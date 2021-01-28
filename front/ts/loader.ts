@@ -43,7 +43,7 @@ export function loadRoutes(app: IModule, routes: Array<Route>): void {
         function ($routeProvider) {
             for (const route of routes) {
                 $routeProvider.when(route.path, {
-                    template: route.template,
+                    templateUrl: route.templateUrl,
                     controller: route.controllerClass
                 })
             }

@@ -3,15 +3,15 @@ import { WelcomeController } from './controllers/welcome-controller';
 
 export interface Route {
     path: string,
-    template: string,
+    templateUrl: string,
     controller: new () => Controller,
     controllerClass: string,
 }
 
-export const Routes = [
+export const Routes: Route[] = [
     {
         path: '/',
-        template: '<h1>Message: {{ message }}</h1>',
+        templateUrl: '/welcome.html',
         controller: WelcomeController,
         controllerClass: 'WelcomeController'
     }

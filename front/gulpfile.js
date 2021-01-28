@@ -11,6 +11,7 @@ const source = require('vinyl-source-stream');
 const log = require('gulplog');
 const babel = require('gulp-babel');
 const uglify = require('gulp-uglify');
+const templateCache = require('gulp-angular-templatecache');
 
 function buildAppScss() {
     return src('scss/app.scss')
@@ -54,7 +55,15 @@ function babelAppTs() {
         .pipe(dest('./public/js/'))
 }
 
-const buildTs = parallel(series(buildAppTs, browserifyAppTs, babelAppTs));
+function templateCacheApp() {
+    return src('./templates/**/*.html')
+        .pipe(templateCache({
+            module: 'App',
+        }))
+        .pipe(dest('./public/js/'));
+}
+
+const buildTs = parallel(series(buildAppTs, browserifyAppTs, babelAppTs), templateCacheApp);
 const buildScss = parallel(buildAppScss);
 
 function watchScss() {
