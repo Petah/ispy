@@ -22,7 +22,7 @@ export class AdminController implements IController {
             y: null
         };
 
-        const path: {
+        let path: {
             x: number,
             y: number,
         }[] = [];
@@ -60,7 +60,6 @@ export class AdminController implements IController {
                 d.push('Z');
                 const dString = d.join(' ');
                 svgPath.attr('d', dString);
-                console.log(dString);
             }
         });
 
@@ -70,7 +69,7 @@ export class AdminController implements IController {
             const parentOffset = $('#gp-image-wrapper svg').parent().offset();
             const x = (event.clientX || event.originalEvent.touches[0].clientX) - parentOffset.left;
             const y = (event.clientY || event.originalEvent.touches[0].clientY) - parentOffset.top;
-            console.log(x, y)
+            path = []
         });
 
         $('#gp-image-wrapper svg').on('mouseup', (event) => {
