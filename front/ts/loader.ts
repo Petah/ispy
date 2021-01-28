@@ -46,8 +46,12 @@ export function loadRoutes(app: IModule, routes: Array<IRoute>): void {
                 $routeProvider.when(route.path, {
                     templateUrl: route.templateUrl,
                     controller: route.controller.name
-                })
+                });
             }
+
+            $routeProvider.otherwise({
+                redirectTo: '/',
+            });
         }
     ]);
 }

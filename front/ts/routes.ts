@@ -1,6 +1,7 @@
 import { AdminController } from './controllers/admin/admin-controller';
 import { IController } from './controllers/controller';
 import { WelcomeController } from './controllers/welcome-controller';
+import { CreateGameController } from './controllers/create-game-controller';
 
 export interface IRouteController {
     name: string,
@@ -20,6 +21,14 @@ export const Routes: IRoute[] = [
         controller: {
             name: 'WelcomeController',
             handler: WelcomeController
+        },
+    },
+    {
+        path: '/create-game',
+        templateUrl: '/create-game.html',
+        controller: {
+            name: 'CreateGameController',
+            handler: CreateGameController
         },
     },
 

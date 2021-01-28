@@ -1,14 +1,21 @@
-@import "~bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Suez+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alegreya&family=Suez+One&display=swap');
 @import "_variables";
+@import "../node_modules/bootstrap/scss/bootstrap";
 
 // Defaults
 html,
 body {
     width: 100vw;
     height: 100vh;
+    font-size: 18px;
 }
 
 // Buttons
+.btn {
+    text-transform: uppercase;
+}
+
 .g-menu-buttons {
     .nav-item:not(:first-child) {
         margin-top: 1rem;
