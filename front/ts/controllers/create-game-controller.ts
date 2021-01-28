@@ -1,24 +1,33 @@
-import { IHttpService, IScope } from "angular";
+import { ILocationService, IScope } from "angular";
+import { IController } from "./controller";
 import { api } from "../game/api";
 import { state } from "../game/state";
-import { IController } from "./controller";
 
 interface ICreateGameControllerScope extends IScope {
     gameName: string,
+    isCreatingGame: boolean,
     playerName: string,
     createGame(): void,
 }
 
 export class CreateGameController implements IController {
     public inject = [
+        '$location',
         '$scope',
-        '$http',
     ];
 
     public controller(
+        $location: ILocationService,
         $scope: ICreateGameControllerScope,
-        $http: IHttpService
     ) {
+        if (!state.hasPlayer) {
+            $location.path('/');
+
+            return;
+        }
+
+        $scope.isCreatingGame = false;
+
         $scope.createGame = async function (): Promise<void> {
             if (!$scope.gameName || !$scope.gameName.length) {
                 alert('Please enter a valid name for your game room.');
@@ -26,10 +35,16 @@ export class CreateGameController implements IController {
                 return;
             }
 
-            console.log(`Creating game with room ${$scope.gameName}`);
-            const game = api.createGame($scope.gameName);
-            state.setGame(game);
-            state.startGame();
+            try {
+                console.log(`Creating game with room ${$scope.gameName}`);
+                $scope.isCreatingGame = true;
+                const game = await api.createGame($scope.gameName);
+                state.setGame(game);
+                state.startGame();
+            } catch (e) {
+                console.error(e.message);
+                $scope.isCreatingGame = false;
+            }
         };
     }
 }

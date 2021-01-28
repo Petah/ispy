@@ -7,7 +7,10 @@
                 <input type="text" class="form-control" id="gameName" aria-describedby="gameNameHelp" placeholder="Dave's Game" ng-model="gameName">
                 <small id="gameNameHelp" class="form-text text-muted">Give your game round a name so others can identify it and join.</small>
             </div>
-            <button type="submit" class="btn btn-primary">Create Game</button>
+            <button type="submit" class="btn btn-primary" ng-disabled="isCreatingGame">
+                <span ng-show="!isCreatingGame">Create Game</span>
+                <span ng-show="isCreatingGame">Creating Game...</span>
+            </button>
         </form>
     </div>
 </div>

@@ -31,7 +31,6 @@ export const Routes: IRoute[] = [
             handler: CreateGameController
         },
     },
-
     {
         path: '/admin',
         templateUrl: '/admin/index.html',

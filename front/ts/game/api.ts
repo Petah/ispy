@@ -1,4 +1,5 @@
 import { IHttpService } from "angular";
+import { JsonApiData } from "../helpers/json-api/types";
 
 class Api {
     private $http: IHttpService = null;
@@ -13,16 +14,24 @@ class Api {
     }
 
     // Player state
-    async createPlayer(name: string): Promise<object> {
-        const player = await this.$http.post(`${this.apiBaseUrl}/api/players/create`, { name });
+    async createPlayer(name: string): Promise<any> {
+        const res = await this.$http.post<JsonApiData>(
+            `${this.apiBaseUrl}/api/players/create`,
+            { name }
+        );
+        const player = res.data.data;
         console.log('Created player!', player);
 
         return player;
     }
 
     // Game state
-    async createGame(name: string): Promise<object> {
-        const game = await this.$http.post(`${this.apiBaseUrl}/api/games/create`, { name });
+    async createGame(name: string): Promise<any> {
+        const res = await this.$http.post<JsonApiData>(
+            `${this.apiBaseUrl}/api/games/create`,
+            { name }
+        );
+        const game = res.data.data;
         console.log('Created game!', game);
 
         return game;
