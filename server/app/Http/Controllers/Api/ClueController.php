@@ -34,7 +34,7 @@ class ClueController extends \App\Http\Controllers\BaseController
             $clue->setUuid($this->input->uuid('uuid'));
         }
         $clue->save();
-        return new Serializers\ClueSerializer($clue);
+        return new Serializers\Api\ClueSerializer($clue);
     }
 
     public function delete()

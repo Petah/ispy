@@ -37,7 +37,7 @@ class GameController extends \App\Http\Controllers\BaseController
             $game->setName($this->input->string('name', null));
         }
         $game->save();
-        return new Serializers\GameSerializer($game);
+        return new Serializers\Api\GameSerializer($game);
     }
 
     public function delete()

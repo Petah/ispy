@@ -34,7 +34,7 @@ class ScoreController extends \App\Http\Controllers\BaseController
             $score->setUuid($this->input->uuid('uuid'));
         }
         $score->save();
-        return new Serializers\ScoreSerializer($score);
+        return new Serializers\Api\ScoreSerializer($score);
     }
 
     public function delete()

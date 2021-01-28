@@ -43,7 +43,7 @@ class LevelController extends \App\Http\Controllers\BaseController
             $level->setImage($this->input->string('image', null));
         }
         $level->save();
-        return new Serializers\LevelSerializer($level);
+        return new Serializers\Api\LevelSerializer($level);
     }
 
     public function delete()

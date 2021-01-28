@@ -34,7 +34,7 @@ class PlayerController extends \App\Http\Controllers\BaseController
             $player->setUuid($this->input->uuid('uuid'));
         }
         $player->save();
-        return new Serializers\PlayerSerializer($player);
+        return new Serializers\Api\PlayerSerializer($player);
     }
 
     public function delete()
