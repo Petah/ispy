@@ -2,7 +2,15 @@
     <div class="g-view-content text-center">
         <h1>iSPY 2021</h1>
         <h3 class="mb-5">COVID-Free Edition</h3>
-        <ul class="g-menu-buttons nav flex-column">
+        <form ng-if="!hasPlayer" ng-submit="createPlayer()">
+            <div class="form-group">
+                <label for="playerName">Enter Your Name</label>
+                <input type="text" class="form-control" id="playerName" aria-describedby="playerNameHelp" placeholder="Cool Guy" ng-model="player.name">
+                <small id="playerNameHelp" class="form-text text-muted">Please enter your name so other players can find you in game rounds and lobbies.</small>
+            </div>
+            <button type="submit" class="btn btn-primary">Create Game</button>
+        </form>
+        <ul class="g-menu-buttons nav flex-column" ng-if="hasPlayer">
             <li class="nav-item">
                 <a href="#!/create-game" class="g-menu-button btn btn-primary">Create Game</a>
             </li>
