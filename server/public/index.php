@@ -58,8 +58,15 @@ $app = require_once __DIR__ . '/../bootstrap/app.php';
 
 $kernel = $app->make(Kernel::class);
 
-$response = tap($kernel->handle(
-    $request = Request::capture()
-))->send();
+$response = $kernel->handle(
+    $request = \App\Http\Request::capture()
+);
+
+$response->headers->set('Access-Control-Allow-Origin', '*');
+$response->headers->set('Access-Control-Allow-Methods', 'GET,POST,PUT,OPTIONS');
+$response->headers->set('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
+$response->headers->set('Access-Control-Max-Age', '3600');
+
+$response->send();
 
 $kernel->terminate($request, $response);
