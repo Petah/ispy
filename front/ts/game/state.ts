@@ -1,26 +1,12 @@
-import { IHttpService } from "angular";
+import { api } from "./api";
 
 class State {
-    private $http: IHttpService;
-    private initialized: boolean = false;
-
     private game: object;
     private player: object;
 
-    init($http: IHttpService) {
-        if (this.initialized) {
-            return;
-        }
-
-        this.$http = $http;
-        this.game = null;
-        this.player = null;
-    }
-
     // Player state
     async createPlayer(name: string): Promise<void> {
-        this.player = await this.$http.post('http://0.0.0.0:9511/players/create', { name });
-        console.log('Created player!', this.player);
+        this.player = await api.createPlayer(name);
     }
 
     get hasPlayer(): boolean {
@@ -30,13 +16,12 @@ class State {
     // Game state
     async startGame(name: string): Promise<void> {
         if (!this.player) {
-            alert('You need to create a character for yourself first.');
+            alert('You need to set the player name first.');
 
             return;
         }
 
-        this.game = await this.$http.post('http://0.0.0.0:9511/games/create', { name });
-        console.log('Starting game!', this.game);
+        this.game = await api.createGame(name);
     }
 }
 
