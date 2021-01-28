@@ -1,9 +1,9 @@
 import { IModule } from "angular";
-import { Controller } from "./controllers/controller";
+import { IController } from "./controllers/controller";
 import { Directive } from "./directives/directive";
 import { Factory } from "./factories/factory";
 import { Filter } from "./filters/filter";
-import { Route } from "./routes";
+import { IRoute } from "./routes";
 
 export function loadDirective(app: IModule, directiveClass: new () => Directive, name: string): void {
     const instance = new directiveClass();
@@ -19,7 +19,7 @@ export function loadDirective(app: IModule, directiveClass: new () => Directive,
     }]);
 }
 
-export function loadController(app: IModule, controllerClass: new () => Controller, name: string): void {
+export function loadController(app: IModule, controllerClass: new () => IController, name: string): void {
     const instance = new controllerClass();
     app.controller(name, [...instance.inject, instance.controller]);
 }
@@ -34,17 +34,18 @@ export function loadFilter(app: IModule, filterClass: new () => Filter, name: st
     app.filter(name, [...instance.inject, instance.filter]);
 }
 
-export function loadRoutes(app: IModule, routes: Array<Route>): void {
+export function loadRoutes(app: IModule, routes: Array<IRoute>): void {
     for (const route of routes) {
         loadController(app, route.controller, route.controllerClass)
     }
+
     app.config([
         '$routeProvider',
         function ($routeProvider) {
             for (const route of routes) {
                 $routeProvider.when(route.path, {
                     template: route.template,
-                    controller: route.controllerClass
+                    controller: route.controller.class
                 })
             }
         }
