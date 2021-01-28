@@ -71,7 +71,10 @@ function watchScss() {
 }
 
 function watchTs() {
-    return watch(['ts/**/*.*'], buildTs);
+    return watch([
+        'ts/**/*.*',
+        'templates/**/*.*',
+    ], buildTs);
 }
 
 const watchBuild = parallel(watchScss, watchTs);

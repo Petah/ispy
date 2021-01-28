@@ -9,6 +9,7 @@
         "@babel/core": "^7.12.10",
         "@babel/preset-env": "^7.12.11",
         "@types/angular": "^1.7.3",
+        "@types/angular-route": "^1.7.1",
         "@types/bootstrap": "^4.3.2",
         "@types/jquery": "^3.5.4",
         "@types/js-md5": "^0.4.2",
@@ -33,6 +34,7 @@
         "gulp-uglify": "^3.0.2",
         "gulp-uglify-es": "^2.0.0",
         "gulplog": "^1.0.0",
+        "http-server": "^0.12.3",
         "jquery": "^3.5.1",
         "js-md5": "^0.7.3",
         "ng-file-upload": "^12.2.13",
@@ -43,8 +45,5 @@
         "vinyl-source-stream": "^2.0.0"
     },
     "browserslist": "> 0.25%, not dead",
-    "dependencies": {
-        "@types/angular-route": "^1.7.1",
-        "http-server": "^0.12.3"
-    }
+    "dependencies": {}
 }
