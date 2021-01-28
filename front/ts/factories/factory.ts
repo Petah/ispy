@@ -1,6 +1,6 @@
 type FactoryObject = any;
 
-export interface Factory {
+export interface IFactory {
     inject: string[];
     factory(...injected: any[]): FactoryObject;
 }

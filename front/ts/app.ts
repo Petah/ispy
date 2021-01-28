@@ -1,9 +1,9 @@
-import 'babel-polyfill';
-import { RootController } from './controllers/root-controller';
-import { WelcomeController } from './controllers/welcome-controller';
-import { JsonApi } from './helpers/json-api';
-import { loadController, loadRoutes } from './loader';
-import { Routes } from "./routes";
+import 'babel-polyfill'
+import { RootController } from './controllers/root-controller'
+import { WelcomeController } from './controllers/welcome-controller'
+import { JsonApi } from './helpers/json-api'
+import { loadController, loadRoutes } from './loader'
+import { Routes } from "./routes"
 
 const app = angular.module('App', [
     'ngRoute'

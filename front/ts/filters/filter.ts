@@ -1,6 +1,6 @@
 type FilterFunction = (...args: any[]) => any;
 
-export interface Filter {
+export interface IFilter {
     inject: string[];
     filter(...injected: any[]): FilterFunction;
 }

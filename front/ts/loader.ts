@@ -1,11 +1,11 @@
 import { IModule } from "angular";
 import { IController } from "./controllers/controller";
-import { Directive } from "./directives/directive";
-import { Factory } from "./factories/factory";
-import { Filter } from "./filters/filter";
+import { IDirective } from "./directives/directive";
+import { IFactory } from "./factories/factory";
+import { IFilter } from "./filters/filter";
 import { IRoute } from "./routes";
 
-export function loadDirective(app: IModule, directiveClass: new () => Directive, name: string): void {
+export function loadDirective(app: IModule, directiveClass: new () => IDirective, name: string): void {
     const instance = new directiveClass();
     app.directive(name, [...instance.inject, function (...injected) {
         return {
@@ -24,19 +24,19 @@ export function loadController(app: IModule, controllerClass: new () => IControl
     app.controller(name, [...instance.inject, instance.controller]);
 }
 
-export function loadFactory(app: IModule, factoryClass: new () => Factory, name: string): void {
+export function loadFactory(app: IModule, factoryClass: new () => IFactory, name: string): void {
     const instance = new factoryClass();
     app.factory(name, [...instance.inject, instance.factory]);
 }
 
-export function loadFilter(app: IModule, filterClass: new () => Filter, name: string): void {
+export function loadFilter(app: IModule, filterClass: new () => IFilter, name: string): void {
     const instance = new filterClass();
     app.filter(name, [...instance.inject, instance.filter]);
 }
 
 export function loadRoutes(app: IModule, routes: Array<IRoute>): void {
     for (const route of routes) {
-        loadController(app, route.controller, route.controllerClass)
+        loadController(app, route.controller.handler, route.controller.name);
     }
 
     app.config([
@@ -45,7 +45,7 @@ export function loadRoutes(app: IModule, routes: Array<IRoute>): void {
             for (const route of routes) {
                 $routeProvider.when(route.path, {
                     template: route.template,
-                    controller: route.controller.class
+                    controller: route.controller.name
                 })
             }
         }

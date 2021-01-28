@@ -14,6 +14,5 @@ export class WelcomeController implements IController {
         $scope: IWelcomeControllerScope,
     ) {
         $scope.message = 'iSpy 2021 - COVID-Free Edition';
-        console.log(`You're in WelcomeController!`);
     }
 }

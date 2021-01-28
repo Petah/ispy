@@ -3,7 +3,7 @@ import { WelcomeController } from './controllers/welcome-controller';
 
 export interface IRouteController {
     name: string,
-    class: new () => IController,
+    handler: new () => IController,
 }
 
 export interface IRoute {
@@ -12,13 +12,13 @@ export interface IRoute {
     controller: IRouteController,
 }
 
-export const Routes = [
+export const Routes: IRoute[] = [
     {
         path: '/',
         template: '<h1>Message: {{ message }}</h1>',
         controller: {
             name: 'WelcomeController',
-            class: WelcomeController
+            handler: WelcomeController
         },
     }
 ];
