@@ -1,3 +1,4 @@
+import { AdminController } from './controllers/admin/admin-controller';
 import { IController } from './controllers/controller';
 import { WelcomeController } from './controllers/welcome-controller';
 
@@ -20,5 +21,14 @@ export const Routes: IRoute[] = [
             name: 'WelcomeController',
             handler: WelcomeController
         },
-    }
+    },
+
+    {
+        path: '/admin',
+        templateUrl: '/admin/index.html',
+        controller: {
+            name: 'AdminController',
+            handler: AdminController,
+        },
+    },
 ];
