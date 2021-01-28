@@ -1,8 +1,8 @@
 {
     "private": true,
     "scripts": {
-        "serve": "./node_modules/.bin/http-server ./public -c-1 -p 3000",
-        "start": "concurrently --kill-others --names=\"server,queue1,queue2,queue3,watch\" \"../bin/server.sh\" \"../bin/queue-work.sh\" \"../bin/queue-work.sh\" \"../bin/queue-work.sh\" \"npm:watch\"",
+        "serve:front": "./node_modules/.bin/http-server ./public -c-1 -p 3000",
+        "serve:server": "concurrently --kill-others --names=\"server,queue1,queue2,queue3,watch\" \"../bin/server.sh\" \"../bin/queue-work.sh\" \"../bin/queue-work.sh\" \"../bin/queue-work.sh\"",
         "watch": "gulp watch"
     },
     "devDependencies": {

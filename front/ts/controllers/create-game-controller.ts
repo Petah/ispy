@@ -1,8 +1,10 @@
-import { IScope } from "angular";
+import { IHttpService, IScope } from "angular";
+import { state } from "../game/state";
 import { IController } from "./controller";
 
 interface ICreateGameControllerScope extends IScope {
-    roomName: string,
+    gameName: string,
+    playerName: string,
     createGame(): void,
 }
 
@@ -14,15 +16,17 @@ export class CreateGameController implements IController {
 
     public controller(
         $scope: ICreateGameControllerScope,
+        $http: IHttpService
     ) {
-        $scope.createGame = function () {
-            if (!$scope.roomName || !$scope.roomName.length) {
+        $scope.createGame = async function (): Promise<void> {
+            if (!$scope.gameName || !$scope.gameName.length) {
                 alert('Please enter a valid name for your game room.');
 
                 return;
             }
 
-            console.log(`Creating game with room ${$scope.roomName}`);
+            console.log(`Creating game with room ${$scope.gameName}`);
+            state.startGame($scope.gameName);
         };
     }
 }
