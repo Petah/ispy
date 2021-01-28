@@ -8,21 +8,27 @@
                 <input type="text" class="form-control" id="playerName" aria-describedby="playerNameHelp" placeholder="Cool Guy" ng-model="player.name">
                 <small id="playerNameHelp" class="form-text text-muted">Please enter your name so other players can find you in game rounds and lobbies.</small>
             </div>
-            <button type="submit" class="btn btn-primary">Create Game</button>
+            <button type="submit" class="btn btn-primary" ng-disabled="isCreatingPlayer">
+                <span ng-show="!isCreatingPlayer">Register</span>
+                <span ng-show="isCreatingPlayer">Registering Player...</span>
+            </button>
         </form>
-        <ul class="g-menu-buttons nav flex-column" ng-if="state.hasPlayer">
-            <li class="nav-item">
-                <a href="#!/create-game" class="g-menu-button btn btn-primary">Create Game</a>
-            </li>
-            <li class="nav-item">
-                <a href="#!/" class="g-menu-button btn btn-secondary">Join Game</a>
-            </li>
-            <li class="nav-item">
-                <a href="#!/" class="g-menu-button btn btn-light">Scoreboard</a>
-            </li>
-            <li class="nav-item">
-                <a href="#!/" class="g-menu-button btn btn-light">Quit</a>
-            </li>
-        </ul>
+        <div class="g-menu-container" ng-if="state.hasPlayer">
+            <p>Welcome {{ player.name }}!</p>
+            <ul class="g-menu-buttons nav flex-column">
+                <li class="nav-item">
+                    <a href="#!/create-game" class="g-menu-button btn btn-primary">Create Game</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#!/" class="g-menu-button btn btn-secondary">Join Game</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#!/" class="g-menu-button btn btn-light">Scoreboard</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#!/" class="g-menu-button btn btn-light">Quit</a>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>

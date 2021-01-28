@@ -1,8 +1,9 @@
-import { api } from "./api";
+import { Game } from "./game";
+import { Player } from "./player";
 
 class State {
-    private game: any;
-    private player: any;
+    private game: Game = null;
+    private player: Player = null;
 
     // Player state
     setPlayer(player: any): void {
