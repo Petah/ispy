@@ -1,18 +1,24 @@
-import { Controller } from './controllers/controller';
+import { IController } from './controllers/controller';
 import { WelcomeController } from './controllers/welcome-controller';
 
-export interface Route {
-    path: string,
-    templateUrl: string,
-    controller: new () => Controller,
-    controllerClass: string,
+export interface IRouteController {
+    name: string,
+    handler: new () => IController,
 }
 
-export const Routes: Route[] = [
+export interface IRoute {
+    path: string,
+    templateUrl: string,
+    controller: IRouteController,
+}
+
+export const Routes: IRoute[] = [
     {
         path: '/',
         templateUrl: '/welcome.html',
-        controller: WelcomeController,
-        controllerClass: 'WelcomeController'
+        controller: {
+            name: 'WelcomeController',
+            handler: WelcomeController
+        },
     }
 ];

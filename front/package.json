@@ -1,7 +1,7 @@
 {
     "private": true,
     "scripts": {
-        "serve": "./node_modules/.bin/http-server -p 3000 ./public",
+        "serve": "./node_modules/.bin/http-server ./public -c-1 -p 3000",
         "start": "concurrently --kill-others --names=\"server,queue1,queue2,queue3,watch\" \"../bin/server.sh\" \"../bin/queue-work.sh\" \"../bin/queue-work.sh\" \"../bin/queue-work.sh\" \"npm:watch\"",
         "watch": "gulp watch"
     },
@@ -44,6 +44,7 @@
     },
     "browserslist": "> 0.25%, not dead",
     "dependencies": {
-        "@types/angular-route": "^1.7.1"
+        "@types/angular-route": "^1.7.1",
+        "http-server": "^0.12.3"
     }
 }

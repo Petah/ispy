@@ -1,19 +1,18 @@
 import { IScope } from "angular";
-import { Controller } from "./controller";
+import { IController } from "./controller";
 
-interface WelcomeControllerScope extends IScope {
+interface IWelcomeControllerScope extends IScope {
     message: string,
 }
 
-export class WelcomeController implements Controller {
+export class WelcomeController implements IController {
     public inject = [
         '$scope',
     ];
 
     public controller(
-        $scope: WelcomeControllerScope,
+        $scope: IWelcomeControllerScope,
     ) {
         $scope.message = 'iSpy 2021 - COVID-Free Edition';
-        console.log(`You're in WelcomeController!`);
     }
 }

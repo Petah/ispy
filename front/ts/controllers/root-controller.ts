@@ -1,16 +1,16 @@
 import { IScope } from "angular";
-import { Controller } from "./controller";
+import { IController } from "./controller";
 
-interface RootControllerScope extends IScope {
+interface IRootControllerScope extends IScope {
 }
 
-export class RootController implements Controller {
+export class RootController implements IController {
     public inject = [
         '$scope',
     ];
 
     public controller(
-        $scope: RootControllerScope,
+        $scope: IRootControllerScope,
     ) {
     }
 }
