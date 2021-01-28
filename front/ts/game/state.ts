@@ -1,12 +1,12 @@
 import { api } from "./api";
 
 class State {
-    private game: object;
-    private player: object;
+    private game: any;
+    private player: any;
 
     // Player state
-    async createPlayer(name: string): Promise<void> {
-        this.player = await api.createPlayer(name);
+    setPlayer(player: any): void {
+        this.player = player;
     }
 
     get hasPlayer(): boolean {
@@ -14,14 +14,23 @@ class State {
     }
 
     // Game state
-    async startGame(name: string): Promise<void> {
+    setGame(game: any): void {
+        this.game = game;
+    }
+
+    startGame(): Promise<void> {
         if (!this.player) {
             alert('You need to set the player name first.');
 
             return;
         }
+        if (!this.game) {
+            alert('No game initialized!');
 
-        this.game = await api.createGame(name);
+            return;
+        }
+
+        console.log(`Starting game: ${this.game.attributes.name}!`);
     }
 }
 

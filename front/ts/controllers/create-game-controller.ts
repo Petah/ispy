@@ -1,4 +1,5 @@
 import { IHttpService, IScope } from "angular";
+import { api } from "../game/api";
 import { state } from "../game/state";
 import { IController } from "./controller";
 
@@ -26,7 +27,9 @@ export class CreateGameController implements IController {
             }
 
             console.log(`Creating game with room ${$scope.gameName}`);
-            state.startGame($scope.gameName);
+            const game = api.createGame($scope.gameName);
+            state.setGame(game);
+            state.startGame();
         };
     }
 }

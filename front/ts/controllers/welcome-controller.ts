@@ -1,6 +1,7 @@
 import { IScope } from "angular";
-import { state } from "../game/state";
 import { IController } from "./controller";
+import { api } from "../game/api";
+import { state } from "../game/state";
 
 interface IWelcomeControllerScope extends IScope {
     hasPlayer: boolean,
@@ -16,7 +17,6 @@ export class WelcomeController implements IController {
     public controller(
         $scope: IWelcomeControllerScope,
     ) {
-        $scope.hasPlayer = state.hasPlayer;
         $scope.player = { name: '' };
 
         $scope.createPlayer = async function (): Promise<boolean> {
@@ -26,7 +26,9 @@ export class WelcomeController implements IController {
                 return;
             }
 
-            state.createPlayer($scope.player.name);
+            const player = await api.createPlayer($scope.player.name);
+            state.setPlayer(player);
+
             return true;
         };
     }
