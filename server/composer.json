@@ -10,7 +10,8 @@
     "require": {
         "php": "^7.3|^8.0",
         "friendsofphp/php-cs-fixer": "^2.18",
-        "laravel/framework": "^8.12"
+        "laravel/framework": "^8.12",
+        "rhinox/input-data": "^0.9.5"
     },
     "require-dev": {
     },
