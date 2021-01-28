@@ -35,12 +35,13 @@ export function loadFilter(app: IModule, filterClass: new () => Filter, name: st
 }
 
 export function loadRoutes(app: IModule, routes: Array<Route>): void {
+    for (const route of routes) {
+        loadController(app, route.controller, route.controllerClass)
+    }
     app.config([
         '$routeProvider',
         function ($routeProvider) {
             for (const route of routes) {
-                console.log(route.controllerClass);
-                loadController(app, route.controller, route.controllerClass)
                 $routeProvider.when(route.path, {
                     template: route.template,
                     controller: route.controllerClass
