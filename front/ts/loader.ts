@@ -3,6 +3,7 @@ import { Controller } from "./controllers/controller";
 import { Directive } from "./directives/directive";
 import { Factory } from "./factories/factory";
 import { Filter } from "./filters/filter";
+import { Route } from "./routes";
 
 export function loadDirective(app: IModule, directiveClass: new () => Directive, name: string): void {
     const instance = new directiveClass();
@@ -23,12 +24,28 @@ export function loadController(app: IModule, controllerClass: new () => Controll
     app.controller(name, [...instance.inject, instance.controller]);
 }
 
+export function loadFactory(app: IModule, factoryClass: new () => Factory, name: string): void {
+    const instance = new factoryClass();
+    app.factory(name, [...instance.inject, instance.factory]);
+}
+
 export function loadFilter(app: IModule, filterClass: new () => Filter, name: string): void {
     const instance = new filterClass();
     app.filter(name, [...instance.inject, instance.filter]);
 }
 
-export function loadFactory(app: IModule, factoryClass: new () => Factory, name: string): void {
-    const instance = new factoryClass();
-    app.factory(name, [...instance.inject, instance.factory]);
+export function loadRoutes(app: IModule, routes: Array<Route>): void {
+    app.config([
+        '$routeProvider',
+        function ($routeProvider) {
+            for (const route of routes) {
+                console.log(route.controllerClass);
+                loadController(app, route.controller, route.controllerClass)
+                $routeProvider.when(route.path, {
+                    template: route.template,
+                    controller: route.controllerClass
+                })
+            }
+        }
+    ]);
 }
