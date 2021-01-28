@@ -63,7 +63,7 @@ function templateCacheApp() {
         .pipe(dest('./public/js/'));
 }
 
-const buildTs = parallel(series(buildAppTs, browserifyAppTs, babelAppTs), templateCacheApp);
+const buildTs = parallel(series(buildAppTs, browserifyAppTs, babelAppTs));
 const buildScss = parallel(buildAppScss);
 
 function watchScss() {
@@ -71,14 +71,15 @@ function watchScss() {
 }
 
 function watchTs() {
-    return watch([
-        'ts/**/*.*',
-        'templates/**/*.*',
-    ], buildTs);
+    return watch(['ts/**/*.*'], buildTs);
 }
 
-const watchBuild = parallel(watchScss, watchTs);
-const build = parallel(buildScss, buildTs);
+function watchTemplates() {
+    return watch(['templates/**/*.*'], templateCacheApp);
+}
+
+const watchBuild = parallel(watchScss, watchTs, watchTemplates);
+const build = parallel(buildScss, buildTs, templateCacheApp);
 
 exports.build = build;
 exports.default = build;
