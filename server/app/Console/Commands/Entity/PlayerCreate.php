@@ -12,6 +12,7 @@ class PlayerCreate extends \Illuminate\Console\Command
     public function handle()
     {
         $player = new Models\Player();
+        $player->setName($this->ask('Name'));
         $player->save();
     }
 }

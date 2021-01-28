@@ -14,6 +14,7 @@ class PlayerList extends \App\Console\EntityCommand
     protected function iterateHeaders(): \Generator
     {
         yield 'UUID';
+        yield 'Name';
         yield 'Created At';
         yield 'Updated At';
         yield 'Deleted At';
@@ -24,6 +25,7 @@ class PlayerList extends \App\Console\EntityCommand
         $noTrim = $this->option('noTrim');
 
         yield $player->getUuid();
+        yield $noTrim ? $player->getName() : $this->trimString($player->getName());
         yield $this->formatDateTime($player->getCreatedAt());
         yield $this->formatDateTime($player->getUpdatedAt());
         yield $this->formatDateTime($player->getDeletedAt());

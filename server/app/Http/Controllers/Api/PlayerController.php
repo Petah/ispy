@@ -33,6 +33,9 @@ class PlayerController extends \App\Http\Controllers\BaseController
         if ($this->input->uuid('uuid')) {
             $player->setUuid($this->input->uuid('uuid'));
         }
+        if ($this->input->exists('name')) {
+            $player->setName($this->input->string('name', null));
+        }
         $player->save();
         return new Serializers\Api\PlayerSerializer($player);
     }
