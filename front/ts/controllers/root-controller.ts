@@ -1,5 +1,5 @@
 import { IHttpService, IScope } from "angular";
-import { state } from "../game/state";
+import { api } from "../game/api";
 import { IController } from "./controller";
 
 interface IRootControllerScope extends IScope {
@@ -15,6 +15,6 @@ export class RootController implements IController {
         $scope: IRootControllerScope,
         $http: IHttpService
     ) {
-        state.init($http);
+        api.init($http);
     }
 }
