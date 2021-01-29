@@ -102,5 +102,12 @@
     }
     .g-round-image-container {
         width: 100%;
+
+        img {
+            padding: 0;
+        }
+    }
+    .g-riddle {
+        background-color: white;;
     }
 }

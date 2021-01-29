@@ -6,9 +6,11 @@
 
     <div class="g-flex g-round-container">
         <div class="g-round-image-container">
-            <img id="g-round-image" class="g-img-fluid" ng-src="{{ state.level.image }}"
+            <img id="g-round-image" class="g-img-fluid nes-container" ng-src="{{ state.level.image }}"
                 ng-attr-alt="{{ state.level.name }} Image" ng-click="click($event)" />
-            <p>{{ state.level.riddle || 'No riddle set! :O' }}</p>
+            <div class="nes-container g-riddle">
+                <p>{{ state.level.riddle || 'No riddle set! :O' }}</p>
+            </div>
             <button class="nes-btn is-error" ng-click="leaveGame()">Leave Game</button>
         </div>
 

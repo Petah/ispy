@@ -61,6 +61,11 @@ io.on('connection', (socket: Socket) => {
             game.broadcast('levelStart', levelStart);
             setTimeout(() => {
                 game.broadcast('levelEnd', {});
+                setTimeout(() => {
+                    game.level = levels[Math.floor(Math.random() * levels.length)];
+                    game.levelStartTime = new Date().getTime();
+                    game.broadcast('levelStart', levelStart);
+                }, 1000);
             }, game.roundTime);
         } else {
             player.emit('levelStart', levelStart);
