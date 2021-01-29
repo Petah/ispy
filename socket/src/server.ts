@@ -2,7 +2,9 @@ import { Server, Socket } from "socket.io";
 import { Game } from "../../common/entities/game";
 import { Level } from "../../common/entities/level";
 import { Player } from "../../common/entities/player";
+import { Guess } from "../../common/events/events";
 import { objectToInstance, serialize } from "../../common/helpers/object";
+import { insidePoly } from "../../common/helpers/poly";
 
 const port = 3000;
 
@@ -43,6 +45,18 @@ io.on('connection', (socket: Socket) => {
     socket.on('joinGame', data => {
         console.log('joinGame', data);
         game.broadcast('levelStart', game.level);
+    });
+
+    socket.on('guess', (guess: Guess) => {
+        console.log('guess', guess);
+        for (const clue of game.level.clues) {
+            for (const item of clue.items) {
+                console.log(guess, insidePoly({
+                    x: guess.xPercent,
+                    y: guess.yPercent,
+                }, item.path));
+            }
+        }
     });
 
     socket.on('disconnect', () => {

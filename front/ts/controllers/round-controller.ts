@@ -3,11 +3,13 @@ import { IController } from "./controller";
 import { state } from "../game/state";
 import { Level } from "../../../common/entities/level";
 import { Player } from "../../../common/entities/player";
+import { socket } from "../game/socket";
 
 interface IRoundControllerScope extends IScope {
     level: Level,
     leaveGame(): void,
     players: Player[]
+    click($event): void
 }
 
 export class RoundController implements IController {
@@ -24,6 +26,13 @@ export class RoundController implements IController {
             console.log('Player not joined going home');
             $location.path('/');
             return;
+        }
+
+        $scope.click = ($event: MouseEvent) => {
+            const target = $($event.target);
+            var xPos = $event.pageX - target.offset().left;
+            var yPos = $event.pageY - target.offset().top;
+            socket.guess(xPos / target.width(), yPos / target.height());
         }
 
         $scope.leaveGame = function (): void {
