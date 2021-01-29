@@ -5,7 +5,7 @@
         <form ng-if="!state.hasPlayer" ng-submit="createPlayer()">
             <div class="form-group">
                 <label for="playerName">Enter Your Name</label>
-                <input type="text" class="form-control" id="playerName" aria-describedby="playerNameHelp" placeholder="Cool Guy" ng-model="player.name">
+                <input type="text" class="form-control" id="playerName" aria-describedby="playerNameHelp" placeholder="Cool Guy" ng-model="player.attributes.name">
                 <small id="playerNameHelp" class="form-text text-muted">Please enter your name so other players can find you in game rounds and lobbies.</small>
             </div>
             <button type="submit" class="btn btn-primary" ng-disabled="isCreatingPlayer">
@@ -14,7 +14,7 @@
             </button>
         </form>
         <div class="g-menu-container" ng-if="state.hasPlayer">
-            <p>Welcome {{ player.name }}!</p>
+            <p>Hello {{ player.attributes.name }}!</p>
             <ul class="g-menu-buttons nav flex-column">
                 <li class="nav-item">
                     <a href="#!/create-game" class="g-menu-button btn btn-primary">Create Game</a>

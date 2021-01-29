@@ -5,7 +5,7 @@ import { Player } from "./player";
 
 class Api {
     private $http: IHttpService = null;
-    private apiBaseUrl: string = 'http://127.0.0.1:9511';
+    private apiBaseUrl: string = 'http://192.168.1.9:9511';
 
     init($http: IHttpService) {
         if (this.$http) {
@@ -28,7 +28,11 @@ class Api {
     // Player state
     async createPlayer(name: string): Promise<Player> {
         const response = await this.post<JsonApiModel>('players/create', {
-            name
+            data: {
+                attributes: {
+                    name: name,
+                },
+            },
         });
         const player = Player.mapModel(response);
         console.log('Created player!', player);
@@ -38,7 +42,11 @@ class Api {
     // Game state
     async createGame(name: string): Promise<any> {
         const response = await this.post<JsonApiModel>('games/create', {
-            name
+            data: {
+                attributes: {
+                    name: name,
+                },
+            },
         });
         const game = Game.mapModel(response);
         console.log('Created game!', game);

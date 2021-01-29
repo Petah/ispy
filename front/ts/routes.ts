@@ -1,7 +1,10 @@
 import { AdminController } from './controllers/admin/admin-controller';
+import { CreateGameController } from './controllers/create-game-controller';
 import { IController } from './controllers/controller';
+import { SelectLevelController } from './controllers/select-level-controller';
 import { WelcomeController } from './controllers/welcome-controller';
 import { CreateGameController } from './controllers/create-game-controller';
+import { RoundController } from './controllers/round-controller';
 import { LevelListController } from './controllers/admin/level-list-controller';
 import { LevelEditController } from './controllers/admin/level-edit-controller';
 
@@ -31,6 +34,22 @@ export const Routes: IRoute[] = [
         controller: {
             name: 'CreateGameController',
             handler: CreateGameController
+        },
+    },
+    {
+        path: '/select-level',
+        templateUrl: '/select-level.html',
+        controller: {
+            name: 'SelectLevelController',
+            handler: SelectLevelController
+        },
+    },
+    {
+        path: '/round',
+        templateUrl: '/round.html',
+        controller: {
+            name: 'RoundController',
+            handler: RoundController
         },
     },
     {
