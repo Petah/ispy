@@ -5,15 +5,19 @@ export class Level {
     public image: string;
     public thumbnail: string;
     public riddle: string;
+    public width: number;
+    public height: number;
     public clues: Clue[] = [];
 
     public getPathString(item: ClueItem): string {
         const d: string[] = [];
         for (const p of item.path) {
+            const x = p.x * this.width;
+            const y = p.y * this.height;
             if (d.length === 0) {
-                d.push(`M ${p.x}, ${p.y}`);
+                d.push(`M ${x}, ${y}`);
             } else {
-                d.push(`L ${p.x}, ${p.y}`);
+                d.push(`L ${x}, ${y}`);
             }
         }
         d.push('Z');
