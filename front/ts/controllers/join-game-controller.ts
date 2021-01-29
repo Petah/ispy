@@ -27,7 +27,8 @@ export class JoinGameController implements IController {
         }
 
         (async () => {
-            $scope.games = (await api.getGames()).filter((game: Game) => game.getLevel());
+            // $scope.games = (await api.getGames()).filter((game: Game) => game.getLevel());
+            $scope.games = await api.getGames()
         })();
 
         $scope.isJoiningGame = false;
