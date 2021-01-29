@@ -1,29 +1,33 @@
 <div id="g-view-select-level" class="g-view-content text-center">
-    <h1 class="text-center">Find A Game</h1>
+    <div class="g-view-title">
+        <h1>iSPY 2021</h1>
+        <h3>Find A Game</h3>
+    </div>
+
     <p ng-if="!state.gamesList.length">Loading games...</p>
 
     <div class="g-form-container nes-container with-title is-rounded ">
         <div class="nes-table-responsive">
-          <table class="nes-table is-bordered is-centered" ng-if="state.gamesList.length">
-            <thead>
-              <tr>
-                <th scope="col"></th>
-                <th scope="col" class="name_col">Name</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr ng-repeat="game in state.gamesList">
-                <th scope="row">
-                  <a ng-click="joinGame(game)" class="nes-text is-primary">#{{ $index + 1}}</a>
-                </th>
-                <td class="name_col">{{ game.name }}</td>
-                <td>
-                  <button class="nes-btn is-primary" ng-click="joinGame(game)">Join</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+            <table class="nes-table is-bordered is-centered" ng-if="state.gamesList.length">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col" class="name_col">Name</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="game in state.gamesList">
+                        <th scope="row">
+                            <a ng-click="joinGame(game)" class="nes-text is-primary">#{{ $index + 1}}</a>
+                        </th>
+                        <td class="name_col">{{ game.name }}</td>
+                        <td>
+                            <button class="nes-btn is-primary" ng-click="joinGame(game)">Join</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
         <a href="#!/" class="nes-btn is-warning">
