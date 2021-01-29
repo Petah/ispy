@@ -26,10 +26,11 @@ export class JoinGameController implements IController {
             return;
         }
 
+        (async () => {
+            $scope.games = (await api.getGames()).filter((game: Game) => game.getLevel());
+        })();
+
         $scope.isJoiningGame = false;
-
-        // @Todo fetch games list
-
         $scope.joinGame = async function (game: Game): Promise<void> {
             try {
                 console.log(`Joining game ${game.attributes.name}`);
@@ -40,7 +41,7 @@ export class JoinGameController implements IController {
             } catch (e) {
                 console.error(e.message);
             }
-            $scope.isJoiningGame = false;
         };
+        $scope.isJoiningGame = false;
     }
 }
