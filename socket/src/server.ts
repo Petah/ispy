@@ -18,8 +18,7 @@ const io = new Server(port, {
 const game = new Game();
 game.id = 'test';
 game.name = 'Test Game';
-
-const levels = [
+game._levels = [
     objectToInstance(require('../../common/data/workshop.json'), new Level()),
     objectToInstance(require('../../common/data/toys.json'), new Level()),
 ];
@@ -52,22 +51,12 @@ io.on('connection', (socket: Socket) => {
 
     socket.on('joinGame', data => {
         console.log('joinGame', data);
-        const levelStart: LevelStart = {
-            game,
-        };
         if (!game.level) {
-            game.level = levels[Math.floor(Math.random() * levels.length)];
-            game.levelStartTime = new Date().getTime();
-            game.broadcast('levelStart', levelStart);
-            setTimeout(() => {
-                game.broadcast('levelEnd', {});
-                setTimeout(() => {
-                    game.level = levels[Math.floor(Math.random() * levels.length)];
-                    game.levelStartTime = new Date().getTime();
-                    game.broadcast('levelStart', levelStart);
-                }, 1000);
-            }, game.roundTime);
+            game.startNextLevel();
         } else {
+            const levelStart: LevelStart = {
+                game,
+            };
             player.emit('levelStart', levelStart);
         }
     });
@@ -81,7 +70,7 @@ io.on('connection', (socket: Socket) => {
                 if (insidePoly({
                     x: guess.xPercent,
                     y: guess.yPercent,
-                }, item.path)) {
+                }, item._path)) {
                     const key = `${player.name}:${c}:${i}`;
                     game._correctGuesses[key] = true;
                     player.score += Math.round(Math.max(0, (game.roundTime - (new Date().getTime() - game.levelStartTime)) / 100));
