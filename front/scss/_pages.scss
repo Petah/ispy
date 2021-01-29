@@ -8,31 +8,6 @@
     }
 }
 
-#g-view-select-level {
-    .is-warning {
-        margin-top: 30px;
-    }
-    .nes-text.is-primary {
-        color: #209cee !important;
-        font-style: italic;
-    }
-    .g-form-container {
-        padding-top: 30px;
-        padding-bottom: 25px;
-    }
-    table {
-        white-space: nowrap;
-        .name_col {
-            width: 450px;
-            text-align: left;
-            overflow: hidden;
-            display: inline-block;
-            text-overflow: ellipsis;
-            padding: 20px;
-        }
-    }
-}
-
 #register {
     button {
         margin-top: 30px;

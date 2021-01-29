@@ -39,7 +39,7 @@ export class CreateGameController implements IController {
             //     const game = await api.createGame($scope.gameName);
             //     state.setGame(game);
             //     state.startGame();
-            //     $location.path('/select-level');
+            //     $location.path('/round');
             // } catch (e) {
             //     console.error(e.message);
             //     $scope.isCreatingGame = false;
