@@ -68,8 +68,11 @@
     left: 0;
     right: 0;
     padding: 1rem;
-    background-color: rgba(228, 97, 70, 0.8);
-    color: white;
+    background-color: white;
+    background-image: url('/images/covid-pattern.png');
+    background-repeat: repeat;
+    background-size: 300px;
+    border-bottom: 4px solid black;
 
     h1,
     h3 {
