@@ -2,15 +2,20 @@ import { IHttpService, IScope } from "angular";
 import { api } from "../../game/api";
 import { IController } from "../controller";
 import { Clue, ClueItem, Level } from "../../../../common/entities/level";
+import { objectToInstance } from "../../../../common/helpers/object";
 
 interface ILevelEditControllerScope extends IScope {
     level: Level,
     addClue(): void,
     currentClue: Clue,
     addItem(clue: Clue): void,
+    removeItem(clue: Clue, item: ClueItem, $index: number): void,
+    removeClue(clue: Clue, $index: number): void,
+    selectItem(item: ClueItem): void,
     currentItem: ClueItem,
     save(): void
     fetchLevel(): Promise<void>
+    image: any
 }
 
 export class LevelEditController implements IController {
@@ -25,7 +30,8 @@ export class LevelEditController implements IController {
         $http: IHttpService,
         $routeParams,
     ) {
-        console.log('routeParams', $routeParams.id);
+        const levelData = require('../../../../../../../common/data/level.json');
+        $scope.level = objectToInstance(levelData, new Level());
         // $scope.level = new LevelData();
 
         $scope.fetchLevel = async () => {
@@ -42,12 +48,28 @@ export class LevelEditController implements IController {
             $scope.addItem($scope.currentClue);
         }
 
+        $scope.removeClue = (clue, $index) => {
+            $scope.level.clues.splice($index, 1);
+        }
+
         $scope.addItem = (clue) => {
             clue.items.push(new ClueItem());
             $scope.currentItem = clue.items[clue.items.length - 1];
         }
 
+        $scope.removeItem = (clue, item, $index) => {
+            clue.items.splice($index, 1);
+        }
+
+        $scope.selectItem = (item: ClueItem) => {
+            $scope.currentItem = item
+            console.log('selectItem');
+            svgPath.attr('d', $scope.level.getPathString($scope.currentItem, $scope.image.width(), $scope.image.height()));
+        }
+
         $scope.save = async () => {
+            console.log(JSON.stringify($scope.level, null, 4));
+            navigator.clipboard.writeText(JSON.stringify($scope.level, null, 4));
             // console.log('save', $scope.level.id);
             // if ($scope.level.id) {
             //     const response = await api.post(`levels/edit/${$scope.level.id}`, {
@@ -69,12 +91,11 @@ export class LevelEditController implements IController {
         };
 
         const svg = $('#gp-image-wrapper svg');
-        const image = $('#gp-image-wrapper img');
+        $scope.image = $('#gp-image-wrapper img');
         const svgPath = $('#gp-image-wrapper svg path');
-        image.on('load', () => {
-            svg.width(image.width());
-            svg.height(image.height());
-            console.log(image.width());
+        $scope.image.on('load', () => {
+            svg.width($scope.image.width());
+            svg.height($scope.image.height());
         })
 
         $('#gp-image-wrapper svg').on('mousemove', (event: any) => {
@@ -86,11 +107,12 @@ export class LevelEditController implements IController {
             }
 
             if (mouse.isDown && $scope.currentItem) {
-                const parentOffset = $('#gp-image-wrapper svg').parent().offset();
-                const x = (event.pageX || event.originalEvent.touches[0].pageX) - parentOffset.left;
-                const y = (event.pageY || event.originalEvent.touches[0].pageY) - parentOffset.top;
+                const target = $scope.image;
+                const x = (event.pageX - target.offset().left) / target.width();
+                const y = (event.pageY - target.offset().top) / target.height();
+                console.log({ x, y });
                 $scope.currentItem.path.push({ x, y });
-                svgPath.attr('d', $scope.level.getPathString($scope.currentItem));
+                svgPath.attr('d', $scope.level.getPathString($scope.currentItem, $scope.image.width(), $scope.image.height()));
                 $scope.$apply();
             }
         });

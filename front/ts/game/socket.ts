@@ -2,6 +2,7 @@ import { IScope, ILocationService } from "angular";
 import { Game } from "../../../common/entities/game";
 import { Level } from "../../../common/entities/level";
 import { Player } from "../../../common/entities/player";
+import { Guess } from "../../../common/events/events";
 import { objectsToInstances, objectToInstance } from "../../../common/helpers/object";
 import { state } from "./state";
 
@@ -40,8 +41,11 @@ class Socket {
         });
 
         this.bind('gamesList', (data) => {
+            const gotoList = state.gamesList.length === 0;
             state.gamesList = objectsToInstances(data, d => new Game());
-            this.goto('/join-game');
+            if (gotoList) {
+                this.goto('/join-game');
+            }
         });
     }
 
@@ -54,6 +58,13 @@ class Socket {
     public joinGame(game: Game) {
         this.emit('joinGame', {
         });
+    }
+
+    public guess(xPercent: number, yPercent: number) {
+        this.emit('guess', {
+            xPercent,
+            yPercent,
+        } as Guess);
     }
 
     private emit(event, data) {
