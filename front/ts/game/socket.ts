@@ -36,6 +36,12 @@ class Socket {
             }
         });
 
+        this.bind('levelEnd', (data) => {
+        });
+
+        this.bind('guessingComplete', (data) => {
+        });
+
         this.bind('gamesList', (data) => {
             state.gamesList = objectsToInstances(data, d => new Game());
         });
