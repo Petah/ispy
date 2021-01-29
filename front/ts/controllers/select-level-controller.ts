@@ -20,9 +20,8 @@ export class SelectLevelController implements IController {
         $location: ILocationService,
         $scope: ISelectLevelControllerScope,
     ) {
-        if (!state.validateGame()) {
+        if (!state.player.joined) {
             $location.path('/');
-
             return;
         }
 
