@@ -49,3 +49,17 @@ body {
 .g-card {
     max-width: 320px;
 }
+
+.g-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#welcome {
+    margin-top: 15px;
+    .nes-balloon {
+        margin-bottom: 85px;
+        margin-left: 25px;
+    }
+}
