@@ -7,46 +7,55 @@ import { state } from "./state";
 
 class Socket {
     private socket: SocketIOClient.Socket;
+    private $rootScope: IScope;
+    private $location: ILocationService;
 
     init($rootScope: IScope, $location: ILocationService) {
+        this.$rootScope = $rootScope;
+        this.$location = $location;
+
         this.socket = io('http://192.168.1.9:3000');
-        this.socket.on('init', (data) => {
-            console.log('init', data);
-            $rootScope.$apply();
+
+        this.bind('init', (data) => {
         });
 
-        this.socket.on('playerJoined', (data) => {
-            console.log('playerJoined', data);
+        this.bind('playerJoined', (data) => {
             const player = new Player();
             player.name = data.name;
             state.game.players.push(player);
-            $rootScope.$apply();
         });
 
-        this.socket.on('youJoined', (data) => {
-            console.log('youJoined', data);
+        this.bind('youJoined', (data) => {
             state.player.joined = true;
-            $rootScope.$apply();
         });
 
-        this.socket.on('youJoined', (data) => {
-            console.log('youJoined', data);
+        this.bind('youJoined', (data) => {
             state.player.joined = true;
-            $rootScope.$apply();
+            this.goto('/select-level');
         });
 
-        this.socket.on('levelStart', (data) => {
-            console.log('levelStart', data);
+        this.bind('levelStart', (data) => {
             state.level = objectToInstance(data, new Level());
-            $location.path('/round');
-            $rootScope.$apply();
+            this.goto('/round');
         });
-
     }
 
-    joinGame(name: string) {
+    public joinGame(name: string) {
         this.socket.emit('joinGame', {
             name,
+        });
+    }
+
+    private goto(route: string) {
+        console.log('Going to', route);
+        this.$location.path(route);
+    }
+
+    private bind(event: string, callback) {
+        this.socket.on(event, (data) => {
+            console.log('Socket received', event, data);
+            callback(data);
+            this.$rootScope.$apply();
         });
     }
 }

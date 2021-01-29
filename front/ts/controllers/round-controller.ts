@@ -26,15 +26,13 @@ export class RoundController implements IController {
             return;
         }
 
-        // $scope.level = state.getLevel();
+        $scope.leaveGame = function (): void {
+            if (!confirm('Are you sure you want to leave the round?')) {
+                return;
+            }
 
-        // $scope.leaveGame = function (): void {
-        //     if (!confirm('Are you sure you want to leave the round?')) {
-        //         return;
-        //     }
-
-        //     state.setLevel(null);
-        //     $location.path('/');
-        // }
+            state.setLevel(null);
+            $location.path('/');
+        }
     }
 }
