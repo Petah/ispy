@@ -30,8 +30,6 @@ export class CreateGameController implements IController {
 
         $scope.createGame = async function (): Promise<void> {
             if (!$scope.gameName || !$scope.gameName.length) {
-                alert('Please enter a valid name for your game room.');
-
                 return;
             }
 
@@ -41,6 +39,7 @@ export class CreateGameController implements IController {
                 const game = await api.createGame($scope.gameName);
                 state.setGame(game);
                 state.startGame();
+                $location.path('/select-level');
             } catch (e) {
                 console.error(e.message);
                 $scope.isCreatingGame = false;

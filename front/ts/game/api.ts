@@ -5,7 +5,7 @@ import { Player } from "./player";
 
 class Api {
     private $http: IHttpService = null;
-    private apiBaseUrl: string = 'http://127.0.0.1:9511';
+    private apiBaseUrl: string = 'http://192.168.1.9:9511';
 
     init($http: IHttpService) {
         if (this.$http) {
