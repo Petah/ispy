@@ -1,26 +1,32 @@
-<div id="g-view-select-level" class="g-view-container">
-    <div class="g-view-content text-center">
-        <h1>Find A Game</h1>
-        <p ng-if="!state.gamesList.length">Loading games...</p>
-        <table class="table table-hover" ng-if="state.gamesList.length">
-          <thead>
-            <tr>
-              <th scope="col">ID</th>
-              <th scope="col">Name</th>
-              <th scope="col">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="game in state.gamesList">
-              <th scope="row">{{ game.id }}</th>
-              <td>{{ game.name }}</td>
-              <td>
-                <button class="btn btn-xs btn-link" ng-click="joinGame(game)">Join</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <a href="#!/" class="btn btn-link">
+<div id="g-view-select-level" class="g-view-content text-center">
+    <h1 class="text-center">Find A Game</h1>
+    <p ng-if="!state.gamesList.length">Loading games...</p>
+
+    <div class="g-form-container nes-container with-title is-rounded ">
+        <div class="nes-table-responsive">
+          <table class="nes-table is-bordered is-centered" ng-if="state.gamesList.length">
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col" class="name_col">Name</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="game in state.gamesList">
+                <th scope="row">
+                  <a ng-click="joinGame(game)" class="nes-text is-primary">#{{ $index + 1}}</a>
+                </th>
+                <td class="name_col">{{ game.name }}</td>
+                <td>
+                  <button class="nes-btn is-primary" ng-click="joinGame(game)">Join</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <a href="#!/" class="nes-btn is-warning">
             <i data-feather="circle"></i> Go Back
         </a>
     </div>

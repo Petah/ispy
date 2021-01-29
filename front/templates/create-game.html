@@ -1,21 +1,19 @@
-<div id="g-view-create-game" class="g-view-container">
-    <div class="g-view-content">
-        <g-message-box>
-            <p>Give your game round a name so others can identify it and join you online.</p>
-        </g-message-box>
-        <div class="g-form-container nes-container with-title is-rounded">
-            <p class="title">Create Game</p>
-            <form ng-submit="createGame()">
-                <div class="nes-field">
-                    <input type="text" class="nes-input" id="gameName" aria-describedby="gameNameHelp" autocomplete="off"
-                        placeholder="Cool People Game" ng-model="gameName">
-                </div>
-                <a href="#!/" class="g-form-btn nes-btn">Go Back</a>
-                <button type="submit" class="g-form-btn nes-btn is-primary" ng-disabled="isCreatingGame">
-                    <span ng-show="!isCreatingGame">Create Game</span>
-                    <span ng-show="isCreatingGame">Creating Game...</span>
-                </button>
-            </form>
-        </div>
+<div id="g-view-create-game" class="g-view-content">
+    <g-message-box>
+        <p>Give your game round a name so others can identify it and join you online.</p>
+    </g-message-box>
+    <div class="g-form-container nes-container with-title is-rounded">
+        <p class="title">Create Game</p>
+        <form ng-submit="createGame()">
+            <div class="nes-field">
+                <input type="text" class="nes-input" id="gameName" aria-describedby="gameNameHelp" autocomplete="off"
+                    placeholder="Cool People Game" ng-model="gameName">
+            </div>
+            <a href="#!/" class="g-form-btn nes-btn">Go Back</a>
+            <button type="submit" class="g-form-btn nes-btn is-primary" ng-disabled="isCreatingGame">
+                <span ng-show="!isCreatingGame">Create Game</span>
+                <span ng-show="isCreatingGame">Creating Game...</span>
+            </button>
+        </form>
     </div>
 </div>

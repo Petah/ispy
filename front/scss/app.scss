@@ -1,5 +1,6 @@
 @import "_form";
 @import "_typography";
+@import "_media";
 
 // Defaults
 html,
@@ -7,6 +8,46 @@ body {
     min-width: 100vw;
     min-height: 100vh;
     font-size: 18px;
+    position: relative;
+}
+
+#g-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 0;
+
+    &::before {
+        content: '';
+        background: url('../images/background_light.png') no-repeat center center / cover;
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+
+    &::after {
+        content: '';
+        background: #abbdf3;
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: .7;
+    }
+
+    #g-team-logo {
+        position: absolute;
+        bottom: -30px;
+        height: 200px;
+        left: 15px;
+    }
 }
 
 // Layout
@@ -15,17 +56,30 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-width: 100vw;
-    min-height: 100vh;
+    min-width: 100%;
+    min-height: 100%;
+    position: relative;
+    z-index: 1;
 }
 
-.g-game-container {
-    background-color: #f2f2f2;
+.text-center {
+    text-align: center;
+}
+
+#g-game-frame {
+    display: flex;
+    min-width: 80vw;
+    min-height: 90vh;
+    max-height: 90vh;
+    max-width: 1200px;
+    margin: 3rem;
+    box-sizing: border-box;
 }
 
 .g-full-size {
     width: 100%;
     height: 100%;
+    margin: 3rem;
 }
 
 .g-card {
@@ -74,7 +128,7 @@ body {
     background: #f2f2f2;
 }
 
-.g-view-select-level {
+g-view-select-level {
     h1 {
         margin-bottom: 50px;
         display: block;
@@ -82,12 +136,36 @@ body {
 }
 
 .g-level-list {
-
     > .nes-container  {
         margin: 0 15px;
         width: 300px;
         img {
             width: 100%;
+        }
+    }
+}
+
+#g-view-select-level {
+    .is-warning {
+        margin-top: 30px;
+    }
+    .nes-text.is-primary {
+        color: #209cee !important;
+        font-style: italic;
+    }
+    .g-form-container { 
+        padding-top: 30px;
+        padding-bottom: 25px;
+    }
+    table {
+        white-space: nowrap;
+        .name_col {
+            width: 450px;
+            text-align: left;
+            overflow: hidden;
+            display: inline-block;
+            text-overflow: ellipsis;
+            padding: 20px;
         }
     }
 }
