@@ -59,23 +59,6 @@ class Handler extends \Illuminate\Foundation\Exceptions\Handler
 
     public static function renderApi($request, \Throwable $exception)
     {
-        if ($exception instanceof ApiAuthException) {
-            return static::jsonApiResponse([
-                'errors' => [[
-                    'detail' => $exception->getMessage(),
-                ]],
-            ], 401);
-        }
-        if ($exception instanceof JwtException) {
-            return static::jsonApiResponse([
-                'errors' => [[
-                    'detail' => 'Invalid token, please try again.',
-                    'meta' => [
-                        'jwt' => $exception->getMessage(),
-                    ],
-                ]],
-            ], 400);
-        }
         if ($exception instanceof NotFoundHttpException || $exception instanceof ModelNotFoundException) {
             return static::jsonApiResponse([
                 'errors' => [[

@@ -15,6 +15,8 @@ class LevelCreate extends \Illuminate\Console\Command
         $level->setName($this->ask('Name'));
         $level->setHost($this->ask('Host'));
         $level->setImage($this->ask('Image'));
+        $level->setThumbnail($this->ask('Thumbnail'));
+        $level->setRiddle($this->ask('Riddle'));
         $level->save();
     }
 }

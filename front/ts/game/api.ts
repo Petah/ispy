@@ -20,6 +20,11 @@ class Api {
         return response.data;
     }
 
+    async get<T>(url: string): Promise<JsonApiData<T>> {
+        const response = await this.$http.get<JsonApiData<T>>(`${this.apiBaseUrl}/api/${url}`);
+        return response.data;
+    }
+
     // Player state
     async createPlayer(name: string): Promise<Player> {
         const response = await this.post<JsonApiModel>('players/create', {

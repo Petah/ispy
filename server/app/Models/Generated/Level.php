@@ -5,6 +5,10 @@ abstract class Level extends \App\Models\BaseModel
 {
     use \Illuminate\Database\Eloquent\SoftDeletes;
 
+    protected $casts = [
+        'clues' => 'json',
+    ];
+
     public function formatName(?string $default = null): string
     {
         if ($default !== null) {
@@ -60,6 +64,39 @@ abstract class Level extends \App\Models\BaseModel
     public function setImage(?string $image): self
     {
         $this->image = $image;
+        return $this;
+    }
+
+    public function getThumbnail(): ?string
+    {
+        return $this->thumbnail;
+    }
+
+    public function setThumbnail(?string $thumbnail): self
+    {
+        $this->thumbnail = $thumbnail;
+        return $this;
+    }
+
+    public function getRiddle(): ?string
+    {
+        return $this->riddle;
+    }
+
+    public function setRiddle(?string $riddle): self
+    {
+        $this->riddle = $riddle;
+        return $this;
+    }
+
+    public function getClues(): \App\Helpers\MutableInputData
+    {
+        return new \App\Helpers\MutableInputData($this->clues);
+    }
+
+    public function setClues($clues)
+    {
+        $this->clues = $clues;
         return $this;
     }
 }

@@ -14,6 +14,8 @@ class ClueList extends \App\Console\EntityCommand
     protected function iterateHeaders(): \Generator
     {
         yield 'UUID';
+        yield 'Name';
+        yield 'Path';
         yield 'Created At';
         yield 'Updated At';
         yield 'Deleted At';
@@ -24,6 +26,8 @@ class ClueList extends \App\Console\EntityCommand
         $noTrim = $this->option('noTrim');
 
         yield $clue->getUuid();
+        yield $noTrim ? $clue->getName() : $this->trimString($clue->getName());
+        yield '?';
         yield $this->formatDateTime($clue->getCreatedAt());
         yield $this->formatDateTime($clue->getUpdatedAt());
         yield $this->formatDateTime($clue->getDeletedAt());

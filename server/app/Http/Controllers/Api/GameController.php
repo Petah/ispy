@@ -19,22 +19,22 @@ class GameController extends \App\Http\Controllers\BaseController
     public function create()
     {
         $game = new Game();
-        return $this->edit($game);
+        return $this->updateEntity($game);
     }
 
-    public function update()
+    public function edit(string $id)
     {
-        $game = Game::findOrFail($this->input->uuid('data.id'));
-        return $this->edit($game);
+        $game = Game::findOrFail($id);
+        return $this->updateEntity($game);
     }
 
-    private function edit(Game $game)
+    private function updateEntity(Game $game)
     {
         if ($this->input->uuid('uuid')) {
-            $game->setUuid($this->input->uuid('uuid'));
+            $game->setUuid($this->input->uuid('data.attributes.uuid'));
         }
-        if ($this->input->exists('name')) {
-            $game->setName($this->input->string('name', null));
+        if ($this->input->exists('data.attributes.name')) {
+            $game->setName($this->input->string('data.attributes.name', null));
         }
         $game->save();
         return new Serializers\Api\GameSerializer($game);

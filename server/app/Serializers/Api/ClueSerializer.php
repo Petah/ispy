@@ -8,6 +8,8 @@ class ClueSerializer extends \App\Serializers\BaseSerializer
      */
     protected function iterateAttributes(?\App\Serializers\ModelInterface $entity)
     {
+        yield 'name' => $entity->getName();
+        yield 'path' => $entity->getPath();
         yield 'createdAt' => $this->format->dateTime($entity->getCreatedAt());
         yield 'updatedAt' => $this->format->dateTime($entity->getUpdatedAt());
         yield 'deletedAt' => $this->format->dateTime($entity->getDeletedAt());

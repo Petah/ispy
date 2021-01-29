@@ -11,6 +11,9 @@ class LevelSerializer extends \App\Serializers\BaseSerializer
         yield 'name' => $entity->getName();
         yield 'host' => $entity->getHost();
         yield 'image' => $entity->getImage();
+        yield 'thumbnail' => $entity->getThumbnail();
+        yield 'riddle' => $entity->getRiddle();
+        yield 'clues' => $entity->getClues();
         yield 'createdAt' => $this->format->dateTime($entity->getCreatedAt());
         yield 'updatedAt' => $this->format->dateTime($entity->getUpdatedAt());
         yield 'deletedAt' => $this->format->dateTime($entity->getDeletedAt());

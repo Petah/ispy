@@ -19,19 +19,19 @@ class ScoreController extends \App\Http\Controllers\BaseController
     public function create()
     {
         $score = new Score();
-        return $this->edit($score);
+        return $this->updateEntity($score);
     }
 
-    public function update()
+    public function edit(string $id)
     {
-        $score = Score::findOrFail($this->input->uuid('data.id'));
-        return $this->edit($score);
+        $score = Score::findOrFail($id);
+        return $this->updateEntity($score);
     }
 
-    private function edit(Score $score)
+    private function updateEntity(Score $score)
     {
         if ($this->input->uuid('uuid')) {
-            $score->setUuid($this->input->uuid('uuid'));
+            $score->setUuid($this->input->uuid('data.attributes.uuid'));
         }
         $score->save();
         return new Serializers\Api\ScoreSerializer($score);

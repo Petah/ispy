@@ -17,6 +17,9 @@ class LevelList extends \App\Console\EntityCommand
         yield 'Name';
         yield 'Host';
         yield 'Image';
+        yield 'Thumbnail';
+        yield 'Riddle';
+        yield 'Clues';
         yield 'Created At';
         yield 'Updated At';
         yield 'Deleted At';
@@ -30,6 +33,9 @@ class LevelList extends \App\Console\EntityCommand
         yield $noTrim ? $level->getName() : $this->trimString($level->getName());
         yield $noTrim ? $level->getHost() : $this->trimString($level->getHost());
         yield $noTrim ? $level->getImage() : $this->trimString($level->getImage());
+        yield $noTrim ? $level->getThumbnail() : $this->trimString($level->getThumbnail());
+        yield $noTrim ? $level->getRiddle() : $this->trimString($level->getRiddle());
+        yield '?';
         yield $this->formatDateTime($level->getCreatedAt());
         yield $this->formatDateTime($level->getUpdatedAt());
         yield $this->formatDateTime($level->getDeletedAt());

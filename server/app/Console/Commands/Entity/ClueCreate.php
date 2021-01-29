@@ -12,6 +12,7 @@ class ClueCreate extends \Illuminate\Console\Command
     public function handle()
     {
         $clue = new Models\Clue();
+        $clue->setName($this->ask('Name'));
         $clue->save();
     }
 }

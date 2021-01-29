@@ -19,28 +19,37 @@ class LevelController extends \App\Http\Controllers\BaseController
     public function create()
     {
         $level = new Level();
-        return $this->edit($level);
+        return $this->updateEntity($level);
     }
 
-    public function update()
+    public function edit(string $id)
     {
-        $level = Level::findOrFail($this->input->uuid('data.id'));
-        return $this->edit($level);
+        $level = Level::findOrFail($id);
+        return $this->updateEntity($level);
     }
 
-    private function edit(Level $level)
+    private function updateEntity(Level $level)
     {
         if ($this->input->uuid('uuid')) {
-            $level->setUuid($this->input->uuid('uuid'));
+            $level->setUuid($this->input->uuid('data.attributes.uuid'));
         }
-        if ($this->input->exists('name')) {
-            $level->setName($this->input->string('name', null));
+        if ($this->input->exists('data.attributes.name')) {
+            $level->setName($this->input->string('data.attributes.name', null));
         }
-        if ($this->input->exists('host')) {
-            $level->setHost($this->input->string('host', null));
+        if ($this->input->exists('data.attributes.host')) {
+            $level->setHost($this->input->string('data.attributes.host', null));
         }
-        if ($this->input->exists('image')) {
-            $level->setImage($this->input->string('image', null));
+        if ($this->input->exists('data.attributes.image')) {
+            $level->setImage($this->input->string('data.attributes.image', null));
+        }
+        if ($this->input->exists('data.attributes.thumbnail')) {
+            $level->setThumbnail($this->input->string('data.attributes.thumbnail', null));
+        }
+        if ($this->input->exists('data.attributes.riddle')) {
+            $level->setRiddle($this->input->string('data.attributes.riddle', null));
+        }
+        if ($this->input->exists('data.attributes.clues')) {
+            $level->setClues($this->input->arr('data.attributes.clues')->getData());
         }
         $level->save();
         return new Serializers\Api\LevelSerializer($level);

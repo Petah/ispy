@@ -19,19 +19,25 @@ class ClueController extends \App\Http\Controllers\BaseController
     public function create()
     {
         $clue = new Clue();
-        return $this->edit($clue);
+        return $this->updateEntity($clue);
     }
 
-    public function update()
+    public function edit(string $id)
     {
-        $clue = Clue::findOrFail($this->input->uuid('data.id'));
-        return $this->edit($clue);
+        $clue = Clue::findOrFail($id);
+        return $this->updateEntity($clue);
     }
 
-    private function edit(Clue $clue)
+    private function updateEntity(Clue $clue)
     {
         if ($this->input->uuid('uuid')) {
-            $clue->setUuid($this->input->uuid('uuid'));
+            $clue->setUuid($this->input->uuid('data.attributes.uuid'));
+        }
+        if ($this->input->exists('data.attributes.name')) {
+            $clue->setName($this->input->string('data.attributes.name', null));
+        }
+        if ($this->input->exists('data.attributes.path')) {
+            $clue->setPath($this->input->arr('data.attributes.path')->getData());
         }
         $clue->save();
         return new Serializers\Api\ClueSerializer($clue);
