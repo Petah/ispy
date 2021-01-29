@@ -10,6 +10,12 @@ export interface Guess {
 export interface CorrectGuess {
     game: Game,
     clue: Clue,
+    player: Player,
+}
+
+export interface IncorrectGuess {
+    game: Game,
+    player: Player,
 }
 
 export interface LevelStart {

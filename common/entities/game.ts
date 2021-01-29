@@ -38,13 +38,18 @@ export class Game {
         if (this._levelsIndex >= this._levels.length) {
             this._levelsIndex = 0;
         }
-        const levelStart: LevelStart = {
-            game: this,
-        };
         this.level = this._levels[this._levelsIndex];
         this._levelsIndex++;
         this.levelStartTime = new Date().getTime();
         this._correctGuesses = [];
+
+        for (const player of this.players) {
+            player.life = 3;
+        }
+
+        const levelStart: LevelStart = {
+            game: this,
+        };
         this.broadcast('levelStart', levelStart);
         setTimeout(() => {
             this.broadcast('levelEnd', {});

@@ -2,7 +2,7 @@ import { Server, Socket } from "socket.io";
 import { Game } from "../../common/entities/game";
 import { Level } from "../../common/entities/level";
 import { Player } from "../../common/entities/player";
-import { CorrectGuess, CreatePlayer, Guess, LevelStart, PlayerJoined } from "../../common/events/events";
+import { CorrectGuess, CreatePlayer, Guess, LevelStart, PlayerJoined, IncorrectGuess } from "../../common/events/events";
 import { objectToInstance, serialize } from "../../common/helpers/object";
 import { insidePoly } from "../../common/helpers/poly";
 
@@ -63,6 +63,10 @@ io.on('connection', (socket: Socket) => {
 
     socket.on('guess', (guess: Guess) => {
         console.log('guess', guess);
+        if (player.life === 0) {
+            return;
+        }
+        let found = false;
         for (const c in game.level.clues) {
             const clue = game.level.clues[c];
             for (const i in clue.items) {
@@ -71,6 +75,7 @@ io.on('connection', (socket: Socket) => {
                     x: guess.xPercent,
                     y: guess.yPercent,
                 }, item._path)) {
+                    found = true;
                     const key = `${player.name}:${c}:${i}`;
                     if (!game._correctGuesses[key]) {
                         game._correctGuesses[key] = true;
@@ -78,6 +83,7 @@ io.on('connection', (socket: Socket) => {
                         const correctGuess: CorrectGuess = {
                             game,
                             clue,
+                            player,
                         };
                         game.broadcast('correctGuess', correctGuess);
                         if (Object.keys(game._correctGuesses).length === game.totalGuesses) {
@@ -86,6 +92,14 @@ io.on('connection', (socket: Socket) => {
                     }
                 }
             }
+        }
+        if (!found) {
+            player.life--;
+            const incorrectGuess: IncorrectGuess = {
+                game,
+                player,
+            };
+            game.broadcast('incorrectGuess', incorrectGuess);
         }
     });
 
