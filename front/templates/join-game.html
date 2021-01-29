@@ -1,4 +1,4 @@
-<div id="g-view-select-level" class="g-view-content text-center">
+<div id="g-view-join-game" class="g-view-content text-center">
     <div class="g-view-title">
         <h1>iSPY 2021</h1>
         <h3>Find A Game</h3>
@@ -8,29 +8,24 @@
 
     <div class="g-form-container nes-container with-title is-rounded ">
         <div class="nes-table-responsive">
-            <table class="nes-table is-bordered is-centered" ng-if="state.gamesList.length">
-                <thead>
-                    <tr>
-                        <th scope="col"></th>
-                        <th scope="col" class="name_col">Name</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
+            <table class="g-games-list nes-table is-bordered is-centered" ng-if="state.gamesList.length">
                 <tbody>
                     <tr ng-repeat="game in state.gamesList">
-                        <th scope="row">
-                            <a ng-click="joinGame(game)" class="nes-text is-primary">#{{ $index + 1}}</a>
-                        </th>
+                        <td scope="row"><div ng-click="joinGame(game)" class="nes-text">#{{ $index + 1}}</div></td>
                         <td class="name_col">{{ game.name }}</td>
                         <td>
-                            <button class="nes-btn is-primary" ng-click="joinGame(game)">Join</button>
+                            {{ game.players.length }}
+                            <i
+                                ng-class="{'fa-user': game.players.length == 1, 'fa-user-friends': game.players.length == 2, 'fa-users': game.players.length > 2}"
+                                class="g-players-icon fas"></i>
                         </td>
+                        <td><button class="nes-btn is-primary" ng-click="joinGame(game)">Join</button></td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
-        <a href="#!/" class="nes-btn is-warning">
+        <a href="#!/" class="g-form-btn nes-btn">
             <i data-feather="circle"></i> Go Back
         </a>
     </div>

@@ -7,6 +7,8 @@ export class Game {
     public name: string;
     public players: Player[] = [];
     public level: Level;
+    public levelStartTime: number;
+    public roundTime: number = 1000 * 60;
 
     public broadcast(event: string, data) {
         for (const player of this.players) {

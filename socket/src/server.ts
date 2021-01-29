@@ -2,7 +2,7 @@ import { Server, Socket } from "socket.io";
 import { Game } from "../../common/entities/game";
 import { Level } from "../../common/entities/level";
 import { Player } from "../../common/entities/player";
-import { Guess } from "../../common/events/events";
+import { CorrectGuess, CreatePlayer, Guess, LevelStart, PlayerJoined } from "../../common/events/events";
 import { objectToInstance, serialize } from "../../common/helpers/object";
 import { insidePoly } from "../../common/helpers/poly";
 
@@ -18,8 +18,11 @@ const io = new Server(port, {
 const game = new Game();
 game.id = 'test';
 game.name = 'Test Game';
-const levelData = require('../../common/data/level.json');
-game.level = objectToInstance(levelData, new Level());
+
+const levels = [
+    objectToInstance(require('../../common/data/workshop.json'), new Level()),
+    objectToInstance(require('../../common/data/toys.json'), new Level()),
+];
 
 io.on('connection', (socket: Socket) => {
     console.log('connection');
@@ -31,30 +34,50 @@ io.on('connection', (socket: Socket) => {
         console.log('init', data);
     });
 
-    socket.on('createPlayer', data => {
-        console.log('createPlayer', data);
-        player.name = data.playerName;
+socket.on('createPlayer', (createPlayer: CreatePlayer) => {
+        console.log('createPlayer', createPlayer);
+        player.name = createPlayer.name;
         game.players.push(player);
-        game.broadcast('playerJoined', {
-            name: player.name,
-        });
-        player._socket.emit('youJoined');
+        const playerJoined: PlayerJoined = {
+            player,
+        };
+        game.broadcast('playerJoined', playerJoined);
+        player.emit('youJoined', {});
         game.broadcast('gamesList', [game]);
     });
 
     socket.on('joinGame', data => {
         console.log('joinGame', data);
-        game.broadcast('levelStart', game.level);
+        const levelStart: LevelStart = {
+            game,
+        };
+        if (!game.level) {
+            game.level = levels[Math.floor(Math.random() * levels.length)];
+            game.levelStartTime = new Date().getTime();
+            game.broadcast('levelStart', levelStart);
+        } else {
+            player.emit('levelStart', levelStart);
+        }
     });
 
     socket.on('guess', (guess: Guess) => {
         console.log('guess', guess);
-        for (const clue of game.level.clues) {
-            for (const item of clue.items) {
-                console.log(guess, insidePoly({
+        for (const c in game.level.clues) {
+            const clue = game.level.clues[c];
+            for (const i in clue.items) {
+                const item = clue.items[i];
+                if (insidePoly({
                     x: guess.xPercent,
                     y: guess.yPercent,
-                }, item.path));
+                }, item.path)) {
+                    const key = `${player.name}:${c}:${i}`;
+                    console.log(key);
+                    player.score += Math.max(0, game.roundTime - (new Date().getTime() - game.levelStartTime));
+                    const correctGuess: CorrectGuess = {
+                        player,
+                    };
+                    game.broadcast('correctGuess', correctGuess);
+                }
             }
         }
     });

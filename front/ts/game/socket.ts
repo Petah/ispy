@@ -2,7 +2,7 @@ import { IScope, ILocationService } from "angular";
 import { Game } from "../../../common/entities/game";
 import { Level } from "../../../common/entities/level";
 import { Player } from "../../../common/entities/player";
-import { Guess } from "../../../common/events/events";
+import { CorrectGuess, CreatePlayer, Guess, LevelStart, PlayerJoined } from "../../../common/events/events";
 import { objectsToInstances, objectToInstance } from "../../../common/helpers/object";
 import { state } from "./state";
 
@@ -20,37 +20,39 @@ class Socket {
         this.bind('init', (data) => {
         });
 
-        this.bind('playerJoined', (data) => {
-            const player = new Player();
-            player.name = data.name;
-            state.game.players.push(player);
+        this.bind('playerJoined', (playerJoined: PlayerJoined) => {
+            const player = objectToInstance(playerJoined.player, new Player());
+            // state.game.players.push(player);
         });
 
         this.bind('youJoined', (data) => {
             state.player.joined = true;
         });
 
-        this.bind('levelStart', (data) => {
-            state.level = objectToInstance(data, new Level());
-            this.goto('/round');
+        this.bind('levelStart', (levelStart: LevelStart) => {
+            if (levelStart.game.id === state.game?.id) {
+                state.level = objectToInstance(levelStart.game.level, new Level());
+                this.goto('/round');
+            }
         });
 
         this.bind('gamesList', (data) => {
-            const gotoList = state.gamesList.length === 0;
             state.gamesList = objectsToInstances(data, d => new Game());
-            if (gotoList) {
-                this.goto('/join-game');
-            }
+        });
+
+        this.bind('correctGuess', (correctGuess: CorrectGuess) => {
         });
     }
 
     public createPlayer(name: string) {
-        this.emit('createPlayer', {
+        const createPlayer: CreatePlayer = {
             name,
-        });
+        };
+        this.emit('createPlayer', createPlayer);
     }
 
     public joinGame(game: Game) {
+        state.game = game;
         this.emit('joinGame', {
         });
     }

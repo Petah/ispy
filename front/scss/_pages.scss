@@ -21,3 +21,27 @@
         margin-left: 25px;
     }
 }
+
+#g-view-join-game {
+    width: 100%;
+    max-width: 680px;
+
+    .nes-table td {
+        border-width: 0;
+    }
+
+    .g-players-icon {
+        position: relative;
+        top: -3px;
+    }
+
+    .g-games-list {
+        width: 98%;
+
+        .name_col {
+            @media (min-width: 768px) {
+                width: 40%;
+            }
+        }
+    }
+}
