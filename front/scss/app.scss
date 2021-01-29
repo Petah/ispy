@@ -1,7 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Suez+One&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Alegreya&family=Suez+One&display=swap');
-@import "_variables";
-@import "../node_modules/bootstrap/scss/bootstrap";
+@import "_form";
+@import "_typography";
 
 // Defaults
 html,
@@ -11,34 +9,18 @@ body {
     font-size: 18px;
 }
 
-// Buttons
-.btn {
-    text-transform: uppercase;
-}
-
-.g-menu-buttons {
-    .nav-item:not(:first-child) {
-        margin-top: 1rem;
-    }
-
-    .g-menu-button {
-        min-width: 320px;
-    }
-}
-
 // Layout
 .g-game-container,
 .g-view-container {
-    @extend .d-flex;
-    @extend .justify-content-center;
-    @extend .align-items-center;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
     min-width: 100vw;
     min-height: 100vh;
 }
 
 .g-game-container {
-    background-color: $backgroundColor;
+    background-color: #f2f2f2;
 }
 
 .g-full-size {
@@ -74,7 +56,7 @@ body {
 }
 
 .nes-container.with-title > .title {
-    background: $backgroundColor;
+    background: #f2f2f2;
 }
 
 .g-view-select-level {
