@@ -1,28 +1,26 @@
-<div id="g-view-select-level" class="g-view-container">
-  <div class="g-view-content text-center">
-      <h1 class="title page-title" ng-if="levels.length">Level list</h1>
-      <p ng-if="!levels.length">Loading levels...</p>
+<div id="g-view-select-level" class="g-view-content text-center">
+    <h1 class="title page-title" ng-if="levels.length">Level list</h1>
+    <p ng-if="!levels.length">Loading levels...</p>
 
-      <div class="g-flex g-level-list">
+    <div class="g-flex g-level-list">
         <div class="nes-container with-title" ng-repeat="level in levels">
-          <p class="title">{{ level.name }}</p>
-          <img ng-src="{{ level.image }}" alt="">
-          <button class="nes-btn is-primary" ng-click="selectLevel(level)">Select Level</button>
+            <p class="title">{{ level.name }}</p>
+            <img ng-src="{{ level.image }}" alt="">
+            <button class="nes-btn is-primary" ng-click="selectLevel(level)">Select Level</button>
         </div>
         <div class="nes-container with-title" ng-repeat="level in levels">
-          <p class="title">{{ level.name }}</p>
-          <img ng-src="{{ level.image }}" alt="">
-          <button class="nes-btn is-primary" ng-click="selectLevel(level)">Select Level</button>
+            <p class="title">{{ level.name }}</p>
+            <img ng-src="{{ level.image }}" alt="">
+            <button class="nes-btn is-primary" ng-click="selectLevel(level)">Select Level</button>
         </div>
         <div class="nes-container with-title" ng-repeat="level in levels">
-          <p class="title">{{ level.name }}</p>
-          <img ng-src="{{ level.image }}" alt="">
-          <button class="nes-btn is-primary" ng-click="selectLevel(level)">Select Level</button>
+            <p class="title">{{ level.name }}</p>
+            <img ng-src="{{ level.image }}" alt="">
+            <button class="nes-btn is-primary" ng-click="selectLevel(level)">Select Level</button>
         </div>
-      </div>
+    </div>
 
-      <a href="#!/" class="nes-btn">
-          <i data-feather="circle"></i> Go Back
-      </a>
-  </div>
+    <a href="#!/" class="nes-btn">
+        <i data-feather="circle"></i> Go Back
+    </a>
 </div>
