@@ -28,6 +28,10 @@ export class RoundController implements IController {
             return;
         }
 
+        setInterval(() => {
+            $scope.$apply();
+        }, 97);
+
         $scope.click = ($event: MouseEvent) => {
             const target = $($event.target);
             const xPos = $event.pageX - target.offset().left;

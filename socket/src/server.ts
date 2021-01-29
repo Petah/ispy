@@ -79,7 +79,7 @@ io.on('connection', (socket: Socket) => {
                 }, item.path)) {
                     const key = `${player.name}:${c}:${i}`;
                     game._correctGuesses[key] = true;
-                    player.score += Math.max(0, game.roundTime - (new Date().getTime() - game.levelStartTime));
+                    player.score += Math.round(Math.max(0, (game.roundTime - (new Date().getTime() - game.levelStartTime)) / 100));
                     const correctGuess: CorrectGuess = {
                         player,
                     };

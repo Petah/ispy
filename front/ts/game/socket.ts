@@ -31,6 +31,7 @@ class Socket {
 
         this.bind('levelStart', (levelStart: LevelStart) => {
             if (levelStart.game.id === state.game?.id) {
+                state.game = objectToInstance(levelStart.game, new Game());
                 state.level = objectToInstance(levelStart.game.level, new Level());
                 this.goto('/round');
             }

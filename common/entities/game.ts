@@ -26,4 +26,8 @@ export class Game {
         }
         return i;
     }
+
+    public get timeRemaining(): string {
+        return ((this.levelStartTime + this.roundTime - new Date().getTime()) / 1000).toFixed(1);
+    }
 }
