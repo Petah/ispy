@@ -44,6 +44,7 @@
     "vinyl-source-stream": "^2.0.0"
   },
   "scripts": {
-    "serve:front": "./node_modules/.bin/http-server ./front/public/ -p 3000 -c-1"
+    "serve:front": "./node_modules/.bin/http-server ./front/public/ -p 3000 -c-1",
+    "watch": "./node_modules/.bin/gulp watch"
   }
 }
