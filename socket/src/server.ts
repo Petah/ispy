@@ -55,6 +55,9 @@ socket.on('createPlayer', (createPlayer: CreatePlayer) => {
             game.level = levels[Math.floor(Math.random() * levels.length)];
             game.levelStartTime = new Date().getTime();
             game.broadcast('levelStart', levelStart);
+            setTimeout(() => {
+                game.broadcast('levelEnd', {});
+            }, game.roundTime);
         } else {
             player.emit('levelStart', levelStart);
         }
@@ -71,12 +74,15 @@ socket.on('createPlayer', (createPlayer: CreatePlayer) => {
                     y: guess.yPercent,
                 }, item.path)) {
                     const key = `${player.name}:${c}:${i}`;
-                    console.log(key);
+                    game._correctGuesses[key] = true;
                     player.score += Math.max(0, game.roundTime - (new Date().getTime() - game.levelStartTime));
                     const correctGuess: CorrectGuess = {
                         player,
                     };
                     game.broadcast('correctGuess', correctGuess);
+                    if (Object.keys(game._correctGuesses).length === game.totalGuesses) {
+                        game.broadcast('guessingComplete', {});
+                    }
                 }
             }
         }
