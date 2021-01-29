@@ -1,6 +1,35 @@
 <div id="g-view-round" class="g-view-content text-center">
-    <h1>{{ state.level.name }}</h1>
-    <img id="g-round-image" class="g-img-fluid"  ng-src="{{ state.level.image }}" ng-attr-alt="{{ state.level.name }} Image" ng-click="click($event)" />
-    <p>{{ state.level.riddle || 'No riddle set! :O' }}</p>
-    <button class="nes-btn  is-danger" ng-click="leaveGame()">Leave Game</button>
+    <div class="g-view-title">
+        <h1>iSPY 2021</h1>
+        <h3 class="mb-5">{{ state.level.name }}</h3>
+    </div>
+
+    <div class="g-flex g-round-container">
+        <div class="g-round-image-container">
+            <img id="g-round-image" class="g-img-fluid"  ng-src="{{ state.level.image }}" ng-attr-alt="{{ state.level.name }} Image" ng-click="click($event)" />
+            <p>{{ state.level.riddle || 'No riddle set! :O' }}</p>
+            <button class="nes-btn is-error" ng-click="leaveGame()">Leave Game</button>
+        </div>
+        
+        <div id="g-aside">
+            <p class="title">Players</p>
+            <aside class="nes-container with-title is-centered">
+                <div class="lists">
+                    <ul class="nes-list is-circle">
+                        <li>Player 1</li>
+                        <li>Player 1</li>
+                        <li>Player 1</li>
+                        <li>Player 1</li>
+                        <li>Player 1</li>
+                        <li>Player 1</li>
+                        <li>Player 1</li>
+                        <li>Player 1</li>
+                        <li>Player 1</li>
+                        <li>Player 1</li>
+                        <li>Player 1</li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </div>
 </div>
