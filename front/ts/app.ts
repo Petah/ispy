@@ -1,7 +1,8 @@
 import 'babel-polyfill'
 import { RootController } from './controllers/root-controller'
+import { MessageBoxDirective } from './directives/message-box'
 import { JsonApi } from './helpers/json-api'
-import { loadController, loadRoutes } from './loader'
+import { loadController, loadDirective, loadRoutes } from './loader'
 import { Routes } from "./routes"
 
 const app = angular.module('App', [
@@ -16,4 +17,5 @@ app.run(['$window', '$q', function ($window, $q) {
 (window as any).JsonApi = JsonApi;
 
 loadController(app, RootController, 'RootController');
+loadDirective(app, MessageBoxDirective, 'gMessageBox');
 loadRoutes(app, Routes);
