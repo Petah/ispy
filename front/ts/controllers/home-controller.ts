@@ -26,7 +26,7 @@ export class HomeController implements IController {
                 return;
             }
             localStorage.setItem('playerName', state.player.name);
-            socket.joinGame(state.player.name);
+            socket.createPlayer(state.player.name);
         };
     }
 }

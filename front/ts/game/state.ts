@@ -4,6 +4,7 @@ import { Level } from "../../../common/entities/level";
 
 class State {
     public game: Game = new Game();
+    public gamesList: Game[] = [];
     public level: Level = null;
     public player: Player = new Player();
 
