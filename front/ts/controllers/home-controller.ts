@@ -7,7 +7,7 @@ import { Player } from "../../../common/entities/player";
 
 interface IHomeControllerScope extends IScope {
     isCreatingPlayer: boolean,
-    createPlayer(): Promise<boolean>,
+    createPlayer(): Promise<void>,
 }
 
 export class HomeController implements IController {
@@ -20,20 +20,13 @@ export class HomeController implements IController {
     ) {
         $scope.isCreatingPlayer = false;
 
-        $scope.createPlayer = async (): Promise<boolean> => {
+        $scope.createPlayer = async (): Promise<void> => {
             console.log(state.player);
             if (!state.player.name || !state.player.name.length) {
                 alert('Please enter a valid name for yourself.');
                 return;
             }
-
-            $scope.isCreatingPlayer = true;
             socket.joinGame(state.player.name);
-            // state.player.name = player.name;
-            // state.setPlayer(player);
-            $scope.isCreatingPlayer = false;
-
-            return true;
         };
     }
 }

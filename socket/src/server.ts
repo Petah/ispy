@@ -37,7 +37,7 @@ io.on('connection', (socket: Socket) => {
             name: player.name,
         });
         player.socket.emit('youJoined');
-        game.broadcast('levelStart', game.level);
+        // game.broadcast('levelStart', game.level);
     });
     socket.on('disconnect', () => {
         console.log('disconnect');
