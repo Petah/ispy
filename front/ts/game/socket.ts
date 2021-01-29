@@ -4,6 +4,7 @@ import { Level } from "../../../common/entities/level";
 import { Player } from "../../../common/entities/player";
 import { CorrectGuess, CreatePlayer, Guess, IncorrectGuess, LevelStart, PlayerJoined } from "../../../common/events/events";
 import { objectsToInstances, objectToInstance } from "../../../common/helpers/object";
+import { audio } from "./audio";
 import { state } from "./state";
 
 class Socket {
@@ -49,6 +50,7 @@ class Socket {
 
         this.bind('correctGuess', (correctGuess: CorrectGuess) => {
             state.game = objectToInstance(correctGuess.game, state.game);
+            audio.play(correctGuess.clue.sound as any);
             console.log(correctGuess.clue)
             console.log(correctGuess.player)
         });

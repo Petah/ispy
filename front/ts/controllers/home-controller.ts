@@ -17,11 +17,12 @@ export class HomeController implements IController {
     public controller(
         $scope: IHomeControllerScope,
     ) {
+
         state.player.name = state.player.name
             || (localStorage.getItem('playerName') || 'there');
 
         $scope.createPlayer = async (): Promise<void> => {
-            audio.play('bobadlelelele');
+            audio.play('spyMusic');
             if (!state.player.name || !state.player.name.length) {
                 alert('Please enter a valid name for yourself.');
                 return;

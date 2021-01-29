@@ -38,5 +38,6 @@ export class ClueItem {
 
 export class Clue {
     text: string = ''
+    sound: string = ''
     items: ClueItem[] = []
 }

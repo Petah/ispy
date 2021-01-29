@@ -4,6 +4,7 @@ import { api } from "../game/api";
 import { state } from "../game/state";
 import { Game } from "../../../common/entities/game";
 import { socket } from "../game/socket";
+import { audio } from "../game/audio";
 
 interface IJoinGameControllerScope extends IScope {
     games: Game[],
@@ -32,6 +33,7 @@ export class JoinGameController implements IController {
 
         $scope.joinGame = async function (game: Game): Promise<void> {
             console.log(`Joining game ${game.name}`);
+            audio.play('bobadlelelele');
             socket.joinGame(game);
         };
     }
