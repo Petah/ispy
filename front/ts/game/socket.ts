@@ -48,6 +48,8 @@ class Socket {
         });
 
         this.bind('correctGuess', (correctGuess: CorrectGuess) => {
+            state.game = objectToInstance(correctGuess.game, state.game);
+            console.log(correctGuess.clue)
         });
     }
 

@@ -2,6 +2,7 @@ import { IScope } from "angular";
 import { IController } from "./controller";
 import { state } from "../game/state";
 import { socket } from "../game/socket";
+import { audio } from "../game/audio";
 
 interface IHomeControllerScope extends IScope {
     isCreatingPlayer: boolean,
@@ -20,6 +21,7 @@ export class HomeController implements IController {
             || (localStorage.getItem('playerName') || 'there');
 
         $scope.createPlayer = async (): Promise<void> => {
+            audio.play('bobadlelelele');
             if (!state.player.name || !state.player.name.length) {
                 alert('Please enter a valid name for yourself.');
                 return;

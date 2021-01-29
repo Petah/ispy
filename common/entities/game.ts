@@ -44,6 +44,7 @@ export class Game {
         this.level = this._levels[this._levelsIndex];
         this._levelsIndex++;
         this.levelStartTime = new Date().getTime();
+        this._correctGuesses = [];
         this.broadcast('levelStart', levelStart);
         setTimeout(() => {
             this.broadcast('levelEnd', {});

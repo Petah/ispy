@@ -1,4 +1,5 @@
 import { Game } from "../entities/game";
+import { Clue } from "../entities/level";
 import { Player } from "../entities/player";
 
 export interface Guess {
@@ -7,7 +8,8 @@ export interface Guess {
 }
 
 export interface CorrectGuess {
-    player: Player,
+    game: Game,
+    clue: Clue,
 }
 
 export interface LevelStart {

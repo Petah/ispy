@@ -72,14 +72,17 @@ io.on('connection', (socket: Socket) => {
                     y: guess.yPercent,
                 }, item._path)) {
                     const key = `${player.name}:${c}:${i}`;
-                    game._correctGuesses[key] = true;
-                    player.score += Math.round(Math.max(0, (game.roundTime - (new Date().getTime() - game.levelStartTime)) / 100));
-                    const correctGuess: CorrectGuess = {
-                        player,
-                    };
-                    game.broadcast('correctGuess', correctGuess);
-                    if (Object.keys(game._correctGuesses).length === game.totalGuesses) {
-                        game.broadcast('guessingComplete', {});
+                    if (!game._correctGuesses[key]) {
+                        game._correctGuesses[key] = true;
+                        player.score += Math.round(Math.max(0, (game.roundTime - (new Date().getTime() - game.levelStartTime)) / 100));
+                        const correctGuess: CorrectGuess = {
+                            game,
+                            clue,
+                        };
+                        game.broadcast('correctGuess', correctGuess);
+                        if (Object.keys(game._correctGuesses).length === game.totalGuesses) {
+                            game.broadcast('guessingComplete', {});
+                        }
                     }
                 }
             }
