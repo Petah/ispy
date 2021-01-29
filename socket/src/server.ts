@@ -18,8 +18,13 @@ const io = new Server(port, {
 const game = new Game();
 game.id = 'test';
 game.name = 'Test Game';
-const levelData = require('../../common/data/level.json');
-game.level = objectToInstance(levelData, new Level());
+// const levelData = require('../../common/data/level.json');
+// game.level = objectToInstance(require('../../common/data/level.json'), new Level());
+
+const levels = [
+    objectToInstance(require('../../common/data/workshop.json'), new Level()),
+    objectToInstance(require('../../common/data/toys.json'), new Level()),
+];
 
 io.on('connection', (socket: Socket) => {
     console.log('connection');
@@ -44,6 +49,9 @@ io.on('connection', (socket: Socket) => {
 
     socket.on('joinGame', data => {
         console.log('joinGame', data);
+        if (!game.level) {
+            game.level = levels[Math.floor(Math.random() * levels.length)];
+        }
         game.broadcast('levelStart', game.level);
     });
 
