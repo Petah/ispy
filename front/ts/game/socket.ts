@@ -9,7 +9,7 @@ class Socket {
     private socket: SocketIOClient.Socket;
 
     init($rootScope: IScope, $location: ILocationService) {
-        this.socket = io('http://localhost:3000');
+        this.socket = io('http://192.168.1.9:3000');
         this.socket.on('init', (data) => {
             console.log('init', data);
             $rootScope.$apply();
