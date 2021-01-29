@@ -14,18 +14,25 @@
             </button>
         </form>
         <div class="g-menu-container" ng-if="state.hasPlayer">
-            <p>Hello {{ player.attributes.name }}!</p>
+            <section class="message -left g-flex" id="welcome">
+                <i class="nes-bcrikko"></i>
+                <div class="nes-balloon from-left">
+                    <p>Hello {{ player.attributes.name }}!</p>
+                </div>
+            </section>                
+
             <ul class="g-menu-buttons nav flex-column">
                 <li class="nav-item">
-                    <a href="#!/create-game" class="g-menu-button btn btn-primary">Create Game</a>
+                    <a href="#!/create-game" class="nes-btn is-primary">Create Game</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#!/join-game" class="g-menu-button btn btn-secondary">Join Game</a>
+                    <a href="#!/join-game" class="nes-btn is-warning">Join Game</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#!/" class="g-menu-button btn btn-light">Scoreboard</a>
+                    <a href="#!/" class="nes-btn is-secondary">Scoreboard</a>
                 </li>
             </ul>
         </div>
     </div>
 </div>
+
