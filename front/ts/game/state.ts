@@ -8,6 +8,10 @@ class State {
     private player: Player = null;
 
     // Player state
+    getPlayer(): Player|null {
+        return this.player;
+    }
+
     setPlayer(player: Player): void {
         this.player = player;
     }
@@ -17,6 +21,10 @@ class State {
     }
 
     // Level state
+    getLevel(): Level|null {
+        return this.level;
+    }
+
     setLevel(level: Level): void {
         if (!this.validateGame()) {
             return;
@@ -48,6 +56,17 @@ class State {
         if (!this.game) {
             console.error('No game initialized!');
 
+            return false;
+        }
+
+        return true;
+    }
+
+    validateLevel(): boolean {
+        if (!this.validateGame()) {
+            return false;
+        }
+        if (!this.level) {
             return false;
         }
 

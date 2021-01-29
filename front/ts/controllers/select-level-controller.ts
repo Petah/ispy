@@ -21,11 +21,12 @@ export class SelectLevelController implements IController {
         $scope: ISelectLevelControllerScope,
     ) {
         if (!state.validateGame()) {
-            $location.path('/create-game');
+            $location.path('/');
 
             return;
         }
 
+        // @Todo fetch levels from API
         $scope.levels = [
             new Level({
                 id: '1',
@@ -46,6 +47,7 @@ export class SelectLevelController implements IController {
         $scope.selectLevel = function (level: Level): void {
             $scope.selectedLevel = level;
             state.setLevel(level);
+            $location.path('/round');
         };
     }
 }

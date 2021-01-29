@@ -23,7 +23,11 @@ class Api {
     // Player state
     async createPlayer(name: string): Promise<Player> {
         const response = await this.post<JsonApiModel>('players/create', {
-            name
+            data: {
+                attributes: {
+                    name: name,
+                },
+            },
         });
         const player = Player.mapModel(response);
         console.log('Created player!', player);
@@ -33,7 +37,11 @@ class Api {
     // Game state
     async createGame(name: string): Promise<any> {
         const response = await this.post<JsonApiModel>('games/create', {
-            name
+            data: {
+                attributes: {
+                    name: name,
+                },
+            },
         });
         const game = Game.mapModel(response);
         console.log('Created game!', game);

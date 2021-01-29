@@ -2,11 +2,12 @@ import { IScope } from "angular";
 import { IController } from "./controller";
 import { api } from "../game/api";
 import { state } from "../game/state";
+import { Player } from "../game/player";
 
 interface IWelcomeControllerScope extends IScope {
     hasPlayer: boolean,
     isCreatingPlayer: boolean,
-    player: { name: string },
+    player: Player,
     createPlayer(): Promise<boolean>,
 }
 
@@ -18,25 +19,32 @@ export class WelcomeController implements IController {
     public controller(
         $scope: IWelcomeControllerScope,
     ) {
-        $scope.player = { name: '' };
+        $scope.player = state.getPlayer() || new Player({
+            id: '',
+            type: 'Player',
+            attributes: {
+                name: ''
+            }
+        });
+
         $scope.isCreatingPlayer = false;
 
         $scope.createPlayer = async function (): Promise<boolean> {
-            if (!$scope.player.name || !$scope.player.name.length) {
+            if (!$scope.player.attributes.name || !$scope.player.attributes.name.length) {
                 alert('Please enter a valid name for yourself.');
 
                 return;
             }
 
+            $scope.isCreatingPlayer = true;
             try {
-                $scope.isCreatingPlayer = true;
-                const player = await api.createPlayer($scope.player.name);
-                $scope.player.name = player.attributes.name;
+                const player = await api.createPlayer($scope.player.attributes.name);
+                $scope.player.attributes.name = player.attributes.name;
                 state.setPlayer(player);
             } catch(e) {
                 console.error(e.message);
-                $scope.isCreatingPlayer = false;
             }
+            $scope.isCreatingPlayer = false;
 
             return true;
         };

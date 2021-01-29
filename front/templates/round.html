@@ -1,0 +1,8 @@
+<div id="g-view-round" class="g-view-container">
+    <div class="g-view-content text-center">
+        <h1>{{ level.attributes.name }}</h1>
+        <img ng-src="{{ level.attributes.image }}" ng-attr-alt="{{ level.attributes.name }} Image">
+        <p>{{ level.attributes.riddle || 'No riddle set! :O' }}</p>
+    </div>
+    <button class="btn btn-sm btn-danger" ng-click="leaveGame()">Leave Game</button>
+</div>
