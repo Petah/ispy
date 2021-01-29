@@ -1,0 +1,48 @@
+#g-view-welcome {
+    ul {
+        padding: 0;
+        text-align: center;
+        li {
+            list-style-type: none;
+        }
+    }
+}
+
+#g-view-select-level {
+    .is-warning {
+        margin-top: 30px;
+    }
+    .nes-text.is-primary {
+        color: #209cee !important;
+        font-style: italic;
+    }
+    .g-form-container {
+        padding-top: 30px;
+        padding-bottom: 25px;
+    }
+    table {
+        white-space: nowrap;
+        .name_col {
+            width: 450px;
+            text-align: left;
+            overflow: hidden;
+            display: inline-block;
+            text-overflow: ellipsis;
+            padding: 20px;
+        }
+    }
+}
+
+#register {
+    button {
+        margin-top: 30px;
+    }
+}
+
+#welcome {
+    margin-top: 15px;
+    .nes-balloon {
+        margin-bottom: 55px;
+        margin-left: 25px;
+    }
+}
