@@ -9,11 +9,11 @@ export class Level {
     public height: number;
     public clues: Clue[] = [];
 
-    public getPathString(item: ClueItem): string {
+    public getPathString(item: ClueItem, width: number, height: number): string {
         const d: string[] = [];
         for (const p of item.path) {
-            const x = p.x * this.width;
-            const y = p.y * this.height;
+            const x = p.x * width;
+            const y = p.y * height;
             if (d.length === 0) {
                 d.push(`M ${x}, ${y}`);
             } else {

@@ -15,6 +15,7 @@ interface ILevelEditControllerScope extends IScope {
     currentItem: ClueItem,
     save(): void
     fetchLevel(): Promise<void>
+    image: any
 }
 
 export class LevelEditController implements IController {
@@ -63,7 +64,7 @@ export class LevelEditController implements IController {
         $scope.selectItem = (item: ClueItem) => {
             $scope.currentItem = item
             console.log('selectItem');
-            svgPath.attr('d', $scope.level.getPathString($scope.currentItem));
+            svgPath.attr('d', $scope.level.getPathString($scope.currentItem, $scope.image.width(), $scope.image.height()));
         }
 
         $scope.save = async () => {
@@ -90,11 +91,11 @@ export class LevelEditController implements IController {
         };
 
         const svg = $('#gp-image-wrapper svg');
-        const image = $('#gp-image-wrapper img');
+        $scope.image = $('#gp-image-wrapper img');
         const svgPath = $('#gp-image-wrapper svg path');
-        image.on('load', () => {
-            svg.width(image.width());
-            svg.height(image.height());
+        $scope.image.on('load', () => {
+            svg.width($scope.image.width());
+            svg.height($scope.image.height());
         })
 
         $('#gp-image-wrapper svg').on('mousemove', (event: any) => {
@@ -106,11 +107,12 @@ export class LevelEditController implements IController {
             }
 
             if (mouse.isDown && $scope.currentItem) {
-                const parentOffset = $('#gp-image-wrapper svg').parent().offset();
-                const x = ((event.pageX || event.originalEvent.touches[0].pageX) - parentOffset.left) / $scope.level.width;
-                const y = ((event.pageY || event.originalEvent.touches[0].pageY) - parentOffset.top) / $scope.level.height;
+                const target = $scope.image;
+                const x = (event.pageX - target.offset().left) / target.width();
+                const y = (event.pageY - target.offset().top) / target.height();
+                console.log({ x, y });
                 $scope.currentItem.path.push({ x, y });
-                svgPath.attr('d', $scope.level.getPathString($scope.currentItem));
+                svgPath.attr('d', $scope.level.getPathString($scope.currentItem, $scope.image.width(), $scope.image.height()));
                 $scope.$apply();
             }
         });
