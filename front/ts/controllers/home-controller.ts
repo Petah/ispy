@@ -18,14 +18,14 @@ export class HomeController implements IController {
     public controller(
         $scope: IHomeControllerScope,
     ) {
-        $scope.isCreatingPlayer = false;
+        state.player.name = localStorage.getItem('playerName') || '';
 
         $scope.createPlayer = async (): Promise<void> => {
-            console.log(state.player);
             if (!state.player.name || !state.player.name.length) {
                 alert('Please enter a valid name for yourself.');
                 return;
             }
+            localStorage.setItem('playerName', state.player.name);
             socket.joinGame(state.player.name);
         };
     }
