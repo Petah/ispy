@@ -20,11 +20,11 @@ export class CreateGameController implements IController {
         $location: ILocationService,
         $scope: ICreateGameControllerScope,
     ) {
-        // if (!state.hasPlayer) {
-        //     $location.path('/');
+        if (!state.hasPlayer) {
+            $location.path('/');
 
-        //     return;
-        // }
+            return;
+        }
 
         $scope.isCreatingGame = false;
 
