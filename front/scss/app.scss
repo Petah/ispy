@@ -1,6 +1,8 @@
 @import "_form";
 @import "_typography";
 @import "_media";
+@import "_layout";
+@import "_pages";
 
 // Defaults
 html,
@@ -9,6 +11,7 @@ body {
     min-height: 100vh;
     font-size: 18px;
     position: relative;
+    background-color: #e8e8e8;
 }
 
 #g-overlay {
@@ -47,125 +50,5 @@ body {
         bottom: -30px;
         height: 200px;
         left: 15px;
-    }
-}
-
-// Layout
-.g-game-container,
-.g-view-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-width: 100%;
-    min-height: 100%;
-    position: relative;
-    z-index: 1;
-}
-
-.text-center {
-    text-align: center;
-}
-
-#g-game-frame {
-    display: flex;
-    min-width: 80vw;
-    min-height: 90vh;
-    max-height: 90vh;
-    max-width: 1200px;
-    margin: 3rem;
-    box-sizing: border-box;
-}
-
-.g-full-size {
-    width: 100%;
-    height: 100%;
-    margin: 3rem;
-}
-
-.g-card {
-    max-width: 320px;
-}
-
-.g-flex {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.g-menu-container {
-    display: inline-block;
-}
-
-#register {
-    button {
-        margin-top: 30px;
-    }
-}
-
-#g-view-welcome {
-    ul {
-        padding: 0;
-        text-align: center;
-        li {
-            list-style-type: none;
-        }
-    }
-}
-
-#welcome {
-    margin-top: 15px;
-    .nes-balloon {
-        margin-bottom: 55px;
-        margin-left: 25px;
-    }
-}
-
-.page-title {
-    margin-bottom: 55px;
-}
-
-.nes-container.with-title > .title {
-    background: #f2f2f2;
-}
-
-g-view-select-level {
-    h1 {
-        margin-bottom: 50px;
-        display: block;
-    }
-}
-
-.g-level-list {
-    > .nes-container  {
-        margin: 0 15px;
-        width: 300px;
-        img {
-            width: 100%;
-        }
-    }
-}
-
-#g-view-select-level {
-    .is-warning {
-        margin-top: 30px;
-    }
-    .nes-text.is-primary {
-        color: #209cee !important;
-        font-style: italic;
-    }
-    .g-form-container { 
-        padding-top: 30px;
-        padding-bottom: 25px;
-    }
-    table {
-        white-space: nowrap;
-        .name_col {
-            width: 450px;
-            text-align: left;
-            overflow: hidden;
-            display: inline-block;
-            text-overflow: ellipsis;
-            padding: 20px;
-        }
     }
 }
