@@ -1,0 +1,23 @@
+#g-view-welcome {
+    ul {
+        padding: 0;
+        text-align: center;
+        li {
+            list-style-type: none;
+        }
+    }
+}
+
+#register {
+    button {
+        margin-top: 30px;
+    }
+}
+
+#welcome {
+    margin-top: 15px;
+    .nes-balloon {
+        margin-bottom: 55px;
+        margin-left: 25px;
+    }
+}

@@ -1,0 +1,81 @@
+.g-game-container,
+.g-view-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 100%;
+    min-height: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.text-center {
+    text-align: center;
+}
+
+#g-game-frame {
+    display: flex;
+    min-width: 80vw;
+    min-height: 90vh;
+    max-height: 90vh;
+    max-width: 1200px;
+    margin: 3rem 2rem 0;
+    box-sizing: border-box;
+    padding: 0;
+}
+
+.g-full-size {
+    width: 100%;
+    height: 100%;
+    margin: 3rem;
+}
+
+.g-card {
+    max-width: 320px;
+}
+
+.g-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.g-menu-container {
+    display: inline-block;
+}
+
+.page-title {
+    margin-bottom: 55px;
+}
+
+.nes-container.with-title > .title {
+    background: #f2f2f2;
+}
+
+.g-level-list {
+    > .nes-container  {
+        margin: 0 15px;
+        width: 300px;
+        img {
+            width: 100%;
+        }
+    }
+}
+
+.g-view-title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+    background-color: white;
+    background-image: url('/images/covid-pattern.png');
+    background-repeat: repeat;
+    background-size: 300px;
+    border-bottom: 4px solid black;
+
+    h1,
+    h3 {
+        margin: 0;
+    }
+}

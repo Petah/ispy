@@ -6,7 +6,6 @@ import { JoinGameController } from './controllers/join-game-controller';
 import { LevelListController } from './controllers/admin/level-list-controller';
 import { LevelEditController } from './controllers/admin/level-edit-controller';
 import { RoundController } from './controllers/round-controller';
-import { SelectLevelController } from './controllers/select-level-controller';
 
 export interface IRouteController {
     name: string,
@@ -42,14 +41,6 @@ export const Routes: IRoute[] = [
         controller: {
             name: 'JoinGameController',
             handler: JoinGameController
-        },
-    },
-    {
-        path: '/select-level',
-        templateUrl: '/select-level.html',
-        controller: {
-            name: 'SelectLevelController',
-            handler: SelectLevelController
         },
     },
     {
