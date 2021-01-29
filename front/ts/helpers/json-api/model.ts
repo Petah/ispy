@@ -1,6 +1,6 @@
 import { JsonApiData, JsonApiModel, JsonApiAttributes, JsonApiRelationships, JsonApiMeta, JsonApiRelationshipData } from './types'
 
-interface ModelConstructor<T> {
+export interface ModelConstructor<T> {
     new(args: ModelConstructorArgs): T;
     isType(type: string): boolean;
 }
@@ -38,6 +38,17 @@ export abstract class Model<A = JsonApiAttributes> {
         this.relationships = args.relationships || {}
         this.included = args.included || []
         this.meta = args.meta || {}
+    }
+
+    public static newEmpty<T extends Model>(this: ModelConstructor<T>) {
+        return new this({
+            id: '',
+            type: this.constructor.name,
+            attributes: {},
+            relationships: {},
+            included: [],
+            meta: {},
+        })
     }
 
     public static isType(type: string): boolean {

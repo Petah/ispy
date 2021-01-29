@@ -29,10 +29,10 @@ function buildAppScss() {
 function buildAppTs() {
     const tsProject = ts.createProject('tsconfig.json');
     return tsProject.src()
-        .pipe(sourcemaps.init())
+        // .pipe(sourcemaps.init())
         .pipe(tsProject())
         .js
-        .pipe(sourcemaps.write())
+        // .pipe(sourcemaps.write())
         .pipe(dest('public/js'));
 }
 
@@ -51,7 +51,7 @@ function babelAppTs() {
         .pipe(babel({
             presets: ['@babel/env']
         }))
-        .pipe(uglify())
+        // .pipe(uglify())
         .pipe(dest('./public/js/'))
 }
 
