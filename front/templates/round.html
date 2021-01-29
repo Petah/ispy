@@ -10,23 +10,16 @@
             <p>{{ state.level.riddle || 'No riddle set! :O' }}</p>
             <button class="nes-btn is-error" ng-click="leaveGame()">Leave Game</button>
         </div>
-        
+
         <div id="g-aside">
             <p class="title">Players</p>
             <aside class="nes-container with-title is-centered">
                 <div class="lists">
                     <ul class="nes-list is-circle">
-                        <li>Player 1</li>
-                        <li>Player 1</li>
-                        <li>Player 1</li>
-                        <li>Player 1</li>
-                        <li>Player 1</li>
-                        <li>Player 1</li>
-                        <li>Player 1</li>
-                        <li>Player 1</li>
-                        <li>Player 1</li>
-                        <li>Player 1</li>
-                        <li>Player 1</li>
+                        <li ng-repeat="player in state.game.players">
+                            {{ player.name }}
+                            {{ player.score }}
+                        </li>
                     </ul>
                 </div>
             </aside>

@@ -27,17 +27,21 @@ const levels = [
 io.on('connection', (socket: Socket) => {
     console.log('connection');
 
-    const player = new Player();
-    player._socket = socket;
+    let player: Player = null;
 
     socket.on('init', data => {
         console.log('init', data);
     });
 
-socket.on('createPlayer', (createPlayer: CreatePlayer) => {
+    socket.on('createPlayer', (createPlayer: CreatePlayer) => {
         console.log('createPlayer', createPlayer);
+        player = game.players.find(p => p.name === createPlayer.name);
+        if (!player) {
+            player = new Player();
+            game.players.push(player);
+        }
+        player._socket = socket;
         player.name = createPlayer.name;
-        game.players.push(player);
         const playerJoined: PlayerJoined = {
             player,
         };
