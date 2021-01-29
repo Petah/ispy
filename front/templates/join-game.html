@@ -1,0 +1,27 @@
+<div id="g-view-select-level" class="g-view-container">
+    <div class="g-view-content text-center">
+        <h1>Find A Game</h1>
+        <p ng-if="!games.length">Loading games...</p>
+        <table class="table table-hover" ng-if="games.length">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="game in games">
+              <th scope="row">{{ $index }}</th>
+              <td>{{ game.attributes.name }}</td>
+              <td>
+                <button class="btn btn-xs btn-link" ng-click="joinGame(game)">Join</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <a href="#!/" class="btn btn-link">
+            <i data-feather="circle"></i> Go Back
+        </a>
+    </div>
+</div>

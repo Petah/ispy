@@ -2,10 +2,11 @@ import { AdminController } from './controllers/admin/admin-controller';
 import { CreateGameController } from './controllers/create-game-controller';
 import { HomeController } from './controllers/home-controller';
 import { IController } from './controllers/controller';
-import { SelectLevelController } from './controllers/select-level-controller';
-import { RoundController } from './controllers/round-controller';
+import { JoinGameController } from './controllers/join-game-controller';
 import { LevelListController } from './controllers/admin/level-list-controller';
 import { LevelEditController } from './controllers/admin/level-edit-controller';
+import { RoundController } from './controllers/round-controller';
+import { SelectLevelController } from './controllers/select-level-controller';
 
 export interface IRouteController {
     name: string,
@@ -33,6 +34,14 @@ export const Routes: IRoute[] = [
         controller: {
             name: 'CreateGameController',
             handler: CreateGameController
+        },
+    },
+    {
+        path: '/join-game',
+        templateUrl: '/join-game.html',
+        controller: {
+            name: 'JoinGameController',
+            handler: JoinGameController
         },
     },
     {

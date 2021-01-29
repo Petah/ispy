@@ -39,6 +39,20 @@ class Api {
         return player;
     }
 
+    async getGames(): Promise<any> {
+        const response = await this.get<JsonApiModel>('games/list');
+        const games = Game.mapModels(response);
+        console.log('Fetched games!', games);
+        return games;
+    }
+
+    async getGame(id: string): Promise<any> {
+        const response = await this.get<JsonApiModel>(`games/fetch/${id}`);
+        const game = Game.mapModel(response);
+        console.log('Fetched game!', game);
+        return game;
+    }
+
     async createGame(name: string): Promise<any> {
         const response = await this.post<JsonApiModel>('games/create', {
             data: {
@@ -50,6 +64,14 @@ class Api {
         const game = Game.mapModel(response);
         console.log('Created game!', game);
         return game;
+    }
+
+    async joinGame(game: Game): Promise<boolean> {
+        // @Todo check if player can join game
+        // const response = await this.get<JsonApiModel>(`games/fetch/${game.id}`);
+        // const game = Game.mapModel(response);
+        // console.log('Created game!', game);
+        return true;
     }
 
     async getLevels(): Promise<any> {
