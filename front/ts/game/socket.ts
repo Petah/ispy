@@ -2,7 +2,7 @@ import { IScope, ILocationService } from "angular";
 import { Game } from "../../../common/entities/game";
 import { Level } from "../../../common/entities/level";
 import { Player } from "../../../common/entities/player";
-import { Guess } from "../../../common/events/events";
+import { CorrectGuess, Guess, LevelStart } from "../../../common/events/events";
 import { objectsToInstances, objectToInstance } from "../../../common/helpers/object";
 import { state } from "./state";
 
@@ -23,20 +23,25 @@ class Socket {
         this.bind('playerJoined', (data) => {
             const player = new Player();
             player.name = data.name;
-            state.game.players.push(player);
+            // state.game.players.push(player);
         });
 
         this.bind('youJoined', (data) => {
             state.player.joined = true;
         });
 
-        this.bind('levelStart', (data) => {
-            state.level = objectToInstance(data, new Level());
-            this.goto('/round');
+        this.bind('levelStart', (levelStart: LevelStart) => {
+            if (levelStart.game.id === state.game?.id) {
+                state.level = objectToInstance(levelStart.game.level, new Level());
+                this.goto('/round');
+            }
         });
 
         this.bind('gamesList', (data) => {
             state.gamesList = objectsToInstances(data, d => new Game());
+        });
+
+        this.bind('correctGuess', (correctGuess: CorrectGuess) => {
         });
     }
 
@@ -47,6 +52,7 @@ class Socket {
     }
 
     public joinGame(game: Game) {
+        state.game = game;
         this.emit('joinGame', {
         });
     }
