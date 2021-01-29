@@ -25,7 +25,6 @@ export interface ILevelAttributes {
 }
 
 export class Level extends Model<ILevelAttributes> {
-
     constructor(args: ModelConstructorArgs<ILevelAttributes>) {
         super(args)
         this.attributes.clues = this.attributes.clues || []
