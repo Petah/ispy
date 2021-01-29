@@ -1,27 +1,19 @@
-import { Game } from "./game";
-import { Level } from "./level";
-import { Player } from "./player";
+import { Game } from "../../../common/entities/game";
+import { Player } from "../../../common/entities/player";
+import { Level } from "../../../common/entities/level";
 
 class State {
-    private game: Game = null;
-    private level: Level = null;
-    private player: Player = null;
+    public game: Game = new Game();
+    public level: Level = null;
+    public player: Player = new Player();
 
     // Player state
-    getPlayer(): Player|null {
+    getPlayer(): Player {
         return this.player;
     }
 
-    setPlayer(player: Player): void {
-        this.player = player;
-    }
-
-    get hasPlayer(): boolean {
-        return this.player ? true : false;
-    }
-
     // Level state
-    getLevel(): Level|null {
+    getLevel(): Level | null {
         return this.level;
     }
 
@@ -43,7 +35,7 @@ class State {
             return;
         }
 
-        console.log(`Starting game: ${this.game.attributes.name}!`);
+        console.log(`Starting game: ${this.game.name}!`);
     }
 
     // Validations

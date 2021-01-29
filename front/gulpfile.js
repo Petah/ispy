@@ -27,18 +27,16 @@ function buildAppScss() {
 }
 
 function buildAppTs() {
-    const tsProject = ts.createProject('tsconfig.json');
+    const tsProject = ts.createProject('../tsconfig.json');
     return tsProject.src()
-        // .pipe(sourcemaps.init())
         .pipe(tsProject())
         .js
-        // .pipe(sourcemaps.write())
         .pipe(dest('public/js'));
 }
 
 function browserifyAppTs() {
     return browserify({
-        entries: './public/js/app.js',
+        entries: './public/js/front/ts/app.js',
     })
         .bundle()
         .pipe(source('app.js'))
@@ -51,7 +49,6 @@ function babelAppTs() {
         .pipe(babel({
             presets: ['@babel/env']
         }))
-        // .pipe(uglify())
         .pipe(dest('./public/js/'))
 }
 

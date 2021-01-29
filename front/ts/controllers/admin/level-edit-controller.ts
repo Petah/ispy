@@ -1,8 +1,7 @@
 import { IHttpService, IScope } from "angular";
 import { api } from "../../game/api";
 import { IController } from "../controller";
-import { Clue, ClueItem, Level } from "../../game/level";
-import { JsonApiModel } from "../../helpers/json-api/types";
+import { Clue, ClueItem, Level } from "../../../../common/entities/level";
 
 interface ILevelEditControllerScope extends IScope {
     level: Level,
@@ -31,15 +30,15 @@ export class LevelEditController implements IController {
 
         $scope.fetchLevel = async () => {
             console.log('fetchLevel');
-            const response = await api.get<JsonApiModel>(`levels/fetch/${$routeParams.id}`)
-            $scope.level = Level.mapModel(response);
-            console.log(response)
+            // const response = await api.get<JsonApiModel>(`levels/fetch/${$routeParams.id}`)
+            // $scope.level = Level.mapModel(response);
+            // console.log(response)
         }
         $scope.fetchLevel();
 
         $scope.addClue = () => {
-            $scope.level.attributes.clues.push(new Clue())
-            $scope.currentClue = $scope.level.attributes.clues[$scope.level.attributes.clues.length - 1];
+            $scope.level.clues.push(new Clue())
+            $scope.currentClue = $scope.level.clues[$scope.level.clues.length - 1];
             $scope.addItem($scope.currentClue);
         }
 
@@ -49,18 +48,18 @@ export class LevelEditController implements IController {
         }
 
         $scope.save = async () => {
-            console.log('save', $scope.level.id);
-            if ($scope.level.id) {
-                const response = await api.post(`levels/edit/${$scope.level.id}`, {
-                    data: $scope.level,
-                })
-                console.log(response.data)
-            } else {
-                const response = await api.post('levels/create', {
-                    data: $scope.level,
-                })
-                console.log(response.data)
-            }
+            // console.log('save', $scope.level.id);
+            // if ($scope.level.id) {
+            //     const response = await api.post(`levels/edit/${$scope.level.id}`, {
+            //         data: $scope.level,
+            //     })
+            //     console.log(response.data)
+            // } else {
+            //     const response = await api.post('levels/create', {
+            //         data: $scope.level,
+            //     })
+            //     console.log(response.data)
+            // }
         }
 
         const mouse = {

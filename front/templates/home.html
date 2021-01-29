@@ -2,10 +2,11 @@
     <div class="g-view-content text-center">
         <h1>iSPY 2021</h1>
         <h3 class="mb-5">COVID-Free Edition</h3>
-        <form ng-if="!state.hasPlayer" ng-submit="createPlayer()">
+        <pre>{{state.player|json}}</pre>
+        <form ng-if="!state.player.joined" ng-submit="createPlayer()">
             <div class="form-group">
                 <label for="playerName">Enter Your Name</label>
-                <input type="text" class="form-control" id="playerName" aria-describedby="playerNameHelp" placeholder="Cool Guy" ng-model="player.attributes.name">
+                <input type="text" class="form-control" id="playerName" aria-describedby="playerNameHelp" placeholder="Cool Guy" ng-model="state.player.name">
                 <small id="playerNameHelp" class="form-text text-muted">Please enter your name so other players can find you in game rounds and lobbies.</small>
             </div>
             <button type="submit" class="btn btn-primary" ng-disabled="isCreatingPlayer">
