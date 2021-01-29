@@ -1,27 +1,25 @@
-<div id="g-view-select-level" class="g-view-container">
-    <div class="g-view-content text-center">
-        <h1>Find A Game</h1>
-        <p ng-if="!state.gamesList.length">Loading games...</p>
-        <table class="table table-hover" ng-if="state.gamesList.length">
-          <thead>
+<div id="g-view-select-level" class="g-view-content text-center">
+    <h1>Find A Game</h1>
+    <p ng-if="!state.gamesList.length">Loading games...</p>
+    <table class="table table-hover" ng-if="state.gamesList.length">
+        <thead>
             <tr>
-              <th scope="col">#</th>
-              <th scope="col">Name</th>
-              <th scope="col">Action</th>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Action</th>
             </tr>
-          </thead>
-          <tbody>
+        </thead>
+        <tbody>
             <tr ng-repeat="game in state.gamesList">
-              <th scope="row">{{ $index }}</th>
-              <td>{{ game.name }}</td>
-              <td>
-                <button class="btn btn-xs btn-link" ng-click="joinGame(game)">Join</button>
-              </td>
+                <th scope="row">{{ $index }}</th>
+                <td>{{ game.name }}</td>
+                <td>
+                    <button class="btn btn-xs btn-link" ng-click="joinGame(game)">Join</button>
+                </td>
             </tr>
-          </tbody>
-        </table>
-        <a href="#!/" class="btn btn-link">
-            <i data-feather="circle"></i> Go Back
-        </a>
-    </div>
+        </tbody>
+    </table>
+    <a href="#!/" class="btn btn-link">
+        <i data-feather="circle"></i> Go Back
+    </a>
 </div>

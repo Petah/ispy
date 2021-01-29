@@ -1,8 +1,6 @@
-<div id="g-view-round" class="g-view-container">
-    <div class="g-view-content text-center">
-        <h1>{{ state.level.name }}</h1>
-        <img ng-src="{{ state.level.image }}" ng-attr-alt="{{ state.level.name }} Image">
-        <p>{{ state.level.riddle || 'No riddle set! :O' }}</p>
-    </div>
-    <button class="btn btn-sm btn-danger" ng-click="leaveGame()">Leave Game</button>
+<div id="g-view-round" class="g-view-content text-center">
+    <h1>{{ state.level.name }}</h1>
+    <img id="g-round-image" class="g-img-fluid"  ng-src="{{ state.level.image }}" ng-attr-alt="{{ state.level.name }} Image">
+    <p>{{ state.level.riddle || 'No riddle set! :O' }}</p>
+    <button class="nes-btn  is-danger" ng-click="leaveGame()">Leave Game</button>
 </div>

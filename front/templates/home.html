@@ -1,52 +1,47 @@
-<div id="g-view-welcome" class="g-view-container">
-    <div class="g-view-content text-center">
-        <div>
-            <h1>iSPY 2021</h1>
-            <h3 class="mb-5">COVID-Free Edition</h3>
-        </div>
-        
-        <!-- <pre>{{state.player|json}}</pre> -->
+<div id="g-view-welcome" class="g-view-content text-center">
+    <div class="g-view-title">
+        <h1>iSPY 2021</h1>
+        <h3 class="mb-5">COVID-Free Edition</h3>
+    </div>
 
-        <section ng-if="!state.hasPlayer" id="register">
-            <g-message-box>
-                <p>Please enter your name so other players can find you in game rounds and lobbies.</p>
-            </g-message-box>
-            
-            <form ng-if="!state.hasPlayer" ng-submit="createPlayer()" class="g-form-container nes-container with-title is-rounded">
-                <div class="nes-field">
-                    <label for="name_field">Your name</label>
-                    <input type="text" class="nes-input" id="playerName" aria-describedby="playerNameHelp" placeholder="Cool Guy" ng-model="state.player.name">
-                </div>
+    <section ng-if="!state.hasPlayer" id="register">
+        <g-message-box>
+            <p>Please enter your name so other players can find you in game rounds and lobbies.</p>
+        </g-message-box>
 
-                <button type="submit" class="nes-btn is-primary" ng-disabled="isCreatingPlayer">
-                    <span ng-show="!isCreatingPlayer">Register</span>
-                    <span ng-show="isCreatingPlayer">Registering Player...</span>
-                </button>
-            </form>
+        <form ng-if="!state.hasPlayer" ng-submit="createPlayer()" class="g-form-container nes-container with-title is-rounded">
+            <div class="nes-field">
+                <label for="name_field">Your name</label>
+                <input type="text" class="nes-input" id="playerName" aria-describedby="playerNameHelp" placeholder="Cool Guy" ng-model="state.player.name">
+            </div>
+
+            <button type="submit" class="nes-btn is-primary" ng-disabled="isCreatingPlayer">
+                <span ng-show="!isCreatingPlayer">Register</span>
+                <span ng-show="isCreatingPlayer">Registering Player...</span>
+            </button>
+        </form>
+    </section>
+
+    <div class="g-menu-container" ng-if="state.hasPlayer">
+        <section class="message -left g-flex" id="welcome">
+            <i class="nes-bcrikko"></i>
+            <div class="nes-balloon from-left">
+                <p>Hello {{ player.name }}!</p>
+            </div>
         </section>
-        
-        <div class="g-menu-container" ng-if="state.hasPlayer">
-            <section class="message -left g-flex" id="welcome">
-                <i class="nes-bcrikko"></i>
-                <div class="nes-balloon from-left">
-                    <p>Hello {{ player.name }}!</p>
-                </div>
-            </section>
 
-            <section class="g-form-container nes-container with-title is-rounded">
-                <ul class="g-menu-buttons nav flex-column">
-                    <li class="nav-item">
-                        <a href="#!/create-game" class="nes-btn is-primary">Create Game</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#!/join-game" class="nes-btn is-warning">Join Game</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#!/" class="nes-btn is-secondary">Scoreboard</a>
-                    </li>
-                </ul>
-            </section>
-        </div>
+        <section class="g-form-container nes-container with-title is-rounded">
+            <ul class="g-menu-buttons nav flex-column">
+                <li class="nav-item">
+                    <a href="#!/create-game" class="nes-btn is-primary">Create Game</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#!/join-game" class="nes-btn is-warning">Join Game</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#!/" class="nes-btn is-secondary">Scoreboard</a>
+                </li>
+            </ul>
+        </section>
     </div>
 </div>
-

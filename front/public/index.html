@@ -29,10 +29,14 @@
 </head>
 
 <body ng-controller="RootController">
-    <div id="overlay">
-        <img src="images/logo.png" alt="">
+    <div id="game" class="g-game-container">
+        <div id="g-game-frame" class="nes-container is-rounded">
+            <div id="g-overlay">
+                <img id="g-team-logo" src="images/logo.png" alt="Spies in the Skies">
+            </div>
+            <div class="g-view-container" ng-view ng-cloak></div>
+        </div>
     </div>
-    <div id="game" class="g-game-container container-fluid" ng-view ng-cloak></div>
     <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
