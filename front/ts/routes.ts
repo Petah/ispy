@@ -1,9 +1,8 @@
 import { AdminController } from './controllers/admin/admin-controller';
 import { CreateGameController } from './controllers/create-game-controller';
+import { HomeController } from './controllers/home-controller';
 import { IController } from './controllers/controller';
 import { SelectLevelController } from './controllers/select-level-controller';
-import { WelcomeController } from './controllers/welcome-controller';
-import { CreateGameController } from './controllers/create-game-controller';
 import { RoundController } from './controllers/round-controller';
 import { LevelListController } from './controllers/admin/level-list-controller';
 import { LevelEditController } from './controllers/admin/level-edit-controller';
@@ -22,10 +21,10 @@ export interface IRoute {
 export const Routes: IRoute[] = [
     {
         path: '/',
-        templateUrl: '/welcome.html',
+        templateUrl: '/home.html',
         controller: {
-            name: 'WelcomeController',
-            handler: WelcomeController
+            name: 'HomeController',
+            handler: HomeController
         },
     },
     {

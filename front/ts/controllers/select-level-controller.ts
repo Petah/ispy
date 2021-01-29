@@ -26,23 +26,12 @@ export class SelectLevelController implements IController {
             return;
         }
 
-        // @Todo fetch levels from API
-        $scope.levels = [
-            new Level({
-                id: '1',
-                type: 'Level',
-                attributes: {
-                    name: 'Watermelon',
-                }
-            }),
-            new Level({
-                id: '2',
-                type: 'Level',
-                attributes: {
-                    name: 'Blueberry',
-                }
-            }),
-        ];
+        (async () => {
+            const level: Level = await api.getLevel('17c69238-fd2e-430d-afdf-0b38d8c3fd14');
+            $scope.levels = [
+                level
+            ];
+        })();
 
         $scope.selectLevel = function (level: Level): void {
             $scope.selectedLevel = level;

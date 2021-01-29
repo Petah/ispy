@@ -1,7 +1,8 @@
 <div id="g-view-select-level" class="g-view-container">
     <div class="g-view-content text-center">
         <h1>Select Level</h1>
-        <div class="card-columns mt-3">
+        <p ng-if="!levels.length">Loading levels...</p>
+        <div class="card-columns mt-3" ng-if="levels.length">
             <div class="card" ng-repeat="level in levels">
               <img class="card-img-top" src="https://picsum.photos/300/200" alt="Card image cap">
               <div class="card-body">

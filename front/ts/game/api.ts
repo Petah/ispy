@@ -1,6 +1,7 @@
 import { IHttpService } from "angular";
 import { JsonApiData, JsonApiModel } from "../helpers/json-api/types";
 import { Game } from "./game";
+import { Level } from "./level";
 import { Player } from "./player";
 
 class Api {
@@ -25,7 +26,6 @@ class Api {
         return response.data;
     }
 
-    // Player state
     async createPlayer(name: string): Promise<Player> {
         const response = await this.post<JsonApiModel>('players/create', {
             data: {
@@ -39,7 +39,6 @@ class Api {
         return player;
     }
 
-    // Game state
     async createGame(name: string): Promise<any> {
         const response = await this.post<JsonApiModel>('games/create', {
             data: {
@@ -51,6 +50,20 @@ class Api {
         const game = Game.mapModel(response);
         console.log('Created game!', game);
         return game;
+    }
+
+    async getLevels(): Promise<any> {
+        const response = await this.get<JsonApiModel>('levels/list');
+        const levels = Level.mapModels(response);
+        console.log('Fetched levels!', levels);
+        return levels;
+    }
+
+    async getLevel(id: string): Promise<Level> {
+        const response = await this.get<JsonApiModel>(`levels/fetch/${id}`);
+        const level = Level.mapModel(response);
+        console.log('Fetched level!', level);
+        return level;
     }
 }
 

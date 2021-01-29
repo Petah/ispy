@@ -4,20 +4,20 @@ import { api } from "../game/api";
 import { state } from "../game/state";
 import { Player } from "../game/player";
 
-interface IWelcomeControllerScope extends IScope {
+interface IHomeControllerScope extends IScope {
     hasPlayer: boolean,
     isCreatingPlayer: boolean,
     player: Player,
     createPlayer(): Promise<boolean>,
 }
 
-export class WelcomeController implements IController {
+export class HomeController implements IController {
     public inject = [
         '$scope',
     ];
 
     public controller(
-        $scope: IWelcomeControllerScope,
+        $scope: IHomeControllerScope,
     ) {
         $scope.player = state.getPlayer() || new Player({
             id: '',
