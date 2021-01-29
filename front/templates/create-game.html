@@ -1,12 +1,18 @@
 <div id="g-view-create-game" class="g-view-container">
     <div class="g-view-content">
+        <div class="g-message">
+            <i class="g-message-icon nes-bcrikko"></i>
+            <div class="g-message-text nes-balloon from-left">
+                <p>Give your game round a name so others can identify it and join you online.</p>
+            </div>
+        </div>
         <div class="g-form-container nes-container with-title is-rounded">
             <p class="title">Create Game</p>
             <form ng-submit="createGame()">
                 <div class="nes-field">
-                    <input type="text" class="nes-input" id="gameName" aria-describedby="gameNameHelp" placeholder="Cool People Game" ng-model="gameName">
-                    <small id="gameNameHelp" class="text-muted">Give your game round a name so others can identify it and join you online.</small>
-                  </div>
+                    <input type="text" class="nes-input" id="gameName" aria-describedby="gameNameHelp"
+                        placeholder="Cool People Game" ng-model="gameName">
+                </div>
                 <a href="#!/" class="g-form-btn nes-btn">Go Back</a>
                 <button type="submit" class="g-form-btn nes-btn is-primary" ng-disabled="isCreatingGame">
                     <span ng-show="!isCreatingGame">Create Game</span>

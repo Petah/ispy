@@ -9,6 +9,27 @@
     }
 }
 
+.g-message {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 2rem;
+
+    .g-message-icon,
+    .g-message-text {
+        flex: 1;
+    }
+
+    .g-message-icon {
+        max-width: 96px;
+        margin: 0 1rem 0rem 0;
+    }
+
+    .g-message-text {
+        max-width: 480px;
+    }
+}
 
 // Buttons
 .nes-btn {
