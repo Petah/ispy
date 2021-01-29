@@ -20,7 +20,7 @@ export class CreateGameController implements IController {
         $location: ILocationService,
         $scope: ICreateGameControllerScope,
     ) {
-        if (!state.hasPlayer) {
+        if (!state.player.joined) {
             $location.path('/');
 
             return;
@@ -33,17 +33,17 @@ export class CreateGameController implements IController {
                 return;
             }
 
-            try {
-                console.log(`Creating game with room ${$scope.gameName}`);
-                $scope.isCreatingGame = true;
-                const game = await api.createGame($scope.gameName);
-                state.setGame(game);
-                state.startGame();
-                $location.path('/select-level');
-            } catch (e) {
-                console.error(e.message);
-                $scope.isCreatingGame = false;
-            }
+            // try {
+            //     console.log(`Creating game with room ${$scope.gameName}`);
+            //     $scope.isCreatingGame = true;
+            //     const game = await api.createGame($scope.gameName);
+            //     state.setGame(game);
+            //     state.startGame();
+            //     $location.path('/select-level');
+            // } catch (e) {
+            //     console.error(e.message);
+            //     $scope.isCreatingGame = false;
+            // }
         };
     }
 }

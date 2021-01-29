@@ -1,8 +1,7 @@
 import { IHttpService, IScope } from "angular";
 import { api } from "../../game/api";
 import { IController } from "../controller";
-import { Level } from "../../game/level";
-import { JsonApiData, JsonApiModel } from "../../helpers/json-api/types";
+import { Level } from "../../../../common/entities/level";
 
 interface ILevelListControllerScope extends IScope {
     levels: Level[],
@@ -22,9 +21,9 @@ export class LevelListController implements IController {
         $routeParams,
     ) {
         $scope.fetchLevels = async () => {
-            const response = await api.get<JsonApiModel[]>('levels/list')
-            $scope.levels = Level.mapModels(response);
-            console.log(response);
+            // const response = await api.get<JsonApiModel[]>('levels/list')
+            // $scope.levels = Level.mapModels(response);
+            // console.log(response);
         }
         $scope.fetchLevels();
     }

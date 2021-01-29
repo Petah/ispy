@@ -1,17 +1,10 @@
 {
     "filesGlob": [
-        "resources/ts/**/*.ts"
+        "socket/src/**/*.ts",
+        "front/ts/**/*.ts",
+        "common/**/*.ts"
     ],
     "compilerOptions": {
-        // "target": "es6",
-        // "module": "commonjs",
-        // "outDir": "dist",
-        // "rootDir": "resources/ts",
-        // "esModuleInterop": true,
-        // "noUnusedLocals": true,
-        // "noUnusedParameters": true,
-        // "noImplicitAny": true,
-
         "module": "commonjs",
         "target": "ES2020",
         "noImplicitAny": false,

@@ -1,8 +1,8 @@
 import { ILocationService, IScope } from "angular";
 import { IController } from "./controller";
-import { Level } from "../game/level";
-import { Player } from "../game/player";
 import { state } from "../game/state";
+import { Level } from "../../../common/entities/level";
+import { Player } from "../../../common/entities/player";
 
 interface IRoundControllerScope extends IScope {
     level: Level,
@@ -20,21 +20,21 @@ export class RoundController implements IController {
         $location: ILocationService,
         $scope: IRoundControllerScope,
     ) {
-        if (!state.validateLevel()) {
+        if (!state.player.joined) {
+            console.log('Player not joined going home');
             $location.path('/');
-
             return;
         }
 
-        $scope.level = state.getLevel();
+        // $scope.level = state.getLevel();
 
-        $scope.leaveGame = function (): void {
-            if (!confirm('Are you sure you want to leave the round?')) {
-                return;
-            }
+        // $scope.leaveGame = function (): void {
+        //     if (!confirm('Are you sure you want to leave the round?')) {
+        //         return;
+        //     }
 
-            state.setLevel(null);
-            $location.path('/');
-        }
+        //     state.setLevel(null);
+        //     $location.path('/');
+        // }
     }
 }
