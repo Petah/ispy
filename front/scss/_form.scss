@@ -1,0 +1,30 @@
+// Layout
+.g-form-container {
+    max-width: 720px;
+    background-color: white;
+    box-shadow: 6px 6px 4px rgba(0,0,0,0.35);
+
+    &.is-rounded.with-title > .title {
+        margin-top: -2rem;
+    }
+}
+
+
+// Buttons
+.nes-btn {
+    text-transform: uppercase;
+}
+
+.g-form-btn {
+    margin-top: 1.5rem;
+}
+
+.g-menu-buttons {
+    .nav-item:not(:first-child) {
+        margin-top: 1rem;
+    }
+
+    .g-menu-button {
+        min-width: 320px;
+    }
+}
