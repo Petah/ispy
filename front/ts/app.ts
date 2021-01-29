@@ -1,6 +1,7 @@
 import 'babel-polyfill'
 import { RootController } from './controllers/root-controller'
-import { loadController, loadRoutes } from './loader'
+import { MessageBoxDirective } from './directives/message-box'
+import { loadController, loadDirective, loadRoutes } from './loader'
 import { Routes } from "./routes"
 
 const app = angular.module('App', [
@@ -14,4 +15,5 @@ app.run(['$window', '$q', function ($window, $q) {
 (window as any).app = app;
 
 loadController(app, RootController, 'RootController');
+loadDirective(app, MessageBoxDirective, 'gMessageBox');
 loadRoutes(app, Routes);

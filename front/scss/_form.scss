@@ -1,0 +1,51 @@
+// Layout
+.g-form-container {
+    max-width: 720px;
+    background-color: white;
+    box-shadow: 6px 6px 4px rgba(0,0,0,0.35);
+
+    &.is-rounded.with-title > .title {
+        margin-top: -2rem;
+    }
+}
+
+.g-message {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 2rem;
+
+    .g-message-icon,
+    .g-message-text {
+        flex: 1;
+    }
+
+    .g-message-icon {
+        max-width: 96px;
+        margin: 0 1rem 0rem 0;
+    }
+
+    .g-message-text {
+        max-width: 480px;
+    }
+}
+
+// Buttons
+.nes-btn {
+    text-transform: uppercase;
+}
+
+.g-form-btn {
+    margin-top: 1.5rem;
+}
+
+.g-menu-buttons {
+    .nav-item:not(:first-child) {
+        margin-top: 1rem;
+    }
+
+    .g-menu-button {
+        min-width: 320px;
+    }
+}

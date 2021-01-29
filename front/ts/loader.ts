@@ -14,6 +14,7 @@ export function loadDirective(app: IModule, directiveClass: new () => IDirective
             require: instance.require,
             template: instance.template,
             templateUrl: instance.templateUrl,
+            transclude: instance.transclude,
             link: instance.directive(...injected),
         };
     }]);

@@ -9,5 +9,6 @@ export interface IDirective {
     template?: string;
     templateUrl?: string;
     inject: string[];
+    transclude: boolean;
     directive(...injected: any[]): Link;
 }
