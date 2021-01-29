@@ -1,8 +1,8 @@
 <div id="g-view-select-level" class="g-view-container">
     <div class="g-view-content text-center">
         <h1>Find A Game</h1>
-        <p ng-if="!games.length">Loading games...</p>
-        <table class="table table-hover" ng-if="games.length">
+        <p ng-if="!state.gamesList.length">Loading games...</p>
+        <table class="table table-hover" ng-if="state.gamesList.length">
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -11,9 +11,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="game in games">
+            <tr ng-repeat="game in state.gamesList">
               <th scope="row">{{ $index }}</th>
-              <td>{{ game.attributes.name }}</td>
+              <td>{{ game.name }}</td>
               <td>
                 <button class="btn btn-xs btn-link" ng-click="joinGame(game)">Join</button>
               </td>

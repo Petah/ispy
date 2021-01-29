@@ -2,7 +2,7 @@ import { IScope, ILocationService } from "angular";
 import { Game } from "../../../common/entities/game";
 import { Level } from "../../../common/entities/level";
 import { Player } from "../../../common/entities/player";
-import { objectToInstance } from "../../../common/helpers/object";
+import { objectsToInstances, objectToInstance } from "../../../common/helpers/object";
 import { state } from "./state";
 
 class Socket {
@@ -38,12 +38,27 @@ class Socket {
             state.level = objectToInstance(data, new Level());
             this.goto('/round');
         });
+
+        this.bind('gamesList', (data) => {
+            state.gamesList = objectsToInstances(data, d => new Game());
+            this.goto('/join-game');
+        });
     }
 
-    public joinGame(name: string) {
-        this.socket.emit('joinGame', {
+    public createPlayer(name: string) {
+        this.emit('createPlayer', {
             name,
         });
+    }
+
+    public joinGame(game: Game) {
+        this.emit('joinGame', {
+        });
+    }
+
+    private emit(event, data) {
+        console.log('Socket emit', event, data)
+        this.socket.emit(event, data);
     }
 
     private goto(route: string) {

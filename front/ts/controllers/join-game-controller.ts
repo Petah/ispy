@@ -3,6 +3,7 @@ import { IController } from "./controller";
 import { api } from "../game/api";
 import { state } from "../game/state";
 import { Game } from "../../../common/entities/game";
+import { socket } from "../game/socket";
 
 interface IJoinGameControllerScope extends IScope {
     games: Game[],
@@ -22,7 +23,6 @@ export class JoinGameController implements IController {
     ) {
         if (!state.player.joined) {
             $location.path('/');
-
             return;
         }
 
@@ -31,16 +31,8 @@ export class JoinGameController implements IController {
         // @Todo fetch games list
 
         $scope.joinGame = async function (game: Game): Promise<void> {
-            // try {
-            //     console.log(`Joining game ${game.name}`);
-            //     $scope.isJoiningGame = true;
-            //     await api.joinGame(game);
-            //     state.setGame(game);
-            //     $location.path('/round');
-            // } catch (e) {
-            //     console.error(e.message);
-            // }
-            // $scope.isJoiningGame = false;
+            console.log(`Joining game ${game.name}`);
+            socket.joinGame(game);
         };
     }
 }
