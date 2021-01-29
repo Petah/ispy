@@ -13,3 +13,11 @@ export interface CorrectGuess {
 export interface LevelStart {
     game: Game,
 }
+
+export interface CreatePlayer {
+    name: string,
+}
+
+export interface PlayerJoined {
+    player: Player,
+}

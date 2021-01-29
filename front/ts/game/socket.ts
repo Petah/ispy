@@ -2,7 +2,7 @@ import { IScope, ILocationService } from "angular";
 import { Game } from "../../../common/entities/game";
 import { Level } from "../../../common/entities/level";
 import { Player } from "../../../common/entities/player";
-import { CorrectGuess, Guess, LevelStart } from "../../../common/events/events";
+import { CorrectGuess, CreatePlayer, Guess, LevelStart, PlayerJoined } from "../../../common/events/events";
 import { objectsToInstances, objectToInstance } from "../../../common/helpers/object";
 import { state } from "./state";
 
@@ -20,9 +20,8 @@ class Socket {
         this.bind('init', (data) => {
         });
 
-        this.bind('playerJoined', (data) => {
-            const player = new Player();
-            player.name = data.name;
+        this.bind('playerJoined', (playerJoined: PlayerJoined) => {
+            const player = objectToInstance(playerJoined.player, new Player());
             // state.game.players.push(player);
         });
 
@@ -46,9 +45,10 @@ class Socket {
     }
 
     public createPlayer(name: string) {
-        this.emit('createPlayer', {
+        const createPlayer: CreatePlayer = {
             name,
-        });
+        };
+        this.emit('createPlayer', createPlayer);
     }
 
     public joinGame(game: Game) {
