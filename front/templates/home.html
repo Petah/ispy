@@ -1,19 +1,30 @@
 <div id="g-view-welcome" class="g-view-container">
     <div class="g-view-content text-center">
-        <h1>iSPY 2021</h1>
-        <h3 class="mb-5">COVID-Free Edition</h3>
-        <pre>{{state.player|json}}</pre>
-        <form ng-if="!state.player.joined" ng-submit="createPlayer()">
-            <div class="form-group">
-                <label for="playerName">Enter Your Name</label>
-                <input type="text" class="form-control" id="playerName" aria-describedby="playerNameHelp" placeholder="Cool Guy" ng-model="state.player.name">
-                <small id="playerNameHelp" class="form-text text-muted">Please enter your name so other players can find you in game rounds and lobbies.</small>
-            </div>
-            <button type="submit" class="btn btn-primary" ng-disabled="isCreatingPlayer">
-                <span ng-show="!isCreatingPlayer">Register</span>
-                <span ng-show="isCreatingPlayer">Registering Player...</span>
-            </button>
-        </form>
+        <div>
+            <h1>iSPY 2021</h1>
+            <h3 class="mb-5">COVID-Free Edition</h3>
+        </div>
+        
+        <!-- <pre>{{state.player|json}}</pre> -->
+
+        <section ng-if="!state.hasPlayer" id="register">
+            <g-message-box>
+                <p>Please enter your name so other players can find you in game rounds and lobbies.</p>
+            </g-message-box>
+            
+            <form ng-if="!state.hasPlayer" ng-submit="createPlayer()" class="g-form-container nes-container with-title is-rounded">
+                <div class="nes-field">
+                    <label for="name_field">Your name</label>
+                    <input type="text" class="nes-input" id="playerName" aria-describedby="playerNameHelp" placeholder="Cool Guy" ng-model="state.player.name">
+                </div>
+
+                <button type="submit" class="nes-btn is-primary" ng-disabled="isCreatingPlayer">
+                    <span ng-show="!isCreatingPlayer">Register</span>
+                    <span ng-show="isCreatingPlayer">Registering Player...</span>
+                </button>
+            </form>
+        </section>
+        
         <div class="g-menu-container" ng-if="state.hasPlayer">
             <section class="message -left g-flex" id="welcome">
                 <i class="nes-bcrikko"></i>
