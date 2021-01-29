@@ -38,10 +38,41 @@ body {
     align-items: center;
 }
 
+.g-menu-container {
+    display: inline-block;
+}
+
 #welcome {
     margin-top: 15px;
     .nes-balloon {
         margin-bottom: 85px;
         margin-left: 25px;
+    }
+}
+
+
+.page-title {
+    margin-bottom: 55px;
+}
+
+.nes-container.with-title > .title {
+    background: #f2f2f2;
+}
+
+.g-view-select-level {
+    h1 {
+        margin-bottom: 50px;
+        display: block;
+    }
+}
+
+.g-level-list {
+
+    > .nes-container  {
+        margin: 0 15px;
+        width: 300px;
+        img {
+            width: 100%;
+        }
     }
 }
