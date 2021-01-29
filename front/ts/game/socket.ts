@@ -30,11 +30,6 @@ class Socket {
             state.player.joined = true;
         });
 
-        this.bind('youJoined', (data) => {
-            state.player.joined = true;
-            this.goto('/select-level');
-        });
-
         this.bind('levelStart', (data) => {
             state.level = objectToInstance(data, new Level());
             this.goto('/round');

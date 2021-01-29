@@ -68,8 +68,8 @@ export class LevelEditController implements IController {
         }
 
         $scope.save = async () => {
-            console.log(JSON.stringify($scope.level, null, 4));
-            navigator.clipboard.writeText(JSON.stringify($scope.level, null, 4));
+            console.log(angular.toJson($scope.level, 4));
+            navigator.clipboard.writeText(angular.toJson($scope.level, 4));
             // console.log('save', $scope.level.id);
             // if ($scope.level.id) {
             //     const response = await api.post(`levels/edit/${$scope.level.id}`, {
@@ -96,6 +96,8 @@ export class LevelEditController implements IController {
         $scope.image.on('load', () => {
             svg.width($scope.image.width());
             svg.height($scope.image.height());
+            $scope.level.width = $scope.image.get(0).naturalWidth;
+            $scope.level.height = $scope.image.get(0).naturalHeight;
         })
 
         $('#gp-image-wrapper svg').on('mousemove', (event: any) => {

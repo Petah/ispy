@@ -30,8 +30,8 @@ export class RoundController implements IController {
 
         $scope.click = ($event: MouseEvent) => {
             const target = $($event.target);
-            var xPos = $event.pageX - target.offset().left;
-            var yPos = $event.pageY - target.offset().top;
+            const xPos = $event.pageX - target.offset().left;
+            const yPos = $event.pageY - target.offset().top;
             socket.guess(xPos / target.width(), yPos / target.height());
         }
 
