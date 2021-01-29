@@ -36,11 +36,7 @@ class Socket {
         });
 
         this.bind('gamesList', (data) => {
-            const gotoList = state.gamesList.length === 0;
             state.gamesList = objectsToInstances(data, d => new Game());
-            if (gotoList) {
-                this.goto('/join-game');
-            }
         });
     }
 
