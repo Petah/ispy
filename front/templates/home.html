@@ -23,12 +23,9 @@
     </section>
 
     <div class="g-menu-container" ng-if="state.player.joined">
-        <section class="message -left g-flex" id="welcome">
-            <i class="nes-bcrikko"></i>
-            <div class="nes-balloon from-left">
-                <p>Hello {{ state.player.name }}!</p>
-            </div>
-        </section>
+        <g-message-box>
+            <p>Hello {{ state.player.name }}!</p>
+        </g-message-box>
 
         <section class="g-form-container nes-container with-title is-rounded">
             <ul class="g-menu-buttons nav flex-column">
