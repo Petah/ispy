@@ -49,7 +49,7 @@
             <div class="g-flex g-flex-col">
                 <div class="g-round-image g-img-fluid" data-ng-magnify data-image-src="{{ state.level.image }}"
                     ng-click="click($event)"></div>
-                <img ng-if="!state.game.started" ng-src="{{ state.game.titleImage }}" class="g-round-image g-img-fluid" />
+                <div ng-if="!state.game.started" class="g-round-image g-img-fluid" data-ng-magnify data-image-src="{{ state.game.titleImage }}"></div>
             </div>
         </div>
 
