@@ -63,3 +63,6 @@ export interface JoinGame {
 
 export interface StartGame {
 }
+
+export interface LeaveGame {
+}
