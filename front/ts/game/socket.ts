@@ -116,6 +116,8 @@ class Socket {
     }
 
     public leaveGame() {
+        state.game = null;
+        state.level = null;
         const leaveGame: LeaveGame = {
         };
         this.emit('leaveGame', leaveGame);
