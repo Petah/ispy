@@ -9,10 +9,7 @@
         <div id="g-round-image-container" class="nes-container with-title is-rounded">
             <p class="title">iSpy Image</p>
             <div class="g-flex g-flex-col">
-                <div id="example1" data-ng-magnify data-image-src="{{ state.level.image }}" ng-click="click($event)"></div>
-
-                <!-- <img id="g-round-image" class="g-img-fluid"  ng-src="{{ state.level.image }}" ng-attr-alt="{{ state.level.name }} Image" ng-click="click($event)" /> -->
-
+                <div id="g-round-image" class="g-img-fluid"  data-ng-magnify data-image-src="{{ state.level.image }}" ng-click="click($event)"></div>
                 <button class="nes-btn is-error btn-action-right" ng-click="start()" ng-if="!state.game.started && state.player.host">Start</button>
             </div>
         </div>
