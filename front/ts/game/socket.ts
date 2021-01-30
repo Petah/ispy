@@ -2,7 +2,7 @@ import { IScope, ILocationService } from "angular";
 import { Game } from "../../../common/entities/game";
 import { Level } from "../../../common/entities/level";
 import { Player } from "../../../common/entities/player";
-import { CorrectGuess, CreatePlayer, Guess, IncorrectGuess, LevelStart, NoLife, PlayerJoined } from "../../../common/events/events";
+import { CorrectGuess, CreatePlayer, DuplicateGuess, Guess, IncorrectGuess, LevelStart, NoLife, PlayerJoined } from "../../../common/events/events";
 import { objectsToInstances, objectToInstance } from "../../../common/helpers/object";
 import { audio } from "./audio";
 import { particles } from "./particles";
@@ -54,6 +54,14 @@ class Socket {
             if (correctGuess.player.name === state.player.name) {
                 audio.play(correctGuess.clue.sound as any || 'found');
                 particles.burst('yes1', correctGuess.guess.pageX, correctGuess.guess.pageY, 'grow-shrink')
+            }
+        });
+
+        this.bind('duplicateGuess', (duplicateGuess: DuplicateGuess) => {
+            state.game = objectToInstance(duplicateGuess.game, state.game);
+            if (duplicateGuess.player.name === state.player.name) {
+                audio.play(duplicateGuess.clue.sound as any || 'found');
+                particles.burst('dupe', duplicateGuess.guess.pageX, duplicateGuess.guess.pageY, 'grow-shrink')
             }
         });
 

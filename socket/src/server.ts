@@ -2,7 +2,7 @@ import { Server, Socket } from "socket.io";
 import { Game } from "../../common/entities/game";
 import { Level } from "../../common/entities/level";
 import { Player } from "../../common/entities/player";
-import { CorrectGuess, CreatePlayer, Guess, LevelStart, PlayerJoined, IncorrectGuess, NoLife } from "../../common/events/events";
+import { CorrectGuess, CreatePlayer, Guess, LevelStart, PlayerJoined, IncorrectGuess, NoLife, DuplicateGuess } from "../../common/events/events";
 import { objectToInstance, serialize } from "../../common/helpers/object";
 import { insidePoly } from "../../common/helpers/poly";
 
@@ -95,6 +95,14 @@ io.on('connection', (socket: Socket) => {
                         if (Object.keys(game._correctGuesses).length === game.totalGuesses) {
                             game.broadcast('guessingComplete', {});
                         }
+                    } else {
+                        const duplicateGuess: DuplicateGuess = {
+                            game,
+                            clue,
+                            player,
+                            guess,
+                        };
+                        player.emit('duplicateGuess', duplicateGuess);
                     }
                 }
             }

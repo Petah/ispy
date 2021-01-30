@@ -23,6 +23,9 @@ class Types {
     questionMark = loadImage('http://192.168.1.9:81/per/ispy/front/public/images/question-mark.png')
     cross = loadImage('http://192.168.1.9:81/per/ispy/front/public/images/cross.png')
     yes1 = loadImage('http://192.168.1.9:81/per/ispy/front/public/images/yes-1.png')
+    yes2 = loadImage('http://192.168.1.9:81/per/ispy/front/public/images/yes-2.png')
+    yes3 = loadImage('http://192.168.1.9:81/per/ispy/front/public/images/yes-3.png')
+    dupe = loadImage('http://192.168.1.9:81/per/ispy/front/public/images/dupe.png')
 }
 
 const types = new Types();
