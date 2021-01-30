@@ -51,14 +51,14 @@ io.on('connection', (socket: Socket) => {
 
     socket.on('joinGame', data => {
         console.log('joinGame', data);
-        if (!game.level) {
-            game.startNextLevel();
-        } else {
-            const levelStart: LevelStart = {
-                game,
-            };
-            player.emit('levelStart', levelStart);
-        }
+        // if (!game.level) {
+        //     game.startNextLevel();
+        // } else {
+        //     const levelStart: LevelStart = {
+        //         game,
+        //     };
+        //     player.emit('levelStart', levelStart);
+        // }
     });
 
     socket.on('guess', (guess: Guess) => {
