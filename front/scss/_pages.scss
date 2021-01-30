@@ -25,6 +25,7 @@
 #g-view-join-game {
     width: 100%;
     max-width: 680px;
+    height: 100%;
 
     .nes-table td {
         border-width: 0;
@@ -42,6 +43,17 @@
             @media (min-width: 768px) {
                 width: 40%;
             }
+        }
+    }
+
+    .g-form-container {
+        max-height: 550px;
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        .nes-table-responsive {
+            overflow: auto;
+            max-height: 345px;
         }
     }
 }
