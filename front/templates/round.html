@@ -66,7 +66,7 @@
                     <button class="nes-btn is-error btn-action-right" ng-click="start()"
                         ng-if="!state.game.started && state.player.host">Start</button>
                 </div>
-                <div ng-if="state.game.levelEnded">
+                <div ng-if="state.game.started && state.game.levelEnded">
                     <p class="title">Level Up</p>
                 </div>
             </div>
