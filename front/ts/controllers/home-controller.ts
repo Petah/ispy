@@ -19,7 +19,7 @@ export class HomeController implements IController {
         $scope: IHomeControllerScope,
     ) {
         state.player.name = state.player.name
-            || (localStorage.getItem('playerName') || 'there');
+            || (localStorage.getItem('playerName') || '');
 
         $scope.createPlayer = async (): Promise<void> => {
             audio.play('spyMusic');

@@ -47,8 +47,9 @@
         <div id="g-round-image-container" class="nes-container with-title is-rounded">
             <p class="title">iSpy Image - Press Space To Zoom</p>
             <div class="g-flex g-flex-col">
-                <div class="g-round-image g-img-fluid" ng-if="state.game.started" data-ng-magnify data-image-src="{{ state.level.image }}" ng-click="clickImage($event)"></div>
+                <div class="g-round-image g-img-fluid" ng-if="state.game.started && !state.game.levelEnded" data-ng-magnify data-image-src="{{ state.level.image }}" ng-click="clickImage($event)"></div>
                 <div class="g-round-image g-img-fluid" ng-if="!state.game.started" data-ng-magnify data-image-src="{{ state.game.titleImage }}"></div>
+                <div ng-if="state.game.levelEnded">End of round</div>
             </div>
         </div>
 

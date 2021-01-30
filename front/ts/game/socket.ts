@@ -19,6 +19,11 @@ class Socket {
 
         this.socket = io();
 
+        this.socket.on("disconnect", () => {
+            alert('Lost connection to server')
+            location.reload();
+        });
+
         this.bind('init', (data) => {
         });
 

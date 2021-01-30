@@ -34,6 +34,14 @@ game1._levels = [
     objectToInstance(require('../../common/data/toys.json'), new Level()),
 ];
 // @todo player list doesn't update on host
+// @todo tick sound
+// @todo round over sound
+// @todo display winner of round
+// @todo score per round?
+// @todo make hearts pixely
+// @todo round score and total score in sidebar
+// @todo tickets for how many items completed
+
 const game2 = new Game();
 game2.id = 'gardens-1';
 game2.name = 'Garden Avengers';
