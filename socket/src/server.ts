@@ -40,7 +40,6 @@ const allPlayers: Player[] = [];
 
 function findPlayerGame(player: Player): Game {
     for (const game of games) {
-        console.log('game.players2', game.players)
         for (const p of game.players) {
             if (p.name === player.name) {
                 return game;
