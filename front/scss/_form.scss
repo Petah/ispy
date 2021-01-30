@@ -29,6 +29,10 @@
     .g-message-text {
         max-width: 480px;
         text-align: left;
+
+        p:last-child {
+            margin-bottom: 0;
+        }
     }
 }
 
