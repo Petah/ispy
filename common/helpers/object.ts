@@ -25,3 +25,7 @@ export function serialize(instance) {
         return value;
     }));
 }
+
+export function randomArray(array: any[]) {
+    return array[Math.floor(Math.random() * array.length)];
+}
