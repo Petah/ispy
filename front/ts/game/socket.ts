@@ -2,7 +2,7 @@ import { IScope, ILocationService } from "angular";
 import { Game } from "../../../common/entities/game";
 import { Level } from "../../../common/entities/level";
 import { Player } from "../../../common/entities/player";
-import { CorrectGuess, CreatePlayer, Guess, IncorrectGuess, LevelStart, NoLife, PlayerJoined } from "../../../common/events/events";
+import { CorrectGuess, CreatePlayer, DuplicateGuess, Guess, IncorrectGuess, LevelStart, NoLife, PlayerJoined, JoinGame } from "../../../common/events/events";
 import { objectsToInstances, objectToInstance } from "../../../common/helpers/object";
 import { audio } from "./audio";
 import { particles } from "./particles";
@@ -51,20 +51,31 @@ class Socket {
 
         this.bind('correctGuess', (correctGuess: CorrectGuess) => {
             state.game = objectToInstance(correctGuess.game, state.game);
-            audio.play(correctGuess.clue.sound as any || 'found');
-            console.log(correctGuess.clue)
-            console.log(correctGuess.player)
+            if (correctGuess.player.name === state.player.name) {
+                audio.play(correctGuess.clue.sound as any || 'found');
+                particles.burst('yes1', correctGuess.guess.pageX, correctGuess.guess.pageY, 'grow-shrink')
+            }
+        });
+
+        this.bind('duplicateGuess', (duplicateGuess: DuplicateGuess) => {
+            state.game = objectToInstance(duplicateGuess.game, state.game);
+            if (duplicateGuess.player.name === state.player.name) {
+                audio.play(duplicateGuess.clue.sound as any || 'found');
+                particles.burst('dupe', duplicateGuess.guess.pageX, duplicateGuess.guess.pageY, 'grow-shrink')
+            }
         });
 
         this.bind('incorrectGuess', (incorrectGuess: IncorrectGuess) => {
             state.game = objectToInstance(incorrectGuess.game, state.game);
-            audio.play('questionMark');
-            particles.burst('questionMark', incorrectGuess.guess.pageX, incorrectGuess.guess.pageY)
-            console.log(incorrectGuess.player)
+            if (incorrectGuess.player.name === state.player.name) {
+                audio.play('questionMark');
+                particles.burst('questionMark', incorrectGuess.guess.pageX, incorrectGuess.guess.pageY, 'wobble')
+            }
         });
 
         this.bind('noLife', (noLife: NoLife) => {
             audio.play('wrong');
+            particles.burst('cross', noLife.guess.pageX, noLife.guess.pageY)
         });
     }
 
@@ -77,8 +88,11 @@ class Socket {
 
     public joinGame(game: Game) {
         state.game = game;
-        this.emit('joinGame', {
-        });
+        const joinGame: JoinGame = {
+            game,
+            player: state.player,
+        };
+        this.emit('joinGame', joinGame);
     }
 
     public guess(xPercent: number, yPercent: number, pageX: number, pageY: number) {

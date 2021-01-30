@@ -7,8 +7,8 @@
     <p ng-if="!state.gamesList.length">Loading games...</p>
 
     <div class="g-form-container nes-container with-title is-rounded ">
-        <div class="nes-table-responsive">
-            <table class="g-games-list nes-table is-bordered is-centered" ng-if="state.gamesList.length">
+        <div class="nes-table-responsive nes-table is-bordered">
+            <table class="g-games-list is-centered" ng-if="state.gamesList.length">
                 <tbody>
                     <tr ng-repeat="game in state.gamesList">
                         <td scope="row"><div ng-click="joinGame(game)" class="nes-text">#{{ $index + 1}}</div></td>
@@ -25,7 +25,7 @@
             </table>
         </div>
 
-        <a href="#!/" class="g-form-btn nes-btn">
+        <a href="#!/" class="g-form-btn nes-btn is-error">
             <i data-feather="circle"></i> Go Back
         </a>
     </div>

@@ -5,36 +5,24 @@
     </div>
 
     <div class="g-flex g-round-container">
-        <div class="g-round-image-container">
-            <img id="g-round-image" class="g-img-fluid nes-container" ng-src="{{ state.level.image }}"
-                ng-attr-alt="{{ state.level.name }} Image" ng-click="click($event)" />
-            <div class="nes-container g-riddle">
-                <p>{{ state.level.riddle || 'No riddle set! :O' }}</p>
-            </div>
+        <div class="g-round-image-container nes-container">
+            <img id="g-round-image" class="g-img-fluid"  ng-src="{{ state.level.image }}" ng-attr-alt="{{ state.level.name }} Image" ng-click="click($event)" />
+            <p>{{ state.level.riddle || 'No riddle set! :O' }}</p>
             <button class="nes-btn is-error" ng-click="leaveGame()">Leave Game</button>
         </div>
 
-        <div>
-            <div class="g-aside">
-                <p class="title">Game</p>
-                <aside class="nes-container with-title is-centered">
-                    {{ state.game.timeRemaining }} sec remaining
-                </aside>
-            </div>
-            <div class="g-aside">
-                <p class="title">Players</p>
-                <aside class="nes-container with-title is-centered">
-                    <div class="lists">
-                        <ul class="nes-list is-circle">
-                            <li ng-repeat="player in state.game.players">
-                                {{ player.name }}
-                                {{ player.score }}
-                                {{ player.life }}
-                            </li>
-                        </ul>
-                    </div>
-                </aside>
-            </div>
+        <div id="g-aside">
+            <p class="title">Players</p>
+            <aside class="nes-container with-title is-centered">
+                <div class="lists">
+                    <ul class="nes-list is-circle">
+                        <li ng-repeat="player in state.game.players">
+                            {{ player.name }}
+                            {{ player.score }}
+                        </li>
+                    </ul>
+                </div>
+            </aside>
         </div>
     </div>
 </div>
