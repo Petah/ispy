@@ -26,8 +26,17 @@ game1._levels = [
 const game2 = new Game();
 game2.id = 'gardens-1';
 game2.name = 'Garden Avengers';
+game2.titleImage = 'http://192.168.1.9:81/per/ispy/front/public/images/round_sh_0-min.jpg';
+game2.info = 'Instructions...';
 game2._levels = [
     objectToInstance(require('../../common/data/gardens-1.json'), new Level()),
+    objectToInstance(require('../../common/data/office-2.json'), new Level()),
+    objectToInstance(require('../../common/data/office-3.json'), new Level()),
+    objectToInstance(require('../../common/data/office-4.json'), new Level()),
+    objectToInstance(require('../../common/data/office-5.json'), new Level()),
+    objectToInstance(require('../../common/data/office-6.json'), new Level()),
+    objectToInstance(require('../../common/data/office-7.json'), new Level()),
+    objectToInstance(require('../../common/data/office-8.json'), new Level()),
 ];
 
 const game3 = new Game();
