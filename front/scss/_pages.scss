@@ -80,21 +80,25 @@
 
 // Scoreboard
 #g-scoreboard {
+    max-width: 720px;
+
     .nes-table-responsive {
         text-transform: uppercase;
     }
+
     h3 {
         margin-bottom: 30px;
         margin-top: 15px;
     }
+
     table {
         width: 100%;
         td, th {
             border-color: transparent;
             padding: .5rem .75rem;
         }
+
         .name {
-            width: 120px;
             text-align: left;
             max-width: 250px;
             overflow: hidden;
