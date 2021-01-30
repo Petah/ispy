@@ -30,9 +30,25 @@ game2._levels = [
     objectToInstance(require('../../common/data/gardens-1.json'), new Level()),
 ];
 
+const game3 = new Game();
+game3.id = 'office-1';
+game3.name = 'Office Galore';
+game3.titleImage = 'http://192.168.1.9:81/per/ispy/front/public/images/round_of_intro-min.jpg';
+game3.info = 'Your mission, should you choose to accept it, is to find all 6 cows scattered throughout the office. Moooo!';
+game3._levels = [
+    objectToInstance(require('../../common/data/office-1.json'), new Level()),
+    objectToInstance(require('../../common/data/office-2.json'), new Level()),
+    objectToInstance(require('../../common/data/office-3.json'), new Level()),
+    objectToInstance(require('../../common/data/office-4.json'), new Level()),
+    objectToInstance(require('../../common/data/office-5.json'), new Level()),
+    objectToInstance(require('../../common/data/office-6.json'), new Level()),
+    objectToInstance(require('../../common/data/office-7.json'), new Level()),
+];
+
 const games: Game[] = [
     game1,
     game2,
+    game3,
 ];
 
 const allPlayers: Player[] = [];

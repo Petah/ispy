@@ -6,6 +6,8 @@ import { Player } from "./player";
 export class Game {
     public id: string;
     public name: string;
+    public titleImage: string;
+    public info: string;
     public players: Player[] = [];
     public level: Level;
     public levelStartTime: number;
@@ -17,6 +19,8 @@ export class Game {
     public _levels: Level[];
     public _correctGuesses = {};
     public _playerClues: { [key: string]: Clue; } = {};
+    public _endTimeout = null;
+    public _nextLevelTimeout = null;
 
     public broadcast(event: string, data, excludePlayer: Player = null) {
         for (const player of this.players) {
@@ -54,6 +58,7 @@ export class Game {
                 game: this,
             };
             this.broadcast('gameFinished', gameFinished)
+            this.clearTimeouts();
             return;
         }
         this.started = true;
@@ -74,16 +79,21 @@ export class Game {
             player.emit('levelStart', levelStart)
         }
 
-        setTimeout(() => {
+        this._endTimeout = setTimeout(() => {
             this.levelEnded = true;
             const levelEnd: LevelEnd = {
                 game: this,
             };
             this.broadcast('levelEnd', levelEnd);
-            setTimeout(() => {
+            this._nextLevelTimeout = setTimeout(() => {
                 this.startNextLevel();
             }, 1000);
         }, this.roundTime);
+    }
+
+    private clearTimeouts() {
+        clearTimeout(this._endTimeout);
+        clearTimeout(this._nextLevelTimeout);
     }
 
     public stop() {
@@ -94,5 +104,6 @@ export class Game {
         this._levelsIndex = 0;
         this._correctGuesses = {};
         this._playerClues = {};
+        this.clearTimeouts();
     }
 }
