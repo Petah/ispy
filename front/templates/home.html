@@ -13,7 +13,7 @@
             <p class="title">Enter Your Name</p>
             <form ng-if="!state.player.joined" ng-submit="createPlayer()">
                 <div class="nes-field">
-                    <input type="text" class="nes-input" id="playerName" aria-describedby="playerNameHelp"
+                    <input type="text" class="nes-input" id="playerName" autocomplete="off"
                         placeholder="Cool Guy" ng-model="state.player.name">
                 </div>
 

@@ -37,12 +37,25 @@
     }
 
     .g-games-list {
-        width: 98%;
+        width: 100%;
 
-        .name_col {
-            @media (min-width: 768px) {
-                width: 40%;
-            }
+        tr:first-child td {
+            padding-bottom: 0.75rem;
+        }
+
+        tr:not(:first-child) td {
+            border-top: 4px solid black;
+            padding-top: 0.75rem;
+        }
+
+        // .g-games-list-name {
+        //     @media (min-width: 768px) {
+        //         width: 40%;
+        //     }
+        // }
+
+        .g-games-list-actions {
+            text-align: right;
         }
     }
 
