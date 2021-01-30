@@ -113,7 +113,7 @@
             position: absolute;
             top: 28px;
             width: 48px;
-            max-width: 48px;
+            min-width: initial;
             height: 48px;
             font-size: 20px;
             text-align: center;
