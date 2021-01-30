@@ -10,6 +10,7 @@
 .g-game-container {
     min-height: 100vh;
     max-height: 1000vh;
+    background-color: #3F3851;
 }
 
 .g-view-container {
@@ -23,13 +24,16 @@
 
 #g-game-frame {
     display: flex;
-    min-width: 80vw;
+    position: relative;
+    min-width: 90vw;
+    max-width: 90vw;
     min-height: 90vh;
     max-height: 90vh;
-    max-width: 1200px;
     margin: 0;
+    border: 10px solid transparent;
+    border: 64px solid transparent;
+    border-image: url(/images/panel_border.png) 64 round;
     box-sizing: border-box;
-    padding: 0;
 }
 
 .g-full-size {
@@ -71,19 +75,27 @@
 }
 
 .g-view-title {
+    display: block;
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     padding: 1rem;
-    background-color: white;
-    background-image: url('../images/covid-pattern.png');
-    background-repeat: repeat;
-    background-size: 300px;
-    border-bottom: 4px solid black;
 
     h1,
-    h3 {
+    h4 {
         margin: 0;
+    }
+
+    &::after {
+        display: block;
+        position: relative;
+        content: "";
+        width: 320px;
+        height: 22px;
+        margin: 0.5rem auto 0;
+        background-image: url('/images/panel_title_footer.png');
+        background-repeat: no-repeat;
+        background-position: center;
     }
 }

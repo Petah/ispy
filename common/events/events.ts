@@ -29,6 +29,11 @@ export interface IncorrectGuess {
     guess: Guess,
 }
 
+export interface PlayerLeft {
+    game: Game,
+    player: Player,
+}
+
 export interface NoLife {
     guess: Guess,
 }
@@ -42,5 +47,10 @@ export interface CreatePlayer {
 }
 
 export interface PlayerJoined {
+    player: Player,
+}
+
+export interface JoinGame {
+    game: Game,
     player: Player,
 }

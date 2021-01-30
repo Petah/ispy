@@ -2,7 +2,7 @@ import { IScope, ILocationService } from "angular";
 import { Game } from "../../../common/entities/game";
 import { Level } from "../../../common/entities/level";
 import { Player } from "../../../common/entities/player";
-import { CorrectGuess, CreatePlayer, DuplicateGuess, Guess, IncorrectGuess, LevelStart, NoLife, PlayerJoined } from "../../../common/events/events";
+import { CorrectGuess, CreatePlayer, DuplicateGuess, Guess, IncorrectGuess, LevelStart, NoLife, PlayerJoined, JoinGame } from "../../../common/events/events";
 import { objectsToInstances, objectToInstance } from "../../../common/helpers/object";
 import { audio } from "./audio";
 import { particles } from "./particles";
@@ -88,8 +88,11 @@ class Socket {
 
     public joinGame(game: Game) {
         state.game = game;
-        this.emit('joinGame', {
-        });
+        const joinGame: JoinGame = {
+            game,
+            player: state.player,
+        };
+        this.emit('joinGame', joinGame);
     }
 
     public guess(xPercent: number, yPercent: number, pageX: number, pageY: number) {
