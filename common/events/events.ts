@@ -66,3 +66,11 @@ export interface StartGame {
 
 export interface LeaveGame {
 }
+
+export interface LevelEnd {
+    game: Game
+}
+
+export interface GameFinished {
+    game: Game
+}

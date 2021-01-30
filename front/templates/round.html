@@ -5,18 +5,58 @@
         <button class="nes-btn is-error btn-action-right" ng-click="leaveGame()">X</button>
     </div>
 
-    <div id="g-round-main">
+    <div id="g-scoreboard" class="g-view-content text-center">
+        <div class="g-form-container" ng-if="state.game.finished">
+            <div class="nes-container with-title is-rounded">
+                <div class="nes-table-responsive">
+                    <h3>Top five players</h3>
+
+                    <table>
+                        <tbody>
+                            <tr class="nes-text is-error" ng-repeat="player in state.game.players | orderBy: 'score'"
+                                ng-class="{
+                                'is-error': $index == 0,
+                                'is-warning': $index == 1,
+                                'is-success': $index == 2,
+                                'is-primary': $index == 3,
+                                'is-disabled': $index == 4,
+                            }">
+                                <td><i class="nes-icon is-medium" ng-class="{
+                                    'trophy is-large': $index == 0,
+                                    'star': $index == 1,
+                                    'star is-half': $index == 2,
+                                    'star is-transparent': $index == 3,
+                                    'star is-empty': $index == 4,
+                                }"></i></td>
+                                <td ng-if="$index == 0">1st</td>
+                                <td ng-if="$index == 1">2nd</td>
+                                <td ng-if="$index == 2">3rd</td>
+                                <td ng-if="$index == 3">4th</td>
+                                <td ng-if="$index == 4">5th</td>
+                                <td class="name">{{ player.name }}</td>
+                                <td class="text-right">{{ player.score }} PTS</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="g-round-main" ng-if="!state.game.finished">
         <div id="g-round-image-container" class="nes-container with-title is-rounded">
             <p class="title">iSpy Image</p>
             <div class="g-flex g-flex-col">
                 <div id="g-round-image" class="g-img-fluid"  data-ng-magnify data-image-src="{{ state.level.image }}" ng-click="click($event)"></div>
-                <button class="nes-btn is-error btn-action-right" ng-click="start()" ng-if="!state.game.started && state.player.host">Start</button>
+
+                <button class="nes-btn is-error btn-action-right" ng-click="start()"
+                    ng-if="!state.game.started && state.player.host">Start</button>
             </div>
         </div>
 
         <aside id="g-round-sidebar">
             <div id="g-round-riddle" class="nes-container with-title is-rounded">
-                <div ng-if="state.game.started">
+                <div ng-if="state.game.started && !state.game.levelEnded">
                     <p class="title">Riddle</p>
                     <div>{{ state.clue }}</div>
                     <div>{{ state.game.timeRemaining }} sec remaining</div>
@@ -24,12 +64,16 @@
                 <div ng-if="!state.game.started">
                     <p class="title">Waiting for players</p>
                 </div>
+                <div ng-if="state.game.levelEnded">
+                    <p class="title">Level Up</p>
+                </div>
             </div>
             <div id="g-round-players" class="nes-container with-title is-rounded">
                 <p class="title">Players ({{ state.game.players.length}})</p>
                 <ul class="g-round-players-list">
                     <li ng-repeat="player in state.game.players">
-                        {{ player.name }} (<i class="fas fa-heart"></i> {{ player.lives }} / <i class="fas fa-star"></i> {{ player.score }})
+                        {{ player.name }} (<i class="fas fa-heart"></i> {{ player.lives }} / <i class="fas fa-star"></i>
+                        {{ player.score }})
                     </li>
                 </ul>
             </div>
