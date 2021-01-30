@@ -36,7 +36,7 @@
     margin: 0;
     border: 10px solid transparent;
     border: 64px solid transparent;
-    border-image: url(/images/panel_border.png) 64 round;
+    border-image: url(../images/panel_border.png) 64 round;
     box-sizing: border-box;
 }
 
@@ -102,7 +102,7 @@
         width: 320px;
         height: 22px;
         margin: 0.5rem auto 0;
-        background-image: url('/images/panel_title_footer.png');
+        background-image: url('../images/panel_title_footer.png');
         background-repeat: no-repeat;
         background-position: center;
     }

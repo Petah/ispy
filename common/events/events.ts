@@ -40,6 +40,12 @@ export interface NoLife {
 
 export interface LevelStart {
     game: Game,
+    clue: string,
+}
+
+export interface JoinedGame {
+    game: Game,
+    player: Player,
 }
 
 export interface CreatePlayer {
@@ -53,4 +59,7 @@ export interface PlayerJoined {
 export interface JoinGame {
     game: Game,
     player: Player,
+}
+
+export interface StartGame {
 }

@@ -2,7 +2,7 @@ import { Server, Socket } from "socket.io";
 import { Game } from "../../common/entities/game";
 import { Level } from "../../common/entities/level";
 import { Player } from "../../common/entities/player";
-import { CorrectGuess, CreatePlayer, Guess, LevelStart, PlayerJoined, IncorrectGuess, NoLife, DuplicateGuess, JoinGame, PlayerLeft } from "../../common/events/events";
+import { CorrectGuess, CreatePlayer, Guess, LevelStart, PlayerJoined, IncorrectGuess, NoLife, DuplicateGuess, JoinedGame, JoinGame, PlayerLeft, StartGame } from "../../common/events/events";
 import { objectToInstance, serialize } from "../../common/helpers/object";
 import { insidePoly } from "../../common/helpers/poly";
 
@@ -24,11 +24,10 @@ game1._levels = [
 ];
 
 const game2 = new Game();
-game2.id = 'test2';
-game2.name = 'Test Game 2';
+game2.id = 'gardens-1';
+game2.name = 'Garden Avengers';
 game2._levels = [
-    objectToInstance(require('../../common/data/workshop.json'), new Level()),
-    objectToInstance(require('../../common/data/toys.json'), new Level()),
+    objectToInstance(require('../../common/data/gardens-1.json'), new Level()),
 ];
 
 const games: Game[] = [
@@ -85,20 +84,44 @@ io.on('connection', (socket: Socket) => {
                 console.log('No player found', joinGame.player.name);
                 return;
             }
+            if (game.players.length === 0) {
+                player.host = true;
+            }
             game.players.push(player);
         }
+        const joinedGame: JoinedGame = {
+            game,
+            player,
+        };
+        player.emit('joinedGame', joinedGame);
+        // if (!game.level) {
+        //     game.startNextLevel();
+        // } else {
+        //     console.log('game._playerClues', game._playerClues)
+        //     const levelStart: LevelStart = {
+        //         game,
+        //         clue:'test',// game._playerClues[player.name].text,
+        //     };
+        //     player.emit('levelStart', levelStart);
+        // }
+    });
+
+    socket.on('startGame', (startGame: StartGame) => {
+        console.log('startGame', startGame);
+        if (!player) {
+            return;
+        }
+        const game = findPlayerGame(player);
         if (!game.level) {
             game.startNextLevel();
-        } else {
-            const levelStart: LevelStart = {
-                game,
-            };
-            player.emit('levelStart', levelStart);
         }
     });
 
     socket.on('guess', (guess: Guess) => {
         console.log('guess', guess);
+        if (!player) {
+            return;
+        }
         const game = findPlayerGame(player);
         if (player.life === 0) {
             const noLife: NoLife = {
@@ -108,39 +131,37 @@ io.on('connection', (socket: Socket) => {
             return;
         }
         let found = false;
-        for (const c in game.level.clues) {
-            const clue = game.level.clues[c];
-            for (const i in clue.items) {
-                const item = clue.items[i];
-                if (insidePoly({
-                    x: guess.xPercent,
-                    y: guess.yPercent,
-                }, item._path)) {
-                    found = true;
-                    const key = `${player.name}:${c}:${i}`;
-                    if (!game._correctGuesses[key]) {
-                        game._correctGuesses[key] = true;
-                        player.score += Math.round(Math.max(0, (game.roundTime - (new Date().getTime() - game.levelStartTime)) / 100));
-                        const correctGuess: CorrectGuess = {
-                            game,
-                            clue,
-                            player,
-                        };
-                        game.broadcast('correctGuess', correctGuess, player);
-                        correctGuess.guess = guess;
-                        player.emit('correctGuess', correctGuess);
-                        if (Object.keys(game._correctGuesses).length === game.totalGuesses) {
-                            game.broadcast('guessingComplete', {});
-                        }
-                    } else {
-                        const duplicateGuess: DuplicateGuess = {
-                            game,
-                            clue,
-                            player,
-                            guess,
-                        };
-                        player.emit('duplicateGuess', duplicateGuess);
+        const clue = game._playerClues[player.name];
+        for (const i in clue.items) {
+            const item = clue.items[i];
+            if (insidePoly({
+                x: guess.xPercent,
+                y: guess.yPercent,
+            }, item._path)) {
+                found = true;
+                const key = `${player.name}:${clue.text}:${i}`;
+                if (!game._correctGuesses[key]) {
+                    game._correctGuesses[key] = true;
+                    player.score += Math.round(Math.max(0, (game.roundTime - (new Date().getTime() - game.levelStartTime)) / 100));
+                    const correctGuess: CorrectGuess = {
+                        game,
+                        clue,
+                        player,
+                    };
+                    game.broadcast('correctGuess', correctGuess, player);
+                    correctGuess.guess = guess;
+                    player.emit('correctGuess', correctGuess);
+                    if (Object.keys(game._correctGuesses).length === game.totalGuesses) {
+                        game.broadcast('guessingComplete', {});
                     }
+                } else {
+                    const duplicateGuess: DuplicateGuess = {
+                        game,
+                        clue,
+                        player,
+                        guess,
+                    };
+                    player.emit('duplicateGuess', duplicateGuess);
                 }
             }
         }

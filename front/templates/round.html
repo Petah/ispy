@@ -11,13 +11,21 @@
             <div class="g-flex g-flex-col">
                 <img id="g-round-image" class="g-img-fluid"  ng-src="{{ state.level.image }}" ng-attr-alt="{{ state.level.name }} Image" ng-click="click($event)" />
 
+                <button class="nes-btn is-error btn-action-right" ng-click="start()" ng-if="state.player.host">Start</button>
             </div>
         </div>
 
         <aside id="g-round-sidebar">
             <div id="g-round-riddle" class="nes-container with-title is-rounded">
-                <p class="title">Riddle</p>
-                <p id="g-round-riddle-text">{{ state.level.riddle || 'No riddle set! :O' }}</p>
+                <div ng-if="state.game.started">
+                    <p class="title">Riddle</p>
+                    <p id="g-round-riddle-text">{{ state.level.riddle || 'No riddle set! :O' }}</p>
+                    <div>{{ state.clue }}</div>
+                    <div>{{ state.game.timeRemaining }} sec remaining</div>
+                </div>
+                <div ng-if="!state.game.started">
+                    <p class="title">Waiting for players</p>
+                </div>
             </div>
             <div id="g-round-players" class="nes-container with-title is-rounded">
                 <p class="title">Players ({{ state.game.players.length}})</p>
