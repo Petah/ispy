@@ -29,6 +29,11 @@
     max-width: 680px;
     height: 100%;
 
+    #search_field {
+        margin-top: 5px;
+        margin-bottom: 20px;
+    }
+
     .nes-table td {
         border-width: 0;
     }
@@ -38,10 +43,15 @@
         top: -3px;
     }
 
+    .table_container {
+        max-height: 355px;
+        overflow: auto;
+    }
+
     .g-games-list {
         width: 100%;
 
-        tr:first-child td {
+        tr td {
             padding-bottom: 0.75rem;
         }
 
@@ -94,8 +104,6 @@
 }
 
 // Round
-
-
 #g-view-round {
     width: 100%;
     height: 100%;
