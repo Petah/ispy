@@ -1,3 +1,7 @@
+#game {
+    overflow: hidden;
+}
+
 .g-game-container,
 .g-view-container {
     display: flex;
@@ -25,9 +29,9 @@
 #g-game-frame {
     display: flex;
     position: relative;
-    min-width: 90vw;
+    min-width: 1400px;
+    min-height: 900px;
     max-width: 90vw;
-    min-height: 90vh;
     max-height: 90vh;
     margin: 0;
     border: 10px solid transparent;
@@ -50,6 +54,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    &-col {
+        flex-direction: column;
+    }
 }
 
 .g-menu-container {
