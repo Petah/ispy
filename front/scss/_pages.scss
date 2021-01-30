@@ -143,10 +143,14 @@
         overflow-y: scroll;
         list-style: none;
 
-        li {
+        .g-player-list-single {
             &:not(:first-child) {
                 margin-top: 0.75rem;
             }
+        }
+
+        .g-player-list-single-life {
+            margin-right: 0.25rem;
         }
     }
 
