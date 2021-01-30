@@ -41,3 +41,33 @@
         transform: rotate(4deg);
     }
 }
+
+.g-grow-shrink {
+    animation: grow-shrink 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    transform: scale(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+@keyframes grow-shrink {
+    10%,
+    90% {
+        transform: scale(0.9);
+    }
+
+    20%,
+    80% {
+        transform: scale(1.1);
+    }
+
+    30%,
+    50%,
+    70% {
+        transform: scale(0.9);
+    }
+
+    40%,
+    60% {
+        transform: scale(1.1);
+    }
+}

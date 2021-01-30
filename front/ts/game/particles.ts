@@ -21,12 +21,17 @@ function loadImage(url: string) {
 
 class Types {
     questionMark = loadImage('http://192.168.1.9:81/per/ispy/front/public/images/question-mark.png')
+    cross = loadImage('http://192.168.1.9:81/per/ispy/front/public/images/cross.png')
+    yes1 = loadImage('http://192.168.1.9:81/per/ispy/front/public/images/yes-1.png')
+    yes2 = loadImage('http://192.168.1.9:81/per/ispy/front/public/images/yes-2.png')
+    yes3 = loadImage('http://192.168.1.9:81/per/ispy/front/public/images/yes-3.png')
+    dupe = loadImage('http://192.168.1.9:81/per/ispy/front/public/images/dupe.png')
 }
 
 const types = new Types();
 
 class Particles {
-    burst(type: keyof Types, x: number, y: number) {
+    burst(type: keyof Types, x: number, y: number, animation: 'wobble' | 'grow-shrink' = null) {
         if (types[type]) {
             const image = $('<img>')
                 .attr({
@@ -36,7 +41,7 @@ class Particles {
                     top: y - (types[type].height / 2),
                     left: x - (types[type].width / 2),
                 })
-                .addClass('g-wobble')
+                .addClass(animation ? `g-${animation}` : '')
                 .appendTo('#g-particles');
             setTimeout(() => {
                 image.fadeOut();

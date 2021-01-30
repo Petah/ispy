@@ -16,6 +16,13 @@ export interface CorrectGuess {
     guess?: Guess,
 }
 
+export interface DuplicateGuess {
+    game: Game,
+    clue: Clue,
+    player: Player,
+    guess?: Guess,
+}
+
 export interface IncorrectGuess {
     game: Game,
     player: Player,

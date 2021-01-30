@@ -14,8 +14,11 @@ export class Game {
     public _levels: Level[];
     public _correctGuesses = {};
 
-    public broadcast(event: string, data) {
+    public broadcast(event: string, data, excludePlayer: Player = null) {
         for (const player of this.players) {
+            if (excludePlayer && player.name === excludePlayer.name) {
+                continue;
+            }
             player._socket.emit(event, serialize(data));
         }
     }
