@@ -21,7 +21,6 @@ export class RootController implements IController {
         $location: ILocationService,
     ) {
         $rootScope.state = state
-        api.init($http);
         socket.init($rootScope, $location);
     }
 }
