@@ -28,7 +28,7 @@ const io = new Server(server, {
 
 const game1 = new Game();
 game1.id = 'test1';
-game1.name = 'Workshop';
+game1.name = 'Workshop (test)';
 game1._levels = [
     objectToInstance(require('../../common/data/workshop.json'), new Level()),
     objectToInstance(require('../../common/data/toys.json'), new Level()),
@@ -65,9 +65,9 @@ game3._levels = [
 ];
 
 const games: Game[] = [
-    game1,
     game2,
     game3,
+    game1,
 ];
 
 const allPlayers: Player[] = [];
