@@ -13,7 +13,7 @@
 
                     <table>
                         <tbody>
-                            <tr class="nes-text is-error" ng-repeat="player in state.game.players | orderBy: 'score'"
+                            <tr class="nes-text" ng-repeat="player in state.game.players | orderBy: '-score'"
                                 ng-class="{
                                 'is-error': $index == 0,
                                 'is-warning': $index == 1,
