@@ -7,7 +7,8 @@
 
     <p ng-if="!state.gamesList.length">Loading games...</p>
 
-    <div class="g-form-container nes-container with-title is-rounded ">
+    <div class="g-form-container nes-container with-title is-centered is-rounded">
+        <p class="title mb-0">Active Games</p>
         <div class="nes-table-responsive nes-table is-bordered">
             <table class="g-games-list is-centered" ng-if="state.gamesList.length">
                 <tbody>
@@ -25,9 +26,5 @@
                 </tbody>
             </table>
         </div>
-
-        <a href="#!/" class="g-form-btn nes-btn">
-            <i data-feather="circle"></i> Go Back
-        </a>
     </div>
 </div>

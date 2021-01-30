@@ -9,17 +9,20 @@
             <p>Please enter your name so other players can find you in game rounds and lobbies.</p>
         </g-message-box>
 
-        <form ng-if="!state.player.joined" ng-submit="createPlayer()" class="g-form-container nes-container with-title is-rounded">
-            <div class="nes-field">
-                <label for="name_field">Your name</label>
-                <input type="text" class="nes-input" id="playerName" aria-describedby="playerNameHelp" placeholder="Cool Guy" ng-model="state.player.name">
-            </div>
+        <div class="g-form-container nes-container with-title is-centered is-rounded">
+            <p class="title">Enter Your Name</p>
+            <form ng-if="!state.player.joined" ng-submit="createPlayer()">
+                <div class="nes-field">
+                    <input type="text" class="nes-input" id="playerName" aria-describedby="playerNameHelp"
+                        placeholder="Cool Guy" ng-model="state.player.name">
+                </div>
 
-            <button type="submit" class="nes-btn is-primary" ng-disabled="isCreatingPlayer">
-                <span ng-show="!isCreatingPlayer">Register</span>
-                <span ng-show="isCreatingPlayer">Registering Player...</span>
-            </button>
-        </form>
+                <button type="submit" class="nes-btn is-primary" ng-disabled="isCreatingPlayer">
+                    <span ng-show="!isCreatingPlayer">Register</span>
+                    <span ng-show="isCreatingPlayer">Registering Player...</span>
+                </button>
+            </form>
+        </div>
     </section>
 
     <div class="g-menu-container" ng-if="state.player.joined">
