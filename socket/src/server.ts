@@ -17,7 +17,7 @@ const io = new Server(port, {
 
 const game1 = new Game();
 game1.id = 'test1';
-game1.name = 'Test Game 1';
+game1.name = 'Workshop';
 game1._levels = [
     objectToInstance(require('../../common/data/workshop.json'), new Level()),
     objectToInstance(require('../../common/data/toys.json'), new Level()),
