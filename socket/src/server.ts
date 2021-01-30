@@ -2,7 +2,7 @@ import { Server, Socket } from "socket.io";
 import { Game } from "../../common/entities/game";
 import { Level } from "../../common/entities/level";
 import { Player } from "../../common/entities/player";
-import { CorrectGuess, CreatePlayer, Guess, LevelStart, PlayerJoined, IncorrectGuess, NoLife, DuplicateGuess } from "../../common/events/events";
+import { CorrectGuess, CreatePlayer, Guess, LevelStart, PlayerJoined, IncorrectGuess, NoLife, DuplicateGuess, JoinGame, PlayerLeft } from "../../common/events/events";
 import { objectToInstance, serialize } from "../../common/helpers/object";
 import { insidePoly } from "../../common/helpers/poly";
 
@@ -15,13 +15,40 @@ const io = new Server(port, {
     },
 });
 
-const game = new Game();
-game.id = 'test';
-game.name = 'Test Game';
-game._levels = [
+const game1 = new Game();
+game1.id = 'test1';
+game1.name = 'Test Game 1';
+game1._levels = [
     objectToInstance(require('../../common/data/workshop.json'), new Level()),
     objectToInstance(require('../../common/data/toys.json'), new Level()),
 ];
+
+const game2 = new Game();
+game2.id = 'test2';
+game2.name = 'Test Game 2';
+game2._levels = [
+    objectToInstance(require('../../common/data/workshop.json'), new Level()),
+    objectToInstance(require('../../common/data/toys.json'), new Level()),
+];
+
+const games: Game[] = [
+    game1,
+    game2,
+];
+
+const allPlayers: Player[] = [];
+
+function findPlayerGame(player: Player): Game {
+    for (const game of games) {
+        console.log('game.players2', game.players)
+        for (const p of game.players) {
+            if (p.name === player.name) {
+                return game;
+            }
+        }
+    }
+    return null;
+}
 
 io.on('connection', (socket: Socket) => {
     console.log('connection');
@@ -34,23 +61,33 @@ io.on('connection', (socket: Socket) => {
 
     socket.on('createPlayer', (createPlayer: CreatePlayer) => {
         console.log('createPlayer', createPlayer);
-        player = game.players.find(p => p.name === createPlayer.name);
+        player = allPlayers.find(p => p.name === createPlayer.name);
         if (!player) {
             player = new Player();
-            game.players.push(player);
+            allPlayers.push(player);
         }
         player._socket = socket;
         player.name = createPlayer.name;
         const playerJoined: PlayerJoined = {
             player,
         };
-        game.broadcast('playerJoined', playerJoined);
+        // game.broadcast('playerJoined', playerJoined);
         player.emit('youJoined', {});
-        game.broadcast('gamesList', [game]);
+        player.emit('gamesList', games);
     });
 
-    socket.on('joinGame', data => {
-        console.log('joinGame', data);
+    socket.on('joinGame', (joinGame: JoinGame) => {
+        console.log('joinGame', joinGame);
+        const game = games.find(g => g.id == joinGame.game.id)
+        player = game.players.find(p => p.name === joinGame.player.name);
+        if (!player) {
+            player = allPlayers.find(p => p.name === joinGame.player.name);
+            if (!player) {
+                console.log('No player found', joinGame.player.name);
+                return;
+            }
+            game.players.push(player);
+        }
         if (!game.level) {
             game.startNextLevel();
         } else {
@@ -63,6 +100,7 @@ io.on('connection', (socket: Socket) => {
 
     socket.on('guess', (guess: Guess) => {
         console.log('guess', guess);
+        const game = findPlayerGame(player);
         if (player.life === 0) {
             const noLife: NoLife = {
                 guess,
@@ -120,6 +158,24 @@ io.on('connection', (socket: Socket) => {
 
     socket.on('disconnect', () => {
         console.log('disconnect');
+        if (player) {
+            const game = findPlayerGame(player);
+            if (game) {
+                const index = game.players.indexOf(player);
+                if (index !== -1) {
+                    game.players.splice(index, 1);
+                    const playerLeft: PlayerLeft = {
+                        game,
+                        player,
+                    };
+                    game.broadcast('playerLeft', playerLeft);
+                }
+            }
+            const index = allPlayers.indexOf(player);
+            if (index !== -1) {
+                allPlayers.splice(index, 1);
+            }
+        }
     });
 
     socket.emit('init');
