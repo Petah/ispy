@@ -8,26 +8,8 @@
   <!-- <p ng-if="!state.gamesList.length">Loading scoreboard...</p> -->
 
   <div class="g-form-container nes-container with-title is-rounded ">
-      <!-- <div class="nes-table-responsive nes-table is-bordered">
-          <table class="g-games-list is-centered" ng-if="state.gamesList.length">
-              <tbody>
-                  <tr ng-repeat="game in state.gamesList">
-                      <td scope="row"><div ng-click="joinGame(game)" class="nes-text">#{{ $index + 1}}</div></td>
-                      <td class="name_col">{{ game.name }}</td>
-                      <td>
-                          {{ game.players.length }}
-                          <i
-                              ng-class="{'fa-user': game.players.length == 1, 'fa-user-friends': game.players.length == 2, 'fa-users': game.players.length > 2}"
-                              class="g-players-icon fas"></i>
-                      </td>
-                      <td><button class="nes-btn is-primary" ng-click="joinGame(game)">Join</button></td>
-                  </tr>
-              </tbody>
-          </table>
-      </div> -->
-
       <div class="nes-table-responsive">
-        <h3>Best five players</h3>
+        <h3>Top five players</h3>
 
         <table>
           <tbody>

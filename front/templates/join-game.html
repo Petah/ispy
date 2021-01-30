@@ -7,27 +7,27 @@
 
     <p ng-if="!state.gamesList.length">Loading games...</p>
 
-    <div class="g-form-container nes-container with-title is-rounded ">
-        <div class="nes-table-responsive nes-table is-bordered">
-            <table class="g-games-list is-centered" ng-if="state.gamesList.length">
-                <tbody>
-                    <tr ng-repeat="game in state.gamesList">
-                        <td scope="row"><div ng-click="joinGame(game)" class="nes-text">#{{ $index + 1}}</div></td>
-                        <td class="name_col">{{ game.name }}</td>
-                        <td>
-                            {{ game.players.length }}
-                            <i
-                                ng-class="{'fa-user': game.players.length == 1, 'fa-user-friends': game.players.length == 2, 'fa-users': game.players.length > 2}"
-                                class="g-players-icon fas"></i>
-                        </td>
-                        <td><button class="nes-btn is-primary" ng-click="joinGame(game)">Join</button></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <a href="#!/" class="g-form-btn nes-btn">
-            <i data-feather="circle"></i> Go Back
-        </a>
+    <div class="g-form-container nes-container with-title is-centered is-rounded">
+        <p class="title mb-0">Active Games</p>
+        <table class="g-games-list" ng-if="state.gamesList.length">
+            <tbody>
+                <tr ng-repeat="game in state.gamesList">
+                    <td scope="row" class="g-games-list-index">
+                        <div ng-click="joinGame(game)" class="nes-text">#{{ $index + 1}}</div>
+                    </td>
+                    <td class="g-games-list-name">
+                        <span>{{ game.name }}</span>
+                    </td>
+                    <td class="g-games-list-players">
+                        <span>{{ game.players.length }}</span>&nbsp;
+                        <i ng-class="{'far fa-user': game.players.length == 0, 'fas fa-user': game.players.length == 1, 'fas fa-user-friends': game.players.length == 2, 'fas fa-users': game.players.length > 2}"
+                            class="g-players-icon"></i>
+                    </td>
+                    <td class="g-games-list-actions">
+                        <button class="nes-btn is-primary" ng-click="joinGame(game)">Join</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>

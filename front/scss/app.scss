@@ -2,6 +2,7 @@
 @import "_typography";
 @import "_media";
 @import "_layout";
+@import "_directives";
 @import "_pages";
 @import "_particles";
 
@@ -58,21 +59,21 @@ body {
 ::-webkit-scrollbar {
     width: 10px;
 }
-  
+
 /* Track */
 ::-webkit-scrollbar-track {
-    background: #f1f1f1; 
+    background: #f1f1f1;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #000; 
+    background: #000;
     cursor: pointer;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: #d6dffa; 
+    background: #d6dffa;
 }
 
 .nes-table th::after, .nes-table td::after {
