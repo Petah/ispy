@@ -9,7 +9,7 @@ interface IRoundControllerScope extends IScope {
     level: Level,
     leaveGame(): void,
     players: Player[]
-    click($event): void
+    clickImage($event: MouseEvent): void
     start(): void
 }
 
@@ -33,7 +33,11 @@ export class RoundController implements IController {
             $scope.$apply();
         }, 97);
 
-        $scope.click = ($event: MouseEvent) => {
+        $scope.clickImage = ($event: MouseEvent) => {
+            if (!state.game.started) {
+                return;
+            }
+
             const target = $($event.target);
             const xPos = $event.pageX - target.offset().left;
             const yPos = $event.pageY - target.offset().top;
