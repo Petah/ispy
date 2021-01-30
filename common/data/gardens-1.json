@@ -14848,7 +14848,7 @@
         }
     ],
     "name": "Level Name",
-    "image": "http://192.168.1.9:81/per/ispy/front/public/images/gardens-1.jpg",
+    "image": "/images/gardens-1.jpg",
     "width": 3198,
     "height": 2000,
     "riddle": ""

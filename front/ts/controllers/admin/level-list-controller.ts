@@ -1,5 +1,4 @@
 import { IHttpService, IScope } from "angular";
-import { api } from "../../game/api";
 import { IController } from "../controller";
 import { Level } from "../../../../common/entities/level";
 

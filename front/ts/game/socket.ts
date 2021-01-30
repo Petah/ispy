@@ -17,7 +17,7 @@ class Socket {
         this.$rootScope = $rootScope;
         this.$location = $location;
 
-        this.socket = io('http://192.168.1.9:3000');
+        this.socket = io();
 
         this.bind('init', (data) => {
         });
