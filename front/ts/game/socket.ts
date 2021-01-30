@@ -2,8 +2,10 @@ import { IScope, ILocationService } from "angular";
 import { Game } from "../../../common/entities/game";
 import { Level } from "../../../common/entities/level";
 import { Player } from "../../../common/entities/player";
-import { CorrectGuess, CreatePlayer, Guess, LevelStart, PlayerJoined } from "../../../common/events/events";
+import { CorrectGuess, CreatePlayer, Guess, IncorrectGuess, LevelStart, NoLife, PlayerJoined } from "../../../common/events/events";
 import { objectsToInstances, objectToInstance } from "../../../common/helpers/object";
+import { audio } from "./audio";
+import { particles } from "./particles";
 import { state } from "./state";
 
 class Socket {
@@ -31,6 +33,7 @@ class Socket {
 
         this.bind('levelStart', (levelStart: LevelStart) => {
             if (levelStart.game.id === state.game?.id) {
+                state.game = objectToInstance(levelStart.game, new Game());
                 state.level = objectToInstance(levelStart.game.level, new Level());
                 this.goto('/round');
             }
@@ -47,6 +50,21 @@ class Socket {
         });
 
         this.bind('correctGuess', (correctGuess: CorrectGuess) => {
+            state.game = objectToInstance(correctGuess.game, state.game);
+            audio.play(correctGuess.clue.sound as any || 'found');
+            console.log(correctGuess.clue)
+            console.log(correctGuess.player)
+        });
+
+        this.bind('incorrectGuess', (incorrectGuess: IncorrectGuess) => {
+            state.game = objectToInstance(incorrectGuess.game, state.game);
+            audio.play('questionMark');
+            particles.burst('questionMark', incorrectGuess.guess.pageX, incorrectGuess.guess.pageY)
+            console.log(incorrectGuess.player)
+        });
+
+        this.bind('noLife', (noLife: NoLife) => {
+            audio.play('wrong');
         });
     }
 
@@ -63,11 +81,14 @@ class Socket {
         });
     }
 
-    public guess(xPercent: number, yPercent: number) {
-        this.emit('guess', {
+    public guess(xPercent: number, yPercent: number, pageX: number, pageY: number) {
+        const guess: Guess = {
             xPercent,
             yPercent,
-        } as Guess);
+            pageX,
+            pageY,
+        };
+        this.emit('guess', guess);
     }
 
     private emit(event, data) {
@@ -84,6 +105,10 @@ class Socket {
         this.socket.on(event, (data) => {
             console.log('Socket received', event, data);
             callback(data);
+            this.$rootScope.$broadcast('socket', {
+                event,
+                data,
+            });
             this.$rootScope.$apply();
         });
     }

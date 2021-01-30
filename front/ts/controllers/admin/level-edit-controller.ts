@@ -113,7 +113,7 @@ export class LevelEditController implements IController {
                 const x = (event.pageX - target.offset().left) / target.width();
                 const y = (event.pageY - target.offset().top) / target.height();
                 console.log({ x, y });
-                $scope.currentItem.path.push({ x, y });
+                $scope.currentItem._path.push({ x, y });
                 svgPath.attr('d', $scope.level.getPathString($scope.currentItem, $scope.image.width(), $scope.image.height()));
                 $scope.$apply();
             }
@@ -123,7 +123,7 @@ export class LevelEditController implements IController {
             event.preventDefault()
             mouse.isDown = true;
             if ($scope.currentItem) {
-                $scope.currentItem.path = []
+                $scope.currentItem._path = []
                 $scope.$apply();
             }
         });

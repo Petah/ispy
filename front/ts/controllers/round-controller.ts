@@ -28,12 +28,24 @@ export class RoundController implements IController {
             return;
         }
 
+        setInterval(() => {
+            $scope.$apply();
+        }, 97);
+
         $scope.click = ($event: MouseEvent) => {
             const target = $($event.target);
             const xPos = $event.pageX - target.offset().left;
             const yPos = $event.pageY - target.offset().top;
-            socket.guess(xPos / target.width(), yPos / target.height());
+            socket.guess(xPos / target.width(), yPos / target.height(), $event.pageX, $event.pageY);
         }
+
+        $scope.$on('socket', (event, data) => {
+            switch (data.event) {
+                case 'incorrectGuess':
+                    console.log('$on', data);
+                    break;
+            }
+        });
 
         $scope.leaveGame = function (): void {
             if (!confirm('Are you sure you want to leave the round?')) {

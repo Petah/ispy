@@ -55,7 +55,7 @@
         width: 100%;
         height: 100%;
     }
-    #g-aside {
+    .g-aside {
         height: calc(100% - 25px);
         position: relative;
         .title {
@@ -102,5 +102,12 @@
     }
     .g-round-image-container {
         width: 100%;
+
+        img {
+            padding: 0;
+        }
+    }
+    .g-riddle {
+        background-color: white;;
     }
 }

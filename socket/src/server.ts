@@ -2,7 +2,7 @@ import { Server, Socket } from "socket.io";
 import { Game } from "../../common/entities/game";
 import { Level } from "../../common/entities/level";
 import { Player } from "../../common/entities/player";
-import { CorrectGuess, CreatePlayer, Guess, LevelStart, PlayerJoined } from "../../common/events/events";
+import { CorrectGuess, CreatePlayer, Guess, LevelStart, PlayerJoined, IncorrectGuess, NoLife } from "../../common/events/events";
 import { objectToInstance, serialize } from "../../common/helpers/object";
 import { insidePoly } from "../../common/helpers/poly";
 
@@ -18,8 +18,7 @@ const io = new Server(port, {
 const game = new Game();
 game.id = 'test';
 game.name = 'Test Game';
-
-const levels = [
+game._levels = [
     objectToInstance(require('../../common/data/workshop.json'), new Level()),
     objectToInstance(require('../../common/data/toys.json'), new Level()),
 ];
@@ -52,23 +51,26 @@ io.on('connection', (socket: Socket) => {
 
     socket.on('joinGame', data => {
         console.log('joinGame', data);
-        const levelStart: LevelStart = {
-            game,
-        };
         if (!game.level) {
-            game.level = levels[Math.floor(Math.random() * levels.length)];
-            game.levelStartTime = new Date().getTime();
-            game.broadcast('levelStart', levelStart);
-            setTimeout(() => {
-                game.broadcast('levelEnd', {});
-            }, game.roundTime);
+            game.startNextLevel();
         } else {
+            const levelStart: LevelStart = {
+                game,
+            };
             player.emit('levelStart', levelStart);
         }
     });
 
     socket.on('guess', (guess: Guess) => {
         console.log('guess', guess);
+        if (player.life === 0) {
+            const noLife: NoLife = {
+                guess,
+            };
+            player.emit('noLife', noLife);
+            return;
+        }
+        let found = false;
         for (const c in game.level.clues) {
             const clue = game.level.clues[c];
             for (const i in clue.items) {
@@ -76,19 +78,35 @@ io.on('connection', (socket: Socket) => {
                 if (insidePoly({
                     x: guess.xPercent,
                     y: guess.yPercent,
-                }, item.path)) {
+                }, item._path)) {
+                    found = true;
                     const key = `${player.name}:${c}:${i}`;
-                    game._correctGuesses[key] = true;
-                    player.score += Math.max(0, game.roundTime - (new Date().getTime() - game.levelStartTime));
-                    const correctGuess: CorrectGuess = {
-                        player,
-                    };
-                    game.broadcast('correctGuess', correctGuess);
-                    if (Object.keys(game._correctGuesses).length === game.totalGuesses) {
-                        game.broadcast('guessingComplete', {});
+                    if (!game._correctGuesses[key]) {
+                        game._correctGuesses[key] = true;
+                        player.score += Math.round(Math.max(0, (game.roundTime - (new Date().getTime() - game.levelStartTime)) / 100));
+                        const correctGuess: CorrectGuess = {
+                            game,
+                            clue,
+                            player,
+                            // @todo this should only be send to player
+                            // guess,
+                        };
+                        game.broadcast('correctGuess', correctGuess);
+                        if (Object.keys(game._correctGuesses).length === game.totalGuesses) {
+                            game.broadcast('guessingComplete', {});
+                        }
                     }
                 }
             }
+        }
+        if (!found) {
+            player.life--;
+            const incorrectGuess: IncorrectGuess = {
+                game,
+                player,
+                guess,
+            };
+            game.broadcast('incorrectGuess', incorrectGuess);
         }
     });
 

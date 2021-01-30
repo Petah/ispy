@@ -11,7 +11,7 @@ export class Level {
 
     public getPathString(item: ClueItem, width: number, height: number): string {
         const d: string[] = [];
-        for (const p of item.path) {
+        for (const p of item._path) {
             const x = p.x * width;
             const y = p.y * height;
             if (d.length === 0) {
@@ -33,10 +33,11 @@ export interface Point {
 export declare type Path = Point[];
 
 export class ClueItem {
-    path: Path = []
+    _path: Path = []
 }
 
 export class Clue {
     text: string = ''
+    sound: string = ''
     items: ClueItem[] = []
 }

@@ -1,13 +1,29 @@
 import { Game } from "../entities/game";
+import { Clue } from "../entities/level";
 import { Player } from "../entities/player";
 
 export interface Guess {
     xPercent: number,
     yPercent: number,
+    pageX: number,
+    pageY: number,
 }
 
 export interface CorrectGuess {
+    game: Game,
+    clue: Clue,
     player: Player,
+    guess?: Guess,
+}
+
+export interface IncorrectGuess {
+    game: Game,
+    player: Player,
+    guess: Guess,
+}
+
+export interface NoLife {
+    guess: Guess,
 }
 
 export interface LevelStart {
