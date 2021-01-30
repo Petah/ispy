@@ -8,22 +8,27 @@ function loadSound(url: string, options = {}): Howl {
 }
 
 class Clips {
-    bobadlelelele = loadSound('http://192.168.1.9:81/per/ispy/front/public/audio/bobadlelelele.mp3')
-    batman = loadSound('http://192.168.1.9:81/per/ispy/front/public/audio/im-batman.mp3')
-    questionMark = loadSound('http://192.168.1.9:81/per/ispy/front/public/audio/question-mark.mp3')
-    wrong = loadSound('http://192.168.1.9:81/per/ispy/front/public/audio/wrong.mp3')
-    found = loadSound('http://192.168.1.9:81/per/ispy/front/public/audio/found.wav')
+    bobadlelelele = loadSound('/audio/bobadlelelele.mp3')
+    batman = loadSound('/audio/im-batman.mp3')
+    ironman = loadSound('/audio/ironman.mp3')
+    thor = loadSound('/audio/thor.mp3')
+    pikachu = loadSound('/audio/pikachu.mp3')
+    bulbasaur = loadSound('/audio/bulbasaur.mp3')
+    hulk = loadSound('/audio/hulk.mp3')
+    questionMark = loadSound('/audio/question-mark.mp3')
+    wrong = loadSound('/audio/wrong.mp3')
+    found = loadSound('/audio/found.wav')
     moo = [
-        loadSound('http://192.168.1.9:81/per/ispy/front/public/audio/moo-1.mp3'),
-        loadSound('http://192.168.1.9:81/per/ispy/front/public/audio/moo-2.mp3'),
-        loadSound('http://192.168.1.9:81/per/ispy/front/public/audio/moo-3.mp3'),
-        loadSound('http://192.168.1.9:81/per/ispy/front/public/audio/moo-4.mp3'),
-        loadSound('http://192.168.1.9:81/per/ispy/front/public/audio/moo-5.mp3'),
-        loadSound('http://192.168.1.9:81/per/ispy/front/public/audio/moo-6.mp3'),
-        loadSound('http://192.168.1.9:81/per/ispy/front/public/audio/moo-7.mp3'),
-        loadSound('http://192.168.1.9:81/per/ispy/front/public/audio/moo-8.mp3'),
+        loadSound('/audio/moo-1.mp3'),
+        loadSound('/audio/moo-2.mp3'),
+        loadSound('/audio/moo-3.mp3'),
+        loadSound('/audio/moo-4.mp3'),
+        loadSound('/audio/moo-5.mp3'),
+        loadSound('/audio/moo-6.mp3'),
+        loadSound('/audio/moo-7.mp3'),
+        loadSound('/audio/moo-8.mp3'),
     ]
-    spyMusic = loadSound('http://192.168.1.9:81/per/ispy/front/public/audio/spy-music.mp3', {
+    spyMusic = loadSound('/audio/spy-music.mp3', {
         loop: true,
         volume: 0.1,
     })

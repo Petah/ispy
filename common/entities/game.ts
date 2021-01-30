@@ -11,7 +11,7 @@ export class Game {
     public players: Player[] = [];
     public level: Level;
     public levelStartTime: number;
-    public roundTime: number = 1000 * 10;
+    public roundTime: number = 1000 * 30;
     public started: boolean = false;
     public levelEnded: boolean = false;
     public finished: boolean = false;
@@ -87,7 +87,7 @@ export class Game {
             this.broadcast('levelEnd', levelEnd);
             this._nextLevelTimeout = setTimeout(() => {
                 this.startNextLevel();
-            }, 1000);
+            }, 3000);
         }, this.roundTime);
     }
 

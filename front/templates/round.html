@@ -47,14 +47,15 @@
         <div id="g-round-image-container" class="nes-container with-title is-rounded">
             <p class="title">iSpy Image</p>
             <div class="g-flex g-flex-col">
-                <div id="g-round-image" class="g-img-fluid" data-ng-magnify data-image-src="{{ state.level.image }}"
+                <div class="g-round-image g-img-fluid" data-ng-magnify data-image-src="{{ state.level.image }}"
                     ng-click="click($event)"></div>
-                <img ng-if="!state.game.started" ng-src="{{ state.game.titleImage }}" class="g-img-fluid" />
+                <img ng-if="!state.game.started" ng-src="{{ state.game.titleImage }}" class="g-round-image g-img-fluid" />
             </div>
         </div>
 
         <aside id="g-round-sidebar">
             <div id="g-round-riddle" class="nes-container with-title is-rounded">
+                <p class="title">Instructions</p>
                 <div ng-if="state.game.started && !state.game.levelEnded">
                     <div>{{ state.clue }}</div>
                     <div>{{ state.game.timeRemaining }}s remaining</div>
@@ -71,10 +72,10 @@
             </div>
             <div id="g-round-players" class="nes-container with-title is-rounded">
                 <p class="title">Players ({{ state.game.players.length}})</p>
-                <ul class="g-round-players-list">
-                    <li ng-repeat="player in state.game.players">
-                        {{ player.name }} (<i class="fas fa-heart"></i> {{ player.lives }} / <i class="fas fa-star"></i>
-                        {{ player.score }})
+                <ul id="g-round-players-list">
+                    <li class="g-player-list-single" ng-repeat="player in state.game.players">
+                        <div class="g-player-list-single-name">{{ player.name }} ({{ player.score }})</div>
+                        <i class="g-player-list-single-life fas fa-heart" ng-repeat="x in [].constructor(player.life) track by $index"></i>
                     </li>
                 </ul>
             </div>
