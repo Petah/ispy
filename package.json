@@ -18,6 +18,7 @@
     "browserify": "^16.5.2",
     "concurrently": "^5.3.0",
     "express": "^4.17.1",
+    "forever": "^3.0.4",
     "gulp": "^4.0.2",
     "gulp-angular-templatecache": "^3.0.0",
     "gulp-autoprefixer": "^7.0.1",
