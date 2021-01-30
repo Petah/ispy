@@ -58,13 +58,15 @@ class Socket {
 
         this.bind('incorrectGuess', (incorrectGuess: IncorrectGuess) => {
             state.game = objectToInstance(incorrectGuess.game, state.game);
-            audio.play('questionMark');
-            particles.burst('questionMark', incorrectGuess.guess.pageX, incorrectGuess.guess.pageY)
-            console.log(incorrectGuess.player)
+            if (incorrectGuess.player.name === state.player.name) {
+                audio.play('questionMark');
+                particles.burst('questionMark', incorrectGuess.guess.pageX, incorrectGuess.guess.pageY, 'wobble')
+            }
         });
 
         this.bind('noLife', (noLife: NoLife) => {
             audio.play('wrong');
+            particles.burst('cross', noLife.guess.pageX, noLife.guess.pageY)
         });
     }
 
