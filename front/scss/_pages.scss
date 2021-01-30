@@ -110,31 +110,32 @@
 
     #g-round-sidebar {
         min-height: 100px;
-        max-width: 320px;
+        max-width: 360px;
         margin-left: 1rem;
     }
 
     #g-round-players {
         background-color: white;
+    }
 
-        ul {
-            padding: 0 0 0 18px;
-            margin: 0;
-            max-height: 320px;
-            text-align: left;
-            overflow-y: scroll;
+    #g-round-players-list {
+        padding: 0;
+        margin: 0;
+        max-height: 320px;
+        text-align: left;
+        overflow-y: scroll;
+        list-style: none;
 
-            li {
-                &:not(:first-child) {
-                    margin-top: 0.75rem;
-                }
+        li {
+            &:not(:first-child) {
+                margin-top: 0.75rem;
             }
         }
     }
 
     #g-round-image-container {
-        padding-left: 0;
-        padding-right: 0;
+        padding-left: 1rem;
+        padding-right: 1rem;
         background-color: white;
 
         .title {
@@ -151,6 +152,11 @@
     #g-round-riddle {
         margin: 0 0 2rem;
         background-color: white;
+    }
+
+    #g-round-riddle-text {
+        max-height: 120px;
         text-align: left;
+        overflow-y: scroll;
     }
 }
