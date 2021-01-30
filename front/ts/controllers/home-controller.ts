@@ -3,6 +3,7 @@ import { IController } from "./controller";
 import { state } from "../game/state";
 import { socket } from "../game/socket";
 import { audio } from "../game/audio";
+import { particles } from "../game/particles";
 
 interface IHomeControllerScope extends IScope {
     isCreatingPlayer: boolean,
@@ -17,7 +18,6 @@ export class HomeController implements IController {
     public controller(
         $scope: IHomeControllerScope,
     ) {
-
         state.player.name = state.player.name
             || (localStorage.getItem('playerName') || 'there');
 

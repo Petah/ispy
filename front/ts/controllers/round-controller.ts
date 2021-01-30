@@ -36,11 +36,15 @@ export class RoundController implements IController {
             const target = $($event.target);
             const xPos = $event.pageX - target.offset().left;
             const yPos = $event.pageY - target.offset().top;
-            socket.guess(xPos / target.width(), yPos / target.height());
+            socket.guess(xPos / target.width(), yPos / target.height(), $event.pageX, $event.pageY);
         }
 
-        $scope.$on('socket', (data) => {
-            console.log('$on', data);
+        $scope.$on('socket', (event, data) => {
+            switch (data.event) {
+                case 'incorrectGuess':
+                    console.log('$on', data);
+                    break;
+            }
         });
 
         $scope.leaveGame = function (): void {

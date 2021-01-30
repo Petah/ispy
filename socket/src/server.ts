@@ -65,6 +65,7 @@ io.on('connection', (socket: Socket) => {
         console.log('guess', guess);
         if (player.life === 0) {
             const noLife: NoLife = {
+                guess,
             };
             player.emit('noLife', noLife);
             return;
@@ -87,6 +88,8 @@ io.on('connection', (socket: Socket) => {
                             game,
                             clue,
                             player,
+                            // @todo this should only be send to player
+                            // guess,
                         };
                         game.broadcast('correctGuess', correctGuess);
                         if (Object.keys(game._correctGuesses).length === game.totalGuesses) {
@@ -101,6 +104,7 @@ io.on('connection', (socket: Socket) => {
             const incorrectGuess: IncorrectGuess = {
                 game,
                 player,
+                guess,
             };
             game.broadcast('incorrectGuess', incorrectGuess);
         }
