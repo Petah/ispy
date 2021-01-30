@@ -53,11 +53,7 @@ export class RoundController implements IController {
         });
 
         $scope.leaveGame = function (): void {
-            if (!confirm('Are you sure you want to leave the round?')) {
-                return;
-            }
-
-            state.setLevel(null);
+            socket.leaveGame();
             $location.path('/');
         }
     }

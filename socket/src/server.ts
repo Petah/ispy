@@ -2,7 +2,7 @@ import { Server, Socket } from "socket.io";
 import { Game } from "../../common/entities/game";
 import { Level } from "../../common/entities/level";
 import { Player } from "../../common/entities/player";
-import { CorrectGuess, CreatePlayer, Guess, LevelStart, PlayerJoined, IncorrectGuess, NoLife, DuplicateGuess, JoinedGame, JoinGame, PlayerLeft, StartGame } from "../../common/events/events";
+import { CorrectGuess, CreatePlayer, Guess, LevelStart, PlayerJoined, IncorrectGuess, NoLife, DuplicateGuess, JoinedGame, JoinGame, PlayerLeft, StartGame, LeaveGame } from "../../common/events/events";
 import { objectToInstance, serialize } from "../../common/helpers/object";
 import { insidePoly } from "../../common/helpers/poly";
 
@@ -37,6 +37,12 @@ const games: Game[] = [
 
 const allPlayers: Player[] = [];
 
+function broadcast(event, data) {
+    for (const player of allPlayers) {
+        player.emit(event, data);
+    }
+}
+
 function findPlayerGame(player: Player): Game {
     for (const game of games) {
         for (const p of game.players) {
@@ -46,6 +52,19 @@ function findPlayerGame(player: Player): Game {
         }
     }
     return null;
+}
+
+function removePlayerFromGame(game: Game, player: Player) {
+    const index = game.players.indexOf(player);
+    if (index !== -1) {
+        game.players.splice(index, 1);
+        const playerLeft: PlayerLeft = {
+            game,
+            player,
+        };
+        game.broadcast('playerLeft', playerLeft);
+    }
+    broadcast('gamesList', games);
 }
 
 io.on('connection', (socket: Socket) => {
@@ -94,6 +113,7 @@ io.on('connection', (socket: Socket) => {
             player,
         };
         player.emit('joinedGame', joinedGame);
+        broadcast('gamesList', games);
         // if (!game.level) {
         //     game.startNextLevel();
         // } else {
@@ -114,6 +134,7 @@ io.on('connection', (socket: Socket) => {
         const game = findPlayerGame(player);
         if (!game.level) {
             game.startNextLevel();
+            broadcast('gamesList', games);
         }
     });
 
@@ -132,6 +153,9 @@ io.on('connection', (socket: Socket) => {
         }
         let found = false;
         const clue = game._playerClues[player.name];
+        if (!clue) {
+            return;
+        }
         for (const i in clue.items) {
             const item = clue.items[i];
             if (insidePoly({
@@ -176,25 +200,29 @@ io.on('connection', (socket: Socket) => {
         }
     });
 
+    socket.on('leaveGame', (leaveGame: LeaveGame) => {
+        console.log('leaveGame', leaveGame);
+        if (!player) {
+            return;
+        }
+        const game = findPlayerGame(player);
+        if (game) {
+            removePlayerFromGame(game, player);
+        }
+    });
+
     socket.on('disconnect', () => {
         console.log('disconnect');
-        if (player) {
-            const game = findPlayerGame(player);
-            if (game) {
-                const index = game.players.indexOf(player);
-                if (index !== -1) {
-                    game.players.splice(index, 1);
-                    const playerLeft: PlayerLeft = {
-                        game,
-                        player,
-                    };
-                    game.broadcast('playerLeft', playerLeft);
-                }
-            }
-            const index = allPlayers.indexOf(player);
-            if (index !== -1) {
-                allPlayers.splice(index, 1);
-            }
+        if (!player) {
+            return
+        }
+        const game = findPlayerGame(player);
+        if (game) {
+            removePlayerFromGame(game, player);
+        }
+        const index = allPlayers.indexOf(player);
+        if (index !== -1) {
+            allPlayers.splice(index, 1);
         }
     });
 

@@ -2,7 +2,7 @@ import { IScope, ILocationService } from "angular";
 import { Game } from "../../../common/entities/game";
 import { Level } from "../../../common/entities/level";
 import { Player } from "../../../common/entities/player";
-import { CorrectGuess, CreatePlayer, DuplicateGuess, Guess, IncorrectGuess, LevelStart, NoLife, PlayerJoined, JoinGame, JoinedGame, StartGame } from "../../../common/events/events";
+import { CorrectGuess, CreatePlayer, DuplicateGuess, Guess, IncorrectGuess, LevelStart, NoLife, PlayerJoined, JoinGame, JoinedGame, StartGame, LeaveGame, PlayerLeft } from "../../../common/events/events";
 import { objectsToInstances, objectToInstance } from "../../../common/helpers/object";
 import { audio } from "./audio";
 import { particles } from "./particles";
@@ -50,6 +50,10 @@ class Socket {
         });
 
         this.bind('levelEnd', (data) => {
+        });
+
+        this.bind('playerLeft', (playerLeft: PlayerLeft) => {
+            state.game = objectToInstance(playerLeft.game, new Game());
         });
 
         this.bind('guessingComplete', (data) => {
@@ -109,6 +113,12 @@ class Socket {
         const startGame: StartGame = {
         };
         this.emit('startGame', startGame);
+    }
+
+    public leaveGame() {
+        const leaveGame: LeaveGame = {
+        };
+        this.emit('leaveGame', leaveGame);
     }
 
     public guess(xPercent: number, yPercent: number, pageX: number, pageY: number) {
