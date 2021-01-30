@@ -2,6 +2,7 @@
     <div class="g-view-title text-center">
         <h1>iSPY 2021</h1>
         <h4>Find A Game</h4>
+        <a href="#!/" class="nes-btn btn-action-left" ng-click="leaveGame()">&lt;</a>
     </div>
 
     <p ng-if="!state.gamesList.length">Loading games...</p>
@@ -25,7 +26,7 @@
             </table>
         </div>
 
-        <a href="#!/" class="g-form-btn nes-btn is-error">
+        <a href="#!/" class="g-form-btn nes-btn">
             <i data-feather="circle"></i> Go Back
         </a>
     </div>
