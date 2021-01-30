@@ -1,6 +1,5 @@
 import { ILocationService, IScope } from "angular";
 import { IController } from "./controller";
-import { api } from "../game/api";
 import { state } from "../game/state";
 
 interface ICreateGameControllerScope extends IScope {

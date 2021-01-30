@@ -7988,7 +7988,7 @@
     ],
     "id": "17c69238-fd2e-430d-afdf-0b38d8c3fd14",
     "name": "Workshop",
-    "image": "http://192.168.1.9:81/per/ispy/front/public/images/workshop.jpg",
+    "image": "/images/workshop.jpg",
     "width": 4032,
     "height": 3024,
     "riddle": "I spy a two hammers,"

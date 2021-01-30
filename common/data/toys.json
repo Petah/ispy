@@ -10747,7 +10747,7 @@
     ],
     "id": "17c69238-fd2e-430d-afdf-0b38d8c3fd14",
     "name": "Toys",
-    "image": "http://192.168.1.9:81/per/ispy/front/public/images/toys.jpg",
+    "image": "/images/toys.jpg",
     "width": 4032,
     "height": 3024,
     "riddle": "I spy a the hunky hulk, a man who thinks he's a bat, and a sneaky robot man."

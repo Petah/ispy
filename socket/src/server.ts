@@ -5,10 +5,21 @@ import { Player } from "../../common/entities/player";
 import { CorrectGuess, CreatePlayer, Guess, LevelStart, PlayerJoined, IncorrectGuess, NoLife, DuplicateGuess, JoinedGame, JoinGame, PlayerLeft, StartGame, LeaveGame } from "../../common/events/events";
 import { objectToInstance, serialize } from "../../common/helpers/object";
 import { insidePoly } from "../../common/helpers/poly";
+import express from "express";
+import * as path from "path";
+import * as http from "http";
 
+const app = express();
+const server = http.createServer(app);
 const port = 3000;
 
-const io = new Server(port, {
+server.listen(port, () => {
+    console.log('Server listening at port %d', port);
+});
+
+app.use(express.static(__dirname + '/../../front/public'));
+
+const io = new Server(server, {
     cors: {
         origin: '*',
         methods: ["GET", "POST"],
@@ -22,11 +33,11 @@ game1._levels = [
     objectToInstance(require('../../common/data/workshop.json'), new Level()),
     objectToInstance(require('../../common/data/toys.json'), new Level()),
 ];
-
+// @todo player list doesn't update on host
 const game2 = new Game();
 game2.id = 'gardens-1';
 game2.name = 'Garden Avengers';
-game2.titleImage = 'http://192.168.1.9:81/per/ispy/front/public/images/round_sh_intro-min.jpg';
+game2.titleImage = '/images/round_sh_intro-min.jpg';
 game2.info = 'Help avenge the gardens, find the missing super hero in each picture. The super hero you must find will be shown here!';
 game2._levels = [
     objectToInstance(require('../../common/data/gardens-1.json'), new Level()),
@@ -41,7 +52,7 @@ game2._levels = [
 const game3 = new Game();
 game3.id = 'office-1';
 game3.name = 'Office Galore';
-game3.titleImage = 'http://192.168.1.9:81/per/ispy/front/public/images/round_of_intro-min.jpg';
+game3.titleImage = '/images/round_of_intro-min.jpg';
 game3.info = 'Your mission, should you choose to accept it, is to find all 6 cows scattered throughout the office. Moooo!';
 game3._levels = [
     objectToInstance(require('../../common/data/office-1.json'), new Level()),

@@ -8768,7 +8768,7 @@
       }
   ],
   "name": "Level Name",
-  "image": "http://192.168.1.9:81/per/ispy/front/public/images/round_sh_7-min.jpg",
+  "image": "/images/round_sh_7-min.jpg",
   "width": 3200,
   "height": 2000,
   "riddle": ""

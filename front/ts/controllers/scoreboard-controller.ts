@@ -1,6 +1,5 @@
 import { ILocationService, IScope } from "angular";
 import { IController } from "./controller";
-import { api } from "../game/api";
 import { state } from "../game/state";
 import { Game } from "../../../common/entities/game";
 import { socket } from "../game/socket";
