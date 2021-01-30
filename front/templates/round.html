@@ -5,24 +5,36 @@
         <button class="nes-btn is-error btn-action-right" ng-click="leaveGame()">X</button>
     </div>
 
-    <div class="g-flex g-round-container">
-        <div class="g-round-image-container nes-container">
-            <img id="g-round-image" class="g-img-fluid"  ng-src="{{ state.level.image }}" ng-attr-alt="{{ state.level.name }} Image" ng-click="click($event)" />
-            <p>{{ state.level.riddle || 'No riddle set! :O' }}</p>
+    <div id="g-round-main">
+        <div id="g-round-image-container" class="nes-container with-title is-rounded">
+            <p class="title">iSpy Image</p>
+            <div class="g-flex g-flex-col">
+                <img id="g-round-image" class="g-img-fluid"  ng-src="{{ state.level.image }}" ng-attr-alt="{{ state.level.name }} Image" ng-click="click($event)" />
+
+                <button class="nes-btn is-error btn-action-right" ng-click="start()" ng-if="state.player.host">Start</button>
+            </div>
         </div>
 
-        <div id="g-aside">
-            <p class="title">Players</p>
-            <aside class="nes-container with-title is-centered">
-                <div class="lists">
-                    <ul class="nes-list is-circle">
-                        <li ng-repeat="player in state.game.players">
-                            {{ player.name }}
-                            {{ player.score }}
-                        </li>
-                    </ul>
+        <aside id="g-round-sidebar">
+            <div id="g-round-riddle" class="nes-container with-title is-rounded">
+                <div ng-if="state.game.started">
+                    <p class="title">Riddle</p>
+                    <p id="g-round-riddle-text">{{ state.level.riddle || 'No riddle set! :O' }}</p>
+                    <div>{{ state.clue }}</div>
+                    <div>{{ state.game.timeRemaining }} sec remaining</div>
                 </div>
-            </aside>
-        </div>
+                <div ng-if="!state.game.started">
+                    <p class="title">Waiting for players</p>
+                </div>
+            </div>
+            <div id="g-round-players" class="nes-container with-title is-rounded">
+                <p class="title">Players ({{ state.game.players.length}})</p>
+                <ul class="g-round-players-list">
+                    <li ng-repeat="player in state.game.players">
+                        {{ player.name }} (<i class="fas fa-heart"></i> {{ player.lives }} / <i class="fas fa-star"></i> {{ player.score }})
+                    </li>
+                </ul>
+            </div>
+        </aside>
     </div>
 </div>

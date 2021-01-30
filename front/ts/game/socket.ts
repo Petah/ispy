@@ -2,7 +2,7 @@ import { IScope, ILocationService } from "angular";
 import { Game } from "../../../common/entities/game";
 import { Level } from "../../../common/entities/level";
 import { Player } from "../../../common/entities/player";
-import { CorrectGuess, CreatePlayer, DuplicateGuess, Guess, IncorrectGuess, LevelStart, NoLife, PlayerJoined, JoinGame } from "../../../common/events/events";
+import { CorrectGuess, CreatePlayer, DuplicateGuess, Guess, IncorrectGuess, LevelStart, NoLife, PlayerJoined, JoinGame, JoinedGame, StartGame } from "../../../common/events/events";
 import { objectsToInstances, objectToInstance } from "../../../common/helpers/object";
 import { audio } from "./audio";
 import { particles } from "./particles";
@@ -27,6 +27,15 @@ class Socket {
             // state.game.players.push(player);
         });
 
+        this.bind('joinedGame', (joinedGame: JoinedGame) => {
+            state.game = objectToInstance(joinedGame.game, new Game());
+            if (state.player.name === joinedGame.player.name && joinedGame.player.host) {
+                state.player.host = true;
+            }
+            // state.game.players.push(player);
+            this.goto('/round');
+        });
+
         this.bind('youJoined', (data) => {
             state.player.joined = true;
         });
@@ -35,7 +44,8 @@ class Socket {
             if (levelStart.game.id === state.game?.id) {
                 state.game = objectToInstance(levelStart.game, new Game());
                 state.level = objectToInstance(levelStart.game.level, new Level());
-                this.goto('/round');
+                state.clue = levelStart.clue;
+                // this.goto('/round');
             }
         });
 
@@ -93,6 +103,12 @@ class Socket {
             player: state.player,
         };
         this.emit('joinGame', joinGame);
+    }
+
+    public startGame() {
+        const startGame: StartGame = {
+        };
+        this.emit('startGame', startGame);
     }
 
     public guess(xPercent: number, yPercent: number, pageX: number, pageY: number) {

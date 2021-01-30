@@ -1,3 +1,7 @@
+#game {
+    overflow: hidden;
+}
+
 .g-game-container,
 .g-view-container {
     display: flex;
@@ -25,14 +29,14 @@
 #g-game-frame {
     display: flex;
     position: relative;
-    min-width: 90vw;
+    min-width: 1400px;
+    min-height: 900px;
     max-width: 90vw;
-    min-height: 90vh;
     max-height: 90vh;
     margin: 0;
     border: 10px solid transparent;
     border: 64px solid transparent;
-    border-image: url(/images/panel_border.png) 64 round;
+    border-image: url(../images/panel_border.png) 64 round;
     box-sizing: border-box;
 }
 
@@ -50,6 +54,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    &-col {
+        flex-direction: column;
+    }
 }
 
 .g-menu-container {
@@ -94,7 +102,7 @@
         width: 320px;
         height: 22px;
         margin: 0.5rem auto 0;
-        background-image: url('/images/panel_title_footer.png');
+        background-image: url('../images/panel_title_footer.png');
         background-repeat: no-repeat;
         background-position: center;
     }

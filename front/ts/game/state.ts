@@ -7,6 +7,7 @@ class State {
     public gamesList: Game[] = [];
     public level: Level = null;
     public player: Player = new Player();
+    public clue: string = '';
 
     // Player state
     getPlayer(): Player {

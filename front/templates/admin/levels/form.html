@@ -1,4 +1,4 @@
-<div class="g-full-size">
+<div class="g-admin g-full-size">
     <h1>Admin</h1>
     <form>
         <button type="button" class="btn btn-primary">New Level</button>
@@ -30,6 +30,10 @@
                 <label for="clue">Clue</label>
                 <input type="text" class="form-control" id="clue" ng-model="clue.text" />
             </div>
+            <div class="form-group">
+                <label for="clue">Sound</label>
+                <input type="text" class="form-control" id="clue" ng-model="clue.sound" />
+            </div>
             <div ng-repeat="item in clue.items">
                 <div class="form-group">
                     <input type="text" class="form-control" id="clue" ng-value="level.getPathString(item, image.width(), image.height())" disabled />
@@ -54,6 +58,15 @@
     </div>
 </div>
 <style>
+    .g-admin {
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        overflow: auto;
+        background-color: white;
+        padding: 15px;
+    }
+
     #gp-image-wrapper {
         position: relative;
     }

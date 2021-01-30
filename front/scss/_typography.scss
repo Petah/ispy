@@ -9,3 +9,9 @@
 .text-right {
     text-align: right;
 }
+
+#g-game-frame {
+    .nes-container.with-title > .title {
+        margin-top: -2rem;
+    }
+}

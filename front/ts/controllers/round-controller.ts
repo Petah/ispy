@@ -10,6 +10,7 @@ interface IRoundControllerScope extends IScope {
     leaveGame(): void,
     players: Player[]
     click($event): void
+    start(): void
 }
 
 export class RoundController implements IController {
@@ -37,6 +38,10 @@ export class RoundController implements IController {
             const xPos = $event.pageX - target.offset().left;
             const yPos = $event.pageY - target.offset().top;
             socket.guess(xPos / target.width(), yPos / target.height(), $event.pageX, $event.pageY);
+        }
+
+        $scope.start = () => {
+            socket.startGame();
         }
 
         $scope.$on('socket', (event, data) => {
