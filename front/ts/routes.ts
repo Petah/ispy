@@ -6,6 +6,7 @@ import { JoinGameController } from './controllers/join-game-controller';
 import { LevelListController } from './controllers/admin/level-list-controller';
 import { LevelEditController } from './controllers/admin/level-edit-controller';
 import { RoundController } from './controllers/round-controller';
+import { ScoreboardController } from './controllers/scoreboard-controller';
 
 export interface IRouteController {
     name: string,
@@ -75,4 +76,12 @@ export const Routes: IRoute[] = [
             handler: LevelEditController,
         },
     },
+    {
+        path: '/scoreboard',
+        templateUrl: '/scoreboard.html',
+        controller: {
+            name: 'ScoreboardController',
+            handler: ScoreboardController
+        },
+    }
 ];

@@ -1,0 +1,68 @@
+<div id="g-scoreboard" class="g-view-content text-center">
+  <div class="g-view-title text-center">
+      <h1>iSPY 2021</h1>
+      <h4>Scoreboard</h4>
+      <a href="#!/" class="nes-btn btn-action-left">&lt;</a>
+  </div>
+
+  <!-- <p ng-if="!state.gamesList.length">Loading scoreboard...</p> -->
+
+  <div class="g-form-container nes-container with-title is-rounded ">
+      <!-- <div class="nes-table-responsive nes-table is-bordered">
+          <table class="g-games-list is-centered" ng-if="state.gamesList.length">
+              <tbody>
+                  <tr ng-repeat="game in state.gamesList">
+                      <td scope="row"><div ng-click="joinGame(game)" class="nes-text">#{{ $index + 1}}</div></td>
+                      <td class="name_col">{{ game.name }}</td>
+                      <td>
+                          {{ game.players.length }}
+                          <i
+                              ng-class="{'fa-user': game.players.length == 1, 'fa-user-friends': game.players.length == 2, 'fa-users': game.players.length > 2}"
+                              class="g-players-icon fas"></i>
+                      </td>
+                      <td><button class="nes-btn is-primary" ng-click="joinGame(game)">Join</button></td>
+                  </tr>
+              </tbody>
+          </table>
+      </div> -->
+
+      <div class="nes-table-responsive">
+        <h3>Best five players</h3>
+
+        <table>
+          <tbody>
+            <tr class="nes-text is-error">
+              <td><i class="nes-icon is-medium trophy is-large"></i></td>
+              <td>1st</td>
+              <td class="name">Ken</td>
+              <td class="text-right">28000 PTS</td>
+            </tr>
+            <tr class="nes-text is-warning">
+              <td><i class="nes-icon is-medium star"></i></td>
+              <td>2st</td>
+              <td class="name">Ken</td>
+              <td class="text-right">28000 PTS</td>
+            </tr>
+            <tr class="nes-text is-success">
+              <td><i class="nes-icon is-medium star is-half"></i></td>
+              <td>3rd</td>
+              <td class="name">Ken</td>
+              <td class="text-right">28000 PTS</td>
+            </tr>
+            <tr class="nes-text is-primary">
+              <td><i class="nes-icon is-medium star is-transparent"></i></td>
+              <td>4th</td>
+              <td class="name">Ken</td>
+              <td class="text-right">28000 PTS</td>
+            </tr>
+            <tr class="nes-text is-disabled">
+              <td><i class="nes-icon is-medium star is-empty"></i></td>
+              <td>5th</td>
+              <td class="name">Ken</td>
+              <td class="text-right">28000 PTS</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  </div>
+</div>

@@ -123,3 +123,22 @@
         background-color: white;;
     }
 }
+
+#g-scoreboard {
+    text-transform: uppercase;
+    h3 {
+        margin-bottom: 30px;
+        margin-top: 15px;
+    }
+    table {
+        width: 100%;
+        td, th {
+            border-color: transparent;
+            padding: .5rem .75rem;
+        }
+        .name {
+            width: 120px;
+            text-align: left;
+        }
+    }
+}
