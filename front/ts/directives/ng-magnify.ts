@@ -20,6 +20,8 @@ export class NgMagnifyDirective implements IDirective {
       glassHeight: '='
     }
 
+    public enableMagnify = false
+
     public directive(): Link {
         return (scope: any, element: JQuery<HTMLDivElement>, attributes: IAttributes, ngModel) => {
           var glass = element.find('div.magnify-glass'),
@@ -27,12 +29,10 @@ export class NgMagnifyDirective implements IDirective {
             el, nWidth, nHeight, magnifyCSS;
 
           const windowT: any = window
-  
-          // if touch devices, do something
-          if (('ontouchstart' in window) || windowT.DocumentTouch && document instanceof Document) {
-            return;
-          }
-          element.on('mousemove', function (evt) {
+
+          const loadGlass = (evt: any) => {
+            if (!this.enableMagnify) return
+            
             el = angular.extend(scope.getOffset(element[0]), {
               width: element[0].offsetWidth,
               height: element[0].offsetHeight,
@@ -47,8 +47,9 @@ export class NgMagnifyDirective implements IDirective {
             if (magnifyCSS) {
               glass.css( magnifyCSS );
             }
-          })
-          .on('mouseleave', function () {
+          }
+
+          const destroyGlass = () => {
             glass.css({
               opacity: 0,
               filter: 'alpha(opacity=0)'
@@ -57,9 +58,28 @@ export class NgMagnifyDirective implements IDirective {
             //Reset image for prevent binding change image source not same size.
             nWidth = undefined;
             nHeight = undefined;
+          }
+
+          document.addEventListener("keypress", (event: any) => {
+            if (event.code === "Space") {
+              this.enableMagnify = true
+            }
           });
-  
-          scope.magnify = function (evt) {
+
+          document.addEventListener("keyup", (event: any) => {
+            this.enableMagnify = false
+            destroyGlass()
+          });
+
+          // if touch devices, do something
+          if (('ontouchstart' in window) || windowT.DocumentTouch && document instanceof Document) {
+            return;
+          }
+ 
+          element.on('mousemove', loadGlass)
+                 .on('mouseleave', destroyGlass);
+
+          scope.magnify = (evt) => {            
             var mx, my, rx, ry, px, py, bgp, img;
   
             if (!nWidth && !nHeight) {
