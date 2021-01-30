@@ -25,6 +25,7 @@
                     </td>
                     <td class="g-games-list-actions">
                         <button class="nes-btn is-primary" ng-click="joinGame(game)" ng-if="!game.started">Join</button>
+                        <div ng-if="game.started">Started</div>
                     </td>
                 </tr>
             </tbody>

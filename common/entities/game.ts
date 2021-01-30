@@ -67,4 +67,13 @@ export class Game {
             }, 1000);
         }, this.roundTime);
     }
+
+    public stop() {
+        this.level = null;
+        this.levelStartTime = null;
+        this.started = false;
+        this._levelsIndex = 0;
+        this._correctGuesses = {};
+        this._playerClues = {};
+    }
 }

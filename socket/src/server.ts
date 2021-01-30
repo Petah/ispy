@@ -63,6 +63,10 @@ function removePlayerFromGame(game: Game, player: Player) {
             player,
         };
         game.broadcast('playerLeft', playerLeft);
+
+        if (game.players.length === 0) {
+            game.stop();
+        }
     }
     broadcast('gamesList', games);
 }
@@ -114,16 +118,6 @@ io.on('connection', (socket: Socket) => {
         };
         player.emit('joinedGame', joinedGame);
         broadcast('gamesList', games);
-        // if (!game.level) {
-        //     game.startNextLevel();
-        // } else {
-        //     console.log('game._playerClues', game._playerClues)
-        //     const levelStart: LevelStart = {
-        //         game,
-        //         clue:'test',// game._playerClues[player.name].text,
-        //     };
-        //     player.emit('levelStart', levelStart);
-        // }
     });
 
     socket.on('startGame', (startGame: StartGame) => {
@@ -132,6 +126,9 @@ io.on('connection', (socket: Socket) => {
             return;
         }
         const game = findPlayerGame(player);
+        if (game.started) {
+            return;
+        }
         if (!game.level) {
             game.startNextLevel();
             broadcast('gamesList', games);
@@ -144,6 +141,9 @@ io.on('connection', (socket: Socket) => {
             return;
         }
         const game = findPlayerGame(player);
+        if (!game.started) {
+            return;
+        }
         if (player.life === 0) {
             const noLife: NoLife = {
                 guess,
