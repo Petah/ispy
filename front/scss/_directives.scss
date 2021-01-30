@@ -3,27 +3,23 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-end;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 
     .g-message-icon,
     .g-message-text {
         flex: 1;
+        display: block;
     }
 
     .g-message-icon {
         max-width: 96px;
-        max-height: 96px;
+        height: 96px;
         margin: 0 1rem 0rem 0;
-        padding: 0;
-        background-color: white;
-    }
-
-    .g-message-icon-img {
-        width: auto;
-        max-width: 100%;
+        image-rendering: pixelated;
     }
 
     .g-message-text {
+        margin-bottom: 4rem;
         max-width: 480px;
         text-align: left;
 
