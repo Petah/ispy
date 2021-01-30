@@ -88,10 +88,10 @@ io.on('connection', (socket: Socket) => {
                             game,
                             clue,
                             player,
-                            // @todo this should only be send to player
-                            // guess,
                         };
-                        game.broadcast('correctGuess', correctGuess);
+                        game.broadcast('correctGuess', correctGuess, player);
+                        correctGuess.guess = guess;
+                        player.emit('correctGuess', correctGuess);
                         if (Object.keys(game._correctGuesses).length === game.totalGuesses) {
                             game.broadcast('guessingComplete', {});
                         }
