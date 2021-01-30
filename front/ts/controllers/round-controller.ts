@@ -39,6 +39,10 @@ export class RoundController implements IController {
             socket.guess(xPos / target.width(), yPos / target.height());
         }
 
+        $scope.$on('socket', (data) => {
+            console.log('$on', data);
+        });
+
         $scope.leaveGame = function (): void {
             if (!confirm('Are you sure you want to leave the round?')) {
                 return;

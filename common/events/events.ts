@@ -18,6 +18,9 @@ export interface IncorrectGuess {
     player: Player,
 }
 
+export interface NoLife {
+}
+
 export interface LevelStart {
     game: Game,
 }

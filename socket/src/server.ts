@@ -2,7 +2,7 @@ import { Server, Socket } from "socket.io";
 import { Game } from "../../common/entities/game";
 import { Level } from "../../common/entities/level";
 import { Player } from "../../common/entities/player";
-import { CorrectGuess, CreatePlayer, Guess, LevelStart, PlayerJoined, IncorrectGuess } from "../../common/events/events";
+import { CorrectGuess, CreatePlayer, Guess, LevelStart, PlayerJoined, IncorrectGuess, NoLife } from "../../common/events/events";
 import { objectToInstance, serialize } from "../../common/helpers/object";
 import { insidePoly } from "../../common/helpers/poly";
 
@@ -64,6 +64,9 @@ io.on('connection', (socket: Socket) => {
     socket.on('guess', (guess: Guess) => {
         console.log('guess', guess);
         if (player.life === 0) {
+            const noLife: NoLife = {
+            };
+            player.emit('noLife', noLife);
             return;
         }
         let found = false;
