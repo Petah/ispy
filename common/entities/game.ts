@@ -1,4 +1,4 @@
-import { LevelStart } from "../events/events";
+import { GameFinished, LevelEnd, LevelStart } from "../events/events";
 import { serialize } from "../helpers/object";
 import { Clue, Level } from "./level";
 import { Player } from "./player";
@@ -11,6 +11,8 @@ export class Game {
     public levelStartTime: number;
     public roundTime: number = 1000 * 10;
     public started: boolean = false;
+    public levelEnded: boolean = false;
+    public finished: boolean = false;
     public _levelsIndex: number = 0;
     public _levels: Level[];
     public _correctGuesses = {};
@@ -26,6 +28,9 @@ export class Game {
     }
 
     public get totalGuesses(): number {
+        if (!this.level) {
+            return 0;
+        }
         let i = 0;
         for (const clue of this.level.clues) {
             for (const item of clue.items) {
@@ -41,9 +46,18 @@ export class Game {
 
     public startNextLevel() {
         if (this._levelsIndex >= this._levels.length) {
-            this._levelsIndex = 0;
+            this.level = null;
+            this.levelStartTime = null;
+            this.finished = true;
+            this.levelEnded = true;
+            const gameFinished: GameFinished = {
+                game: this,
+            };
+            this.broadcast('gameFinished', gameFinished)
+            return;
         }
         this.started = true;
+        this.levelEnded = false;
         this.level = this._levels[this._levelsIndex];
         this._levelsIndex++;
         this.levelStartTime = new Date().getTime();
@@ -61,7 +75,11 @@ export class Game {
         }
 
         setTimeout(() => {
-            this.broadcast('levelEnd', {});
+            this.levelEnded = true;
+            const levelEnd: LevelEnd = {
+                game: this,
+            };
+            this.broadcast('levelEnd', levelEnd);
             setTimeout(() => {
                 this.startNextLevel();
             }, 1000);
@@ -72,6 +90,7 @@ export class Game {
         this.level = null;
         this.levelStartTime = null;
         this.started = false;
+        this.finished = false;
         this._levelsIndex = 0;
         this._correctGuesses = {};
         this._playerClues = {};

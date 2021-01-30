@@ -2,7 +2,7 @@ import { IScope, ILocationService } from "angular";
 import { Game } from "../../../common/entities/game";
 import { Level } from "../../../common/entities/level";
 import { Player } from "../../../common/entities/player";
-import { CorrectGuess, CreatePlayer, DuplicateGuess, Guess, IncorrectGuess, LevelStart, NoLife, PlayerJoined, JoinGame, JoinedGame, StartGame, LeaveGame, PlayerLeft } from "../../../common/events/events";
+import { CorrectGuess, CreatePlayer, DuplicateGuess, Guess, IncorrectGuess, LevelStart, NoLife, PlayerJoined, JoinGame, JoinedGame, StartGame, LeaveGame, PlayerLeft, LevelEnd, GameFinished } from "../../../common/events/events";
 import { objectsToInstances, objectToInstance } from "../../../common/helpers/object";
 import { audio } from "./audio";
 import { particles } from "./particles";
@@ -49,7 +49,12 @@ class Socket {
             }
         });
 
-        this.bind('levelEnd', (data) => {
+        this.bind('levelEnd', (levelEnd: LevelEnd) => {
+            state.game = objectToInstance(levelEnd.game, new Game());
+        });
+
+        this.bind('gameFinished', (gameFinished: GameFinished) => {
+            state.game = objectToInstance(gameFinished.game, new Game());
         });
 
         this.bind('playerLeft', (playerLeft: PlayerLeft) => {
