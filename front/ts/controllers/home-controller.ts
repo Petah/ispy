@@ -23,6 +23,7 @@ export class HomeController implements IController {
 
         $scope.createPlayer = async (): Promise<void> => {
             audio.play('spyMusic');
+            audio.play('bell');
             if (!state.player.name || !state.player.name.length) {
                 alert('Please enter a valid name for yourself.');
                 return;

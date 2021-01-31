@@ -2,6 +2,7 @@ import { ILocationService, IScope } from "angular";
 import { IController } from "./controller";
 import { state } from "../game/state";
 import { Level } from "../../../common/entities/level";
+import { audio } from "../game/audio";
 
 interface ISelectLevelControllerScope extends IScope {
     levels: Level[],
@@ -32,6 +33,7 @@ export class SelectLevelController implements IController {
         // })();
 
         $scope.selectLevel = function (level: Level): void {
+            audio.play('bell');
             $scope.selectedLevel = level;
             // state.setLevel(level);
             $location.path('/round');
