@@ -50,7 +50,7 @@ class Socket {
                 state.game = objectToInstance(levelStart.game, new Game());
                 state.level = objectToInstance(levelStart.game.level, new Level());
                 state.clue = levelStart.clue;
-                // this.goto('/round');
+                state.player.life = levelStart.player.life;
             }
         });
 
@@ -91,6 +91,7 @@ class Socket {
 
         this.bind('incorrectGuess', (incorrectGuess: IncorrectGuess) => {
             state.game = objectToInstance(incorrectGuess.game, state.game);
+            state.player.life = incorrectGuess.player.life;
             if (incorrectGuess.player.name === state.player.name) {
                 audio.play('questionMark');
                 particles.burst('questionMark', incorrectGuess.guess.pageX, incorrectGuess.guess.pageY, 'wobble')

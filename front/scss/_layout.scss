@@ -14,7 +14,7 @@
 .g-game-container {
     min-height: 100vh;
     max-height: 1000vh;
-    background-color: #3F3851;
+    background-color: #3f3851;
 }
 
 .g-view-container {
@@ -24,6 +24,19 @@
 
 .text-center {
     text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.td-pad {
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 #g-game-frame {
@@ -73,7 +86,7 @@
 }
 
 .g-level-list {
-    > .nes-container  {
+    > .nes-container {
         margin: 0 15px;
         width: 300px;
         img {
@@ -102,7 +115,7 @@
         width: 320px;
         height: 22px;
         margin: 0.5rem auto 0;
-        background-image: url('../images/panel_title_footer.png');
+        background-image: url("../images/panel_title_footer.png");
         background-repeat: no-repeat;
         background-position: center;
     }

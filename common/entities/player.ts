@@ -6,6 +6,7 @@ export class Player {
     public _socket: Socket;
     public joined: boolean = false;
     public score: number = 0;
+    public roundScore: number = 0;
     public life: number = 3;
     public host: boolean = false;
 

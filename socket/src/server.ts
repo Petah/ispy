@@ -17,7 +17,10 @@ server.listen(port, () => {
     console.log('Server listening at port %d', port);
 });
 
-app.use(express.static(__dirname + '/../../front/public'));
+app.use(express.static(__dirname + '/../../front/public', {
+    maxAge: 0,
+    etag: false,
+}));
 
 const io = new Server(server, {
     cors: {
@@ -41,6 +44,8 @@ game1._levels = [
 // @todo make hearts pixely
 // @todo round score and total score in sidebar
 // @todo tickets for how many items completed
+// @todo how to play on first screen, or help button
+// @todo Sound for next round, game start, game finish
 
 const game2 = new Game();
 game2.id = 'gardens-1';
@@ -209,7 +214,9 @@ io.on('connection', (socket: Socket) => {
                 const key = `${player.name}:${clue.text}:${i}`;
                 if (!game._correctGuesses[key]) {
                     game._correctGuesses[key] = true;
-                    player.score += Math.round(Math.max(0, (game.roundTime - (new Date().getTime() - game.levelStartTime)) / 100));
+                    let points = Math.round(Math.max(0, (game.roundTime - (new Date().getTime() - game.levelStartTime)) / 100));
+                    player.score += points;
+                    player.roundScore += points;
                     const correctGuess: CorrectGuess = {
                         game,
                         clue,
@@ -219,7 +226,7 @@ io.on('connection', (socket: Socket) => {
                     correctGuess.guess = guess;
                     player.emit('correctGuess', correctGuess);
                     if (Object.keys(game._correctGuesses).length === game.totalGuesses) {
-                        game.broadcast('guessingComplete', {});
+                        game.end();
                     }
                 } else {
                     const duplicateGuess: DuplicateGuess = {
@@ -240,6 +247,13 @@ io.on('connection', (socket: Socket) => {
                 guess,
             };
             game.broadcast('incorrectGuess', incorrectGuess);
+            let totalLife = 0;
+            for (const player of game.players) {
+                totalLife += player.life;
+            }
+            if (totalLife === 0) {
+                game.end();
+            }
         }
     });
 
