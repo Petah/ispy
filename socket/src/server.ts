@@ -43,7 +43,7 @@ game1._levels = [
 // @todo score per round?
 // @todo make hearts pixely
 // @todo round score and total score in sidebar
-// @todo tickets for how many items completed
+// @todo ticks for how many items completed
 // @todo how to play on first screen, or help button
 // @todo Sound for next round, game start, game finish
 

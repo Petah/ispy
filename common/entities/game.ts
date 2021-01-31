@@ -75,13 +75,15 @@ export class Game {
         this._playerClues = {};
 
         for (const player of this.players) {
-            this._playerClues[player.name] = this.level.clues[Math.floor(Math.random() * this.level.clues.length)];
+            const clue = this.level.clues[Math.floor(Math.random() * this.level.clues.length)];
+            this._playerClues[player.name] = clue;
             player.life = 3;
             player.roundScore = 0;
+            player.items = clue.items.length;
             const levelStart: LevelStart = {
                 game: this,
                 player,
-                clue: this._playerClues[player.name].text,
+                clue: clue.text,
             };
             player.emit('levelStart', levelStart)
         }

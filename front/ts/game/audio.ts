@@ -27,7 +27,6 @@ class Clips {
         loadSound('/audio/moo-5.mp3'),
         loadSound('/audio/moo-6.mp3'),
         loadSound('/audio/moo-7.mp3'),
-        loadSound('/audio/moo-8.mp3'),
     ]
     spyMusic = loadSound('/audio/spy-music.mp3', {
         loop: true,

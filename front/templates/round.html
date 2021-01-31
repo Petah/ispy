@@ -125,8 +125,13 @@
                             <span class="nes-text is-success" ng-if="player.roundScore > 0">+{{ player.roundScore
                                 }}</span>
                         </td>
+                        <!-- <td class="text-right g-nowrap">
+                            {{player.items}}???
+                            <i class="g-player-list-single-life nes-icon is-small star"
+                                ng-repeat="x in [].constructor(player.items) track by $index"></i>
+                        </td> -->
                         <td class="text-right g-nowrap">
-                            <div ng <i class="g-player-list-single-life nes-icon is-small heart"
+                            <i class="g-player-list-single-life nes-icon is-small heart"
                                 ng-repeat="x in [].constructor(3) track by $index" ng-class="{
                                     'is-transparent': player.life <= $index
                                 }"></i>
