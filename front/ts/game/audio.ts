@@ -9,7 +9,7 @@ function loadSound(url: string, options = {}): Howl {
 
 class Clips {
     bobadlelelele = loadSound('/audio/bobadlelelele.mp3')
-    batman = loadSound('/audio/im-batman.mp3')
+    batman = loadSound('/audio/batman.mp3')
     ironman = loadSound('/audio/ironman.mp3')
     thor = loadSound('/audio/thor.mp3')
     pikachu = loadSound('/audio/pikachu.mp3')
