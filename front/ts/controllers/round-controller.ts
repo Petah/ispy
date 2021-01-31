@@ -4,6 +4,7 @@ import { state } from "../game/state";
 import { Level } from "../../../common/entities/level";
 import { Player } from "../../../common/entities/player";
 import { socket } from "../game/socket";
+import { audio } from "../game/audio";
 
 interface IRoundControllerScope extends IScope {
     level: Level,
@@ -45,6 +46,7 @@ export class RoundController implements IController {
         }
 
         $scope.start = () => {
+            audio.play('bell');
             socket.startGame();
         }
 
@@ -58,6 +60,7 @@ export class RoundController implements IController {
 
         $scope.leaveGame = function (): void {
             socket.leaveGame();
+            audio.play('bell');
             $location.path('/');
         }
     }

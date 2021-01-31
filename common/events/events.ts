@@ -40,6 +40,7 @@ export interface NoLife {
 
 export interface LevelStart {
     game: Game,
+    player: Player,
     clue: string,
 }
 

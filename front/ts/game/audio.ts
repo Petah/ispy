@@ -18,6 +18,7 @@ class Clips {
     questionMark = loadSound('/audio/question-mark.mp3')
     wrong = loadSound('/audio/wrong.mp3')
     found = loadSound('/audio/found.wav')
+    bell = loadSound('/audio/bell.mp3')
     moo = [
         loadSound('/audio/moo-1.mp3'),
         loadSound('/audio/moo-2.mp3'),
@@ -26,7 +27,6 @@ class Clips {
         loadSound('/audio/moo-5.mp3'),
         loadSound('/audio/moo-6.mp3'),
         loadSound('/audio/moo-7.mp3'),
-        loadSound('/audio/moo-8.mp3'),
     ]
     spyMusic = loadSound('/audio/spy-music.mp3', {
         loop: true,

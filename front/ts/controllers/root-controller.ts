@@ -1,4 +1,5 @@
 import { IHttpService, ILocationService, IRootScopeService, IScope } from "angular";
+import { audio } from "../game/audio";
 import { socket } from "../game/socket";
 import { state } from "../game/state";
 import { IController } from "./controller";
@@ -21,6 +22,7 @@ export class RootController implements IController {
         $location: ILocationService,
     ) {
         $rootScope.state = state
+        $rootScope.audio = audio
         socket.init($rootScope, $location);
     }
 }

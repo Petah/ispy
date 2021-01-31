@@ -152,6 +152,7 @@
 
         .g-player-list-single-life {
             margin-right: 0.25rem;
+            color: #ff6746;
         }
     }
 
@@ -183,5 +184,14 @@
         max-height: 120px;
         text-align: left;
         overflow-y: scroll;
+    }
+
+    .g-player-list-single-name {
+        width: 100%;
+    }
+
+    .g-player-list-score {
+        padding-left: 10px;
+        padding-right: 10px;
     }
 }

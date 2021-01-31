@@ -36,7 +36,12 @@ export class Game {
             return 0;
         }
         let i = 0;
+        let c = 0;
         for (const clue of this.level.clues) {
+            c++;
+            if (c > this.players.length) {
+                break
+            }
             for (const item of clue.items) {
                 i++;
             }
@@ -70,25 +75,34 @@ export class Game {
         this._playerClues = {};
 
         for (const player of this.players) {
-            this._playerClues[player.name] = this.level.clues[Math.floor(Math.random() * this.level.clues.length)];
+            const clue = this.level.clues[Math.floor(Math.random() * this.level.clues.length)];
+            this._playerClues[player.name] = clue;
             player.life = 3;
+            player.roundScore = 0;
+            player.items = clue.items.length;
             const levelStart: LevelStart = {
                 game: this,
-                clue: this._playerClues[player.name].text,
+                player,
+                clue: clue.text,
             };
             player.emit('levelStart', levelStart)
         }
 
         this._endTimeout = setTimeout(() => {
-            this.levelEnded = true;
-            const levelEnd: LevelEnd = {
-                game: this,
-            };
-            this.broadcast('levelEnd', levelEnd);
-            this._nextLevelTimeout = setTimeout(() => {
-                this.startNextLevel();
-            }, 3000);
+            this.end();
         }, this.roundTime);
+    }
+
+    public end() {
+        clearTimeout(this._endTimeout);
+        this.levelEnded = true;
+        const levelEnd: LevelEnd = {
+            game: this,
+        };
+        this.broadcast('levelEnd', levelEnd);
+        this._nextLevelTimeout = setTimeout(() => {
+            this.startNextLevel();
+        }, 5000);
     }
 
     private clearTimeouts() {

@@ -32,6 +32,7 @@ export class JoinGameController implements IController {
 
         $scope.joinGame = async function (game: Game): Promise<void> {
             console.log(`Joining game ${game.name}`);
+            audio.play('bell');
             audio.play('bobadlelelele');
             socket.joinGame(game);
         };
