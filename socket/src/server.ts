@@ -195,7 +195,7 @@ io.on('connection', (socket: Socket) => {
             return;
         }
         if (!game.level) {
-            game.startNextLevel();
+            game.startNextLevel(true);
             broadcast('gamesList', games);
         }
     });

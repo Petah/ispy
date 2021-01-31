@@ -51,7 +51,7 @@ export class Game {
         return ((this.levelStartTime + this.roundTime - new Date().getTime()) / 1000).toFixed(1);
     }
 
-    public startNextLevel() {
+    public startNextLevel(first: boolean = false) {
         if (this._levelsIndex >= this._levels.length) {
             this.level = null;
             this.levelStartTime = null;
@@ -76,6 +76,9 @@ export class Game {
             const clue = this.level.clues[Math.floor(Math.random() * this.level.clues.length)];
             this._playerClues[player.name] = clue;
             player.life = 3;
+            if (first) {
+                player.score = 0;
+            }
             player.roundScore = 0;
             player.items = clue.items.length;
             const levelStart: LevelStart = {
