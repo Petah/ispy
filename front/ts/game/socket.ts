@@ -28,16 +28,15 @@ class Socket {
         });
 
         this.bind('playerJoined', (playerJoined: PlayerJoined) => {
-            const player = objectToInstance(playerJoined.player, new Player());
-            // state.game.players.push(player);
         });
 
         this.bind('joinedGame', (joinedGame: JoinedGame) => {
-            state.game = objectToInstance(joinedGame.game, new Game());
-            if (state.player.name === joinedGame.player.name && joinedGame.player.host) {
-                state.player.host = true;
+            if (joinedGame.game.id === state.game?.id) {
+                state.game = objectToInstance(joinedGame.game, new Game());
+                if (state.player.name === joinedGame.player.name && joinedGame.player.host) {
+                    state.player.host = true;
+                }
             }
-            // state.game.players.push(player);
             this.goto('/round');
         });
 

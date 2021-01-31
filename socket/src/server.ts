@@ -77,9 +77,27 @@ game3._levels = [
     objectToInstance(require('../../common/data/office-7.json'), new Level()),
 ];
 
+const game4 = new Game();
+game4.id = 'banana';
+game4.name = 'Bananarama';
+game4.titleImage = '/images/banana/round_bn_intro.jpg';
+game4.info = 'Race to fine the banana! There is 1 banana in each scene, first to find it gets the most points.';
+game4._levels = [
+    objectToInstance(require('../../common/data/banana-1.json'), new Level()),
+    objectToInstance(require('../../common/data/banana-2.json'), new Level()),
+    // objectToInstance(require('../../common/data/banana-3.json'), new Level()),
+    objectToInstance(require('../../common/data/banana-4.json'), new Level()),
+    objectToInstance(require('../../common/data/banana-5.json'), new Level()),
+    objectToInstance(require('../../common/data/banana-6.json'), new Level()),
+    objectToInstance(require('../../common/data/banana-7.json'), new Level()),
+    objectToInstance(require('../../common/data/banana-8.json'), new Level()),
+    objectToInstance(require('../../common/data/banana-9.json'), new Level()),
+];
+
 const games: Game[] = [
     game2,
     game3,
+    game4,
     game1,
 ];
 
@@ -164,8 +182,7 @@ io.on('connection', (socket: Socket) => {
             game,
             player,
         };
-        player.emit('joinedGame', joinedGame);
-        broadcast('gamesList', games);
+        broadcast('joinedGame', joinedGame);
     });
 
     socket.on('startGame', (startGame: StartGame) => {

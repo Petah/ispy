@@ -36,15 +36,13 @@ export class Game {
             return 0;
         }
         let i = 0;
-        let c = 0;
-        for (const clue of this.level.clues) {
-            c++;
-            if (c > this.players.length) {
-                break
+        for (const playerName in this._playerClues) {
+            const player = this.players.find(p => p.name === playerName);
+            if (!player) {
+                continue;
             }
-            for (const item of clue.items) {
-                i++;
-            }
+            const clue = this._playerClues[playerName];
+            i += clue.items.length;
         }
         return i;
     }
