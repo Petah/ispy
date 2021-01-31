@@ -18,8 +18,8 @@ server.listen(port, () => {
 });
 
 app.use(express.static(__dirname + '/../../front/public', {
-    maxAge: 0,
-    etag: false,
+    // maxAge: 0,
+    // etag: false,
 }));
 
 const io = new Server(server, {
